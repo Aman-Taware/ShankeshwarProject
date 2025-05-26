@@ -246,8 +246,8 @@ const mockProperties = [
     },
     startingPrice: 4500000,
     completionPercentage: 75,
-    brochureUrl: 'https://example.com/brochures/shankeshwar-pearl-brochure.pdf',
-    floorPlanPdf: 'https://example.com/floorplans/shankeshwar-pearl-floorplans.pdf',
+    brochureUrl: '/documents/properties/shankeshwar-pearl/shankeshwar-pearl-brochure.pdf',
+    floorPlanPdf: '/documents/properties/shankeshwar-pearl/shankeshwar-pearl-floorplans.pdf',
     videoUrl: 'https://www.youtube.com/embed/562VuMrFUys',
     specifications: {
       structure: 'RCC framed structure with earthquake-resistant design',
@@ -337,7 +337,7 @@ const mockProperties = [
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-1.jpeg', alt: 'Shankeshwar Sparsh Exterior', type: 'exterior' },
       { url: '/images/property/shankeshwar-sparsh/interior/sparsh-interior-1.jpeg', alt: 'Shankeshwar Sparsh Living Room', type: 'interior' },
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-4.jpeg', alt: 'Shankeshwar Sparsh Living Room', type: 'interior' },
-      { url: '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-1.jpeg', alt: 'Children\'s Play Area', type: 'amenity' },
+      { url: '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-1.jpg', alt: 'Children\'s Play Area', type: 'amenity' },
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-2.jpeg', alt: 'Shankeshwar Sparsh Building View', type: 'exterior' },
       { url: '/images/property/shankeshwar-sparsh/interior/sparsh-interior-2.jpeg', alt: 'Modern Kitchen', type: 'interior' },
       // { url: '/images/property/shankeshwar-sparsh/amenities/sparsh-daycare.jpeg', alt: 'Day Care Center', type: 'amenity' }
@@ -459,7 +459,6 @@ const mockProperties = [
     ],
     // Add amenity images for this property too
     amenityImages: [
-      '/images/website/placeholder-amenity.jpg',
       '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-1.jpeg',
       '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-2.jpeg',
       '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-3.jpeg',
@@ -476,8 +475,8 @@ const mockProperties = [
     },
     startingPrice: 3800000,
     completionPercentage: 60,
-    brochureUrl: 'https://example.com/brochures/shankeshwar-sparsh-brochure.pdf',
-    floorPlanPdf: 'https://example.com/floorplans/shankeshwar-sparsh-floorplans.pdf',
+    brochureUrl: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-brochure.pdf',
+    floorPlanPdf: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-floorplans.pdf',
     videoUrl: 'https://www.youtube.com/embed/KoTJEPP-5Z8',
     specifications: {
       structure: 'RCC framed structure with child-safe design',

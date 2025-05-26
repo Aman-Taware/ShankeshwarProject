@@ -7,6 +7,7 @@ import OngoingProjectsPage from './pages/OngoingProjectsPage';
 import CompletedProjectsPage from './pages/CompletedProjectsPage';
 import PropertyDetailPage from './pages/PropertyDetailPage';
 import ContactPage from './pages/ContactPage';
+import AboutUsPage from './pages/AboutUsPage';
 // Import other pages here as you create them
 // import AboutPage from './pages/AboutPage'; 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/projects/completed" element={<CompletedProjectsPage />} />
         <Route path="/property/:propertyId" element={<PropertyDetailPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutUsPage />} />
         {/* Define other routes here */}
         {/* <Route path="/about" element={<AboutPage />} /> */}
       </Routes>

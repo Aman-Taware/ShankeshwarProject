@@ -32,40 +32,35 @@ export default function HomePage() {
       {/* Hero Section - Full width, no container */}
       <HeroSection />
       
-      {/* About Us Summary */}
+      {/* About Us Summary with Core Values */}
       <AboutUsSummary />
       
-      {/* Achievements Section */}
-      <AchievementsCounter />
-      
-      {/* Testimonials Section */}
-      <TestimonialsSection />
-      
-      {/* Main Content */}
-      <motion.section
-        className="py-16 md:py-20"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      {/* Projects Section - Now immediately after About Us Summary/Core Values */}
+      <section className="py-16 bg-sage-teal/5">
         <Container>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display text-deep-teal mb-6">
-              Welcome to <span className="text-amber-gold">Shankeshwar Realty</span>
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="inline-block px-4 py-1 bg-amber-gold/10 text-amber-gold text-sm font-semibold rounded-full mb-4">Our Projects</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-deep-teal mb-6">
+              Explore Our <span className="text-amber-gold">Real Estate</span> Portfolio
             </h2>
-            <p className="text-lg text-deep-teal max-w-2xl mx-auto leading-relaxed">
-              Your trusted partner in finding the perfect property. We specialize in premium real estate solutions tailored to your needs, offering exceptional homes, commercial spaces, and investment opportunities.
+            <p className="text-lg text-deep-teal/70 max-w-3xl mx-auto">
+              Discover our collection of premium properties, thoughtfully designed with a perfect blend of luxury, comfort, and strategic locations.
             </p>
-          </div>
+          </motion.div>
           
           {/* Ongoing Projects */}
           {ongoingProperties && ongoingProperties.length > 0 && (
             <motion.div 
               className="mb-20"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0.5, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.05, fallback: true }}
               transition={{ duration: 0.6 }}
             >
               <div className="flex justify-between items-end mb-8">
@@ -88,7 +83,7 @@ export default function HomePage() {
                     key={property.id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.05, fallback: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <PropertyCard property={property} index={index} />
@@ -110,9 +105,9 @@ export default function HomePage() {
           {completedProperties && completedProperties.length > 0 && (
             <motion.div 
               className="mb-20"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0.5, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.05, fallback: true }}
               transition={{ duration: 0.6 }}
             >
               <div className="flex justify-between items-end mb-8">
@@ -135,7 +130,7 @@ export default function HomePage() {
                     key={property.id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.05, fallback: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <PropertyCard property={property} index={index} />
@@ -152,6 +147,32 @@ export default function HomePage() {
               )}
             </motion.div>
           )}
+        </Container>
+      </section>
+      
+      {/* Achievements Section */}
+      <AchievementsCounter />
+      
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+      
+      {/* Main Content - Property Types Section */}
+      <motion.section
+        className="py-16 md:py-20"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <Container>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-display text-deep-teal mb-6">
+              Welcome to <span className="text-amber-gold">Shankeshwar Realty</span>
+            </h2>
+            <p className="text-lg text-deep-teal max-w-2xl mx-auto leading-relaxed">
+              Your trusted partner in finding the perfect property. We specialize in premium real estate solutions tailored to your needs, offering exceptional homes, commercial spaces, and investment opportunities.
+            </p>
+          </div>
           
           {/* Property Types */}
           <motion.div
