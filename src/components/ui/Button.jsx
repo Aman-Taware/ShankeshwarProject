@@ -5,7 +5,7 @@ import { cn } from '../../lib/utils';
 import { motion } from 'framer-motion';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer',
   {
     variants: {
       variant: {
@@ -62,6 +62,7 @@ const Button = React.forwardRef(
     children, 
     icon, 
     iconPosition = 'right',
+    onClick,
     ...props 
   }, ref) => {
     const buttonClasses = cn(buttonVariants({ variant, size, width, animation, className }));
@@ -77,54 +78,58 @@ const Button = React.forwardRef(
       </>
     );
 
-    // Animation variants
-    const buttonAnimationVariants = {
-      hover: {
-        scale: animation === 'grow' ? 1.05 : 1,
-        y: animation === 'bounce' ? -2 : 0,
-        transition: {
-          type: 'spring',
-          stiffness: 500,
-          damping: 15
-        }
-      },
-      tap: {
-        scale: 0.98,
-        transition: {
-          type: 'spring',
-          stiffness: 500,
-          damping: 15
-        }
+    // Handle click with debug info
+    const handleClick = (e) => {
+      console.log("Button clicked:", href || "no href", e);
+      if (onClick) {
+        onClick(e);
       }
     };
-    
+
     if (href) {
+      // Use standard Link for internal navigation
+      if (href.startsWith('/')) {
+        return (
+          <Link
+            to={href}
+            className={buttonClasses}
+            target={target}
+            rel={target === '_blank' ? 'noopener noreferrer' : rel}
+            onClick={handleClick}
+            ref={ref}
+            {...props}
+          >
+            {buttonContent}
+          </Link>
+        );
+      }
+      
+      // Use anchor for external links
       return (
-        <MotionLink
-          to={href}
+        <a
+          href={href}
           className={buttonClasses}
-          target={target}
+          target={target || '_blank'}
           rel={target === '_blank' ? 'noopener noreferrer' : rel}
-          whileHover="hover"
-          whileTap="tap"
-          variants={buttonAnimationVariants}
+          onClick={handleClick}
+          ref={ref}
+          {...props}
         >
           {buttonContent}
-        </MotionLink>
+        </a>
       );
     }
     
     return (
-      <MotionButton
+      <button
         className={buttonClasses}
         ref={ref}
-        whileHover="hover"
-        whileTap="tap"
-        variants={buttonAnimationVariants}
+        onClick={handleClick}
+        type="button"
         {...props}
       >
         {buttonContent}
-      </MotionButton>
+      </button>
     );
   }
 );

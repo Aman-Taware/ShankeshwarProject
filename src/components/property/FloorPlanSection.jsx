@@ -50,6 +50,7 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
   }
   
   const currentImage = currentConfig.floorPlan;
+  const hasFloorPlan = !!currentImage;
 
   // Helper function to get range text for a flat type
   const getFlatTypeRangeText = (flatType) => {
@@ -118,23 +119,27 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
       {/* Floor Plan Content */}
       <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
         <div className="relative">
-          <img
-            src={currentImage}
-            alt={`${currentType.type} Floor Plan - ${currentConfig.superBuiltUpArea} sq.ft`}
-            className="w-full h-auto object-contain rounded-lg"
-            onError={(e) => {
-              e.target.src = '/images/website/placeholder-floorplan.jpg';
-            }}
-          />
-          
-          {/* View Larger Button */}
-          <button
-            onClick={() => setLightboxOpen(true)}
-            className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-colors"
-            title="View Larger"
-          >
-            <FiMaximize2 className="text-deep-teal" />
-          </button>
+          {hasFloorPlan ? (
+            <>
+              {/* Floor Plan Image - Only shown if a floor plan is available */}
+              <div className="max-h-[50vh] md:max-h-[400px] lg:max-h-[500px] overflow-auto flex justify-center">
+                <img
+                  src={currentImage}
+                  alt={`${currentType.type} Floor Plan - ${currentConfig.superBuiltUpArea} sq.ft`}
+                  className="w-auto max-w-full h-auto max-h-[50vh] md:max-h-[400px] lg:max-h-[500px] object-contain rounded-lg"
+                />
+              </div>
+              
+              {/* View Larger Button - Only shown if a floor plan is available */}
+              <button
+                onClick={() => setLightboxOpen(true)}
+                className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-50 transition-colors"
+                title="View Larger"
+              >
+                <FiMaximize2 className="text-deep-teal" />
+              </button>
+            </>
+          ) : null}
         </div>
         
         {/* Flat Details Section */}
@@ -168,9 +173,9 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
         </div>
       </div>
       
-      {/* Lightbox for Floor Plan */}
+      {/* Lightbox for Floor Plan - Only rendered if a floor plan exists */}
       <AnimatePresence>
-        {lightboxOpen && (
+        {lightboxOpen && hasFloorPlan && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -184,14 +189,11 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
               <FiMaximize2 className="transform rotate-45" />
             </button>
             
-            <div className="max-w-4xl w-full">
+            <div className="max-w-4xl w-full max-h-[90vh] overflow-auto flex justify-center">
               <img
                 src={currentImage}
                 alt={`${currentType.type} Floor Plan - ${currentConfig.superBuiltUpArea} sq.ft`}
-                className="w-full h-auto object-contain"
-                onError={(e) => {
-                  e.target.src = '/images/website/placeholder-floorplan.jpg';
-                }}
+                className="w-auto max-w-full h-auto object-contain"
               />
             </div>
           </motion.div>

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getPropertyImageUrl, formatPropertyPrice } from '../../data/properties';
 import ImageWithFallback from '../ui/ImageWithFallback';
 import { PROPERTY_STATUS } from '../../config/constants';
+import Button from '../ui/Button';
+import { FiChevronDown, FiChevronUp, FiMapPin, FiCalendar, FiInfo, FiHome, FiMaximize, FiDownload } from 'react-icons/fi';
+import { FaBed, FaBath, FaRulerCombined, FaWhatsapp } from 'react-icons/fa';
 
-const PropertyCard = ({ property, compact = false, index = 0 }) => {
+const PropertyCard = ({ property, compact = false, index = 0, isCompletedProperty = false, isUpcomingProperty = false }) => {
+  const [showDetails, setShowDetails] = useState(false);
+  
   if (!property) {
     return null;
   }
@@ -15,47 +20,63 @@ const PropertyCard = ({ property, compact = false, index = 0 }) => {
     name,
     status,
     type,
+    subType,
     bedrooms,
     bathrooms,
     area,
+    height,
     location,
     slug,
     startingPrice,
     shortDescription,
-    completionPercentage, // For under-construction projects
-    possessionDate,       // For completed or nearing-possession projects
+    completionPercentage,
+    possessionDate,
+    totalUnits,
+    amenities,
+    projectOverview,
+    flatTypes,
+    description,
+    images,
+    rentalYield,
+    expectedAppreciation,
+    documents,
+    contactPhone
   } = property;
 
-  // Get status configuration and styling
-  const statusConfig = {
-    'under-construction': { 
-      label: 'Under Construction',
-      color: 'bg-sage-teal text-deep-teal',
-      icon: 'fas fa-hard-hat'
-    },
-    'nearing-possession': { 
-      label: 'Nearing Possession',
-      color: 'bg-amber-gold text-deep-teal',
-      icon: 'fas fa-key'
-    },
-    'ready-to-move-in': { 
-      label: 'Ready to Move',
-      color: 'bg-green-600 text-white',
-      icon: 'fas fa-home'
-    },
-    'completed': { 
-      label: 'Completed',
-      color: 'bg-green-600 text-white',
-      icon: 'fas fa-check-circle'
+  // Check if this is an investment property
+  const isInvestment = type?.toLowerCase() === 'investment';
+
+  // Status configuration
+  const getStatusConfig = (statusValue) => {
+    // First check if it matches one of our constants
+    for (const key in PROPERTY_STATUS) {
+      if (PROPERTY_STATUS[key].value === statusValue) {
+        return {
+          label: PROPERTY_STATUS[key].label,
+          color: PROPERTY_STATUS[key].color,
+          icon: PROPERTY_STATUS[key].icon
+        };
+      }
     }
+    
+    // Fallback
+    return {
+      label: statusValue ? statusValue.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : "N/A",
+      color: 'bg-gray-500 text-white',
+      icon: 'fas fa-building'
+    };
   };
 
-  // Use status config or fallback
-  const currentStatus = statusConfig[status] || {
-    label: status ? status.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : "N/A",
-    color: 'bg-gray-500 text-white',
-    icon: 'fas fa-building'
-  };
+  // Use status config
+  const currentStatus = getStatusConfig(status);
+
+  // Determine if this is a completed property
+  const isCompleted = status === PROPERTY_STATUS.COMPLETED.value || 
+                     status === PROPERTY_STATUS.READY_TO_MOVE_IN.value ||
+                     isCompletedProperty;
+  
+  // Determine if this is an upcoming property
+  const isUpcoming = status === PROPERTY_STATUS.UPCOMING.value || isUpcomingProperty;
 
   // Card animation
   const cardVariants = {
@@ -145,312 +166,467 @@ const PropertyCard = ({ property, compact = false, index = 0 }) => {
       >
         <div className="absolute top-0 left-0 h-full w-1.5 bg-amber-gold"></div>
         
-        <Link to={`/property/${id}`} className="flex w-full">
-          <motion.div 
-            className="w-1/3 flex-shrink-0 relative overflow-hidden rounded-l-lg"
-            whileHover="hover"
-          >
-            <motion.div
-              variants={imageHoverVariants}
-              className="w-full h-full"
-            >
-              <ImageWithFallback
-                src={propertyImageUrl}
-                alt={name || 'Property image'}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-            
+        {/* For completed properties, don't link to detail page */}
+        {isCompleted ? (
+          <div className="flex w-full">
             <motion.div 
-              className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full shadow ${currentStatus.color} flex items-center`}
-              variants={badgeVariants}
-              initial="initial"
-              animate="animate"
+              className="w-1/3 flex-shrink-0 relative overflow-hidden rounded-l-lg"
               whileHover="hover"
             >
-              <i className={`${currentStatus.icon} mr-1`}></i>
-              <span>{currentStatus.label}</span>
+              <motion.div
+                variants={imageHoverVariants}
+                className="w-full h-full"
+              >
+                <ImageWithFallback
+                  src={propertyImageUrl}
+                  alt={name || 'Property image'}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+              
+              <motion.div 
+                className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full shadow ${currentStatus.color} flex items-center`}
+                variants={badgeVariants}
+                initial="initial"
+                animate="animate"
+                whileHover="hover"
+              >
+                <i className={`${currentStatus.icon} mr-1`}></i>
+                <span>{currentStatus.label}</span>
+              </motion.div>
             </motion.div>
-          </motion.div>
-          
-          <motion.div 
-            className="p-5 flex-grow flex flex-col justify-center"
-            variants={contentVariants}
-          >
-            <motion.h3 
-              variants={childVariants}
-              custom={0}
-              className="text-md md:text-lg font-display font-semibold text-deep-teal mb-1.5 group-hover:text-amber-gold transition-colors truncate"
-            >
-              {name || "Unnamed Property"}
-            </motion.h3>
             
             <motion.div 
-              variants={childVariants}
-              custom={1}
-              className="flex items-center text-xs text-sage-teal mb-3"
+              className="p-5 flex-grow flex flex-col justify-center"
+              variants={contentVariants}
             >
-              <i className="fas fa-map-marker-alt mr-1.5"></i>
-              <span className="truncate">{location?.address || location?.city || "N/A"}</span>
+              <motion.h3 
+                variants={childVariants}
+                custom={0}
+                className="text-md md:text-lg font-display font-semibold text-deep-teal mb-1.5 truncate"
+              >
+                {name || "Unnamed Property"}
+              </motion.h3>
+              
+              <motion.div 
+                variants={childVariants}
+                custom={1}
+                className="flex items-center text-xs text-sage-teal mb-3"
+              >
+                <i className="fas fa-map-marker-alt mr-1.5"></i>
+                <span className="truncate">{location?.address || location?.city || "N/A"}</span>
+              </motion.div>
+              
+              <motion.p 
+                variants={childVariants}
+                custom={2}
+                className="text-md font-bold text-amber-gold"
+              >
+                {displayPrice}
+              </motion.p>
+            </motion.div>
+          </div>
+        ) : (
+          <Link to={`/property/${id}`} className="flex w-full">
+            <motion.div 
+              className="w-1/3 flex-shrink-0 relative overflow-hidden rounded-l-lg"
+              whileHover="hover"
+            >
+              <motion.div
+                variants={imageHoverVariants}
+                className="w-full h-full"
+              >
+                <ImageWithFallback
+                  src={propertyImageUrl}
+                  alt={name || 'Property image'}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+              
+              <motion.div 
+                className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full shadow ${currentStatus.color} flex items-center`}
+                variants={badgeVariants}
+                initial="initial"
+                animate="animate"
+                whileHover="hover"
+              >
+                <i className={`${currentStatus.icon} mr-1`}></i>
+                <span>{currentStatus.label}</span>
+              </motion.div>
             </motion.div>
             
-            <motion.p 
-              variants={childVariants}
-              custom={2}
-              className="text-md font-bold text-amber-gold"
+            <motion.div 
+              className="p-5 flex-grow flex flex-col justify-center"
+              variants={contentVariants}
             >
-              {displayPrice}
-            </motion.p>
-          </motion.div>
-        </Link>
+              <motion.h3 
+                variants={childVariants}
+                custom={0}
+                className="text-md md:text-lg font-display font-semibold text-deep-teal mb-1.5 truncate"
+              >
+                {name || "Unnamed Property"}
+              </motion.h3>
+              
+              <motion.div 
+                variants={childVariants}
+                custom={1}
+                className="flex items-center text-xs text-sage-teal mb-3"
+              >
+                <i className="fas fa-map-marker-alt mr-1.5"></i>
+                <span className="truncate">{location?.address || location?.city || "N/A"}</span>
+              </motion.div>
+              
+              <motion.p 
+                variants={childVariants}
+                custom={2}
+                className="text-md font-bold text-amber-gold"
+              >
+                {displayPrice}
+              </motion.p>
+            </motion.div>
+          </Link>
+        )}
       </motion.div>
     );
   }
 
-  // Enhanced Standard Vertical Card
+  // Full Card (With all information)
   return (
     <motion.div
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      whileHover={hoverEffect}
-      className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col overflow-hidden h-full relative"
+      viewport={{ once: true, amount: 0.1 }}
+      className={`bg-white rounded-lg shadow-lg overflow-hidden ${isCompleted ? 'h-auto' : 'h-full'}`}
     >
-      {/* Status ribbon with icon - different color based on status */}
-      <motion.div 
-        className="absolute -top-1 -right-1 z-10 flex items-center"
-        variants={badgeVariants}
-        initial="initial"
-        animate="animate"
-        whileHover="hover"
-      >
-        <div className="relative">
-          <div className={`font-medium text-xs px-4 py-1.5 ${currentStatus.color} shadow-lg flex items-center`}>
-            <i className={`${currentStatus.icon} mr-1.5`}></i>
-            {currentStatus.label}
-          </div>
-          <div className="w-1 h-1 absolute bottom-0 right-0 bg-deep-teal/60 transform translate-y-full"></div>
-        </div>
-      </motion.div>
-      
-      {/* Property type badge */}
-      <div className="absolute top-3 left-3 z-10">
-        <div className="bg-white/90 backdrop-blur-sm text-xs font-medium px-2.5 py-1 rounded shadow-sm">
-          {type || "Residential"}
-        </div>
-      </div>
-      
-      <Link to={`/property/${id}`} className="block">
-        <div className="relative h-56 sm:h-64 overflow-hidden">
-          <motion.div
-            whileHover="hover"
-            initial="initial"
-            className="h-full w-full"
-          >
+      {/* For completed properties, don't link to detail page */}
+      {isCompleted ? (
+        <div className="h-full flex flex-col">
+          <div className="relative overflow-hidden h-52">
             <motion.div
-              variants={imageHoverVariants}
+              whileHover={imageHoverVariants.hover}
               className="h-full w-full"
             >
               <ImageWithFallback
                 src={propertyImageUrl}
-                alt={name || 'Property image'}
-                className="w-full h-full object-cover"
+                alt={name}
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-all duration-700 ease-in-out"
               />
             </motion.div>
-          </motion.div>
-          
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-80 transition-opacity"></div>
-          
-          {/* Floating price badge in image */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 + 0.5, duration: 0.5 }}
-            className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg"
-          >
-            <p className="font-bold text-sm sm:text-base text-amber-gold">
-              {displayPrice}
-            </p>
-          </motion.div>
-        </div>
-      </Link>
-
-      <motion.div 
-        className="p-5 sm:p-6 flex flex-col flex-grow"
-        variants={contentVariants}
-      >
-        <Link to={`/property/${id}`} className="block mb-2">
-          <motion.h3 
-            variants={childVariants} 
-            custom={0}
-            className="text-lg sm:text-xl font-display font-bold text-deep-teal group-hover:text-amber-gold transition-colors duration-300 leading-tight"
-          >
-            {name || "Unnamed Property"}
-          </motion.h3>
-        </Link>
-
-        <motion.div 
-          variants={childVariants}
-          custom={1}
-          className="flex items-center text-xs sm:text-sm text-sage-teal mb-3"
-        >
-          <i className="fas fa-map-marker-alt mr-1.5"></i>
-          <span className="truncate">{location?.address || location?.city || "N/A"}</span>
-        </motion.div>
-
-        <motion.p 
-          variants={childVariants}
-          custom={2}
-          className="text-xs sm:text-sm text-gray-600 mb-4 line-clamp-2"
-        >
-          {shortDescription || (property.description ? property.description.substring(0, 100) + '...' : 'An excellent property opportunity.')}
-        </motion.p>
-
-        {/* Property Details Box with status-specific content */}
-        <motion.div
-          variants={childVariants}
-          custom={3}
-          className="mb-5 p-4 bg-sage-teal/10 rounded-lg"
-        >
-          {/* For Under Construction Properties */}
-          {status === 'under-construction' && completionPercentage != null && (
-            <div className="mb-3 space-y-2">
-              <div className="text-xs">
-                <div className="flex items-center justify-between text-gray-600 mb-1">
-                  <span className="font-medium">Construction Progress</span>
-                  <span className="font-semibold text-deep-teal">{completionPercentage}%</span>
-                </div>
-                <div className="w-full bg-sage-teal/30 rounded-full h-2.5 overflow-hidden">
-                  <motion.div 
-                    className="bg-amber-gold h-2.5 rounded-full"
-                    initial={{ width: 0 }}                    
-                    animate={{ width: `${completionPercentage}%` }}
-                    transition={{ duration: 1.2, ease: "easeOut", delay: index * 0.1 + 0.7 }}
-                  ></motion.div>
-                </div>
-              </div>
-              {possessionDate && (
-                <div className="text-xs text-gray-600 flex justify-between items-center mt-2">
-                  <span className="font-medium">Expected Possession:</span>
-                  <span className="font-semibold text-deep-teal">{possessionDate}</span>
-                </div>
-              )}
-            </div>
-          )}
-          
-          {/* For Nearing Possession Properties */}
-          {status === 'nearing-possession' && (
-            <div className="mb-3 space-y-2">
-              <div className="flex justify-between text-xs text-gray-600">
-                <span className="font-medium">Ready for Possession:</span>
-                <span className="font-semibold text-amber-gold">{possessionDate || "Soon"}</span>
-              </div>
-              <div className="flex items-center justify-center bg-amber-gold/10 p-1.5 rounded mt-1">
-                <i className="fas fa-bell text-amber-gold mr-1.5"></i>
-                <span className="text-xs text-deep-teal font-medium">Book Now for Early Bird Offers!</span>
-              </div>
-            </div>
-          )}
-          
-          {/* For Completed Properties */}
-          {(status === 'completed' || status === 'ready-to-move-in') && (
-            <div className="mb-3 space-y-2">
-              <div className="flex justify-between text-xs text-gray-600">
-                <span className="font-medium">Move In:</span>
-                <span className="font-semibold text-green-600">Immediately</span>
-              </div>
-              <div className="flex items-center justify-center bg-green-600/10 p-1.5 rounded mt-1">
-                <i className="fas fa-check-circle text-green-600 mr-1.5"></i>
-                <span className="text-xs text-deep-teal font-medium">Ready for Immediate Possession!</span>
-              </div>
-            </div>
-          )}
-
-          {/* Property Specs in Flex Layout */}
-          {(bedrooms || bathrooms || area) && (
-            <div className="flex justify-between text-xs sm:text-sm text-gray-700 mt-3">
-              {bedrooms && (
-                <div className="flex flex-col items-center">
-                  <div className="bg-white p-2 rounded-full mb-1.5">
-                    <i className="fas fa-bed text-sage-teal"></i>
-                  </div>
-                  <span className="font-medium">{bedrooms} {bedrooms.includes(',') ? 'Beds' : (parseInt(bedrooms) === 1 ? 'Bed' : 'Beds')}</span>
-                </div>
-              )}
-              {bathrooms && (
-                <div className="flex flex-col items-center">
-                  <div className="bg-white p-2 rounded-full mb-1.5">
-                    <i className="fas fa-bath text-sage-teal"></i>
-                  </div>
-                  <span className="font-medium">{bathrooms} {bathrooms.includes(',') ? 'Baths' : (parseInt(bathrooms) === 1 ? 'Bath' : 'Baths')}</span>
-                </div>
-              )}
-              {area && (
-                <div className="flex flex-col items-center">
-                  <div className="bg-white p-2 rounded-full mb-1.5">
-                    <i className="fas fa-vector-square text-sage-teal"></i>
-                  </div>
-                  <span className="font-medium">{area} sqft</span>
-                </div>
-              )}
-            </div>
-          )}
-        </motion.div>
-        
-        {property.unitTypes && property.unitTypes.length > 0 && (
-          <motion.div 
-            variants={childVariants}
-            custom={4}
-            className="mb-5 flex flex-wrap gap-1.5"
-          >
-            {property.unitTypes.slice(0, 3).map((unit, idx) => (
-              <span key={idx} className="bg-deep-teal/10 text-deep-teal px-2 py-0.5 rounded text-xs font-medium border-l-2 border-amber-gold">
-                {unit.name}
-              </span>
-            ))}
-            {property.unitTypes.length > 3 && (
-              <span className="bg-amber-gold/10 text-amber-gold px-2 py-0.5 rounded text-xs font-medium">
-                +{property.unitTypes.length - 3} more
-              </span>
-            )}
-          </motion.div>
-        )}
-
-        <motion.div 
-          variants={childVariants}
-          custom={5}
-          className="mt-auto"
-        >
-          <Link to={`/property/${id}`}>
-            <motion.div
-              className={`w-full text-center py-2.5 px-5 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base flex items-center justify-center
-                ${status === 'completed' || status === 'ready-to-move-in' 
-                  ? 'bg-green-600 text-white hover:bg-amber-gold hover:text-deep-teal' 
-                  : 'bg-deep-teal text-white hover:bg-amber-gold hover:text-deep-teal'}`}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+            
+            <motion.div 
+              className={`absolute top-4 left-4 px-3 py-1.5 rounded-full shadow-md ${currentStatus.color} flex items-center`}
+              variants={badgeVariants}
+              initial="initial"
+              animate="animate"
+              whileHover="hover"
             >
-              {status === 'completed' || status === 'ready-to-move-in' ? (
-                <>
-                  <i className="fas fa-home mr-2"></i>
-                  View Ready Home
-                </>
-              ) : status === 'nearing-possession' ? (
-                <>
-                  <i className="fas fa-key mr-2"></i>
-                  Book Now
-                </>
-              ) : (
-                <>
-                  <i className="fas fa-info-circle mr-2"></i>
-                  View Details
-                </>
-              )}
+              <i className={`${currentStatus.icon} mr-1.5`}></i>
+              <span className="font-medium">{currentStatus.label}</span>
             </motion.div>
-          </Link>
-        </motion.div>
-      </motion.div>
+            
+            {startingPrice && (
+              <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-deep-teal font-bold">
+                {displayPrice}
+              </div>
+            )}
+          </div>
+          
+          <div className="p-6 flex-grow">
+            <h3 className="text-xl font-display font-bold text-deep-teal group-hover:text-amber-gold transition-colors mb-2">{name}</h3>
+            
+            <div className="flex items-center text-sm text-gray-500 mb-4">
+              <FiMapPin className="mr-1.5 text-sage-teal" />
+              <span>{location?.address || location?.city || "N/A"}</span>
+              {location?.mapLink && (
+                <a 
+                  href={location.mapLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="ml-2 text-amber-gold hover:text-deep-teal transition-colors"
+                >
+                  <i className="fas fa-map-marked-alt"></i>
+                </a>
+              )}
+            </div>
+            
+            {/* Key Features */}
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              {type && !isInvestment && (
+                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                  <FiHome className="text-amber-gold mb-1" />
+                  <span className="text-xs text-center text-gray-600">{type}</span>
+                </div>
+              )}
+              
+              {subType && isInvestment && (
+                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                  <FiHome className="text-amber-gold mb-1" />
+                  <span className="text-xs text-center text-gray-600">{subType}</span>
+                </div>
+              )}
+              
+              {flatTypes && flatTypes.length > 0 && !isInvestment && (
+                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                  <FaBed className="text-amber-gold mb-1" />
+                  <span className="text-xs text-center text-gray-600">
+                    {flatTypes.map(flat => flat.type.replace(' BHK', '')).join(' & ')} BHK
+                  </span>
+                </div>
+              )}
+              
+              {area && (
+                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                  <FaRulerCombined className="text-amber-gold mb-1" />
+                  <span className="text-xs text-center text-gray-600">{area}</span>
+                </div>
+              )}
+              
+              {height && isInvestment && (
+                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                  <i className="fas fa-arrows-alt-v text-amber-gold mb-1"></i>
+                  <span className="text-xs text-center text-gray-600">Height: {height}</span>
+                </div>
+              )}
+            </div>
+            
+            {/* Short Description */}
+            <div className="mb-4">
+              <p className="text-sm text-gray-600 line-clamp-3">{shortDescription || description?.substring(0, 120) + '...' || "A premium property by Shankeshwar Realty designed to provide exceptional living experience."}</p>
+            </div>
+            
+            {/* Investment-specific details */}
+            {isInvestment && (
+              <div className="bg-amber-gold/10 p-3 rounded-md mb-4">
+                <div className="text-deep-teal font-medium text-sm mb-2">Investment Highlights</div>
+                <div className="grid grid-cols-2 gap-2">
+                  {rentalYield && (
+                    <div className="flex items-center">
+                      <i className="fas fa-chart-line text-amber-gold mr-2"></i>
+                      <span className="text-xs">Rental Yield: {rentalYield}</span>
+                    </div>
+                  )}
+                  {expectedAppreciation && (
+                    <div className="flex items-center">
+                      <i className="fas fa-arrow-trend-up text-amber-gold mr-2"></i>
+                      <span className="text-xs">Appreciation: {expectedAppreciation}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {/* Documents for investment properties */}
+            {isInvestment && documents && documents.length > 0 && (
+              <div className="mb-4">
+                <div className="text-deep-teal font-medium text-sm mb-2">Documents</div>
+                <div className="flex flex-wrap gap-2">
+                  {documents.map((doc, idx) => (
+                    <a 
+                      key={idx}
+                      href={doc.url} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-xs bg-gray-100 hover:bg-deep-teal/10 px-3 py-1.5 rounded text-deep-teal transition-colors"
+                    >
+                      <FiDownload className="mr-1.5" />
+                      {doc.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Contact Sales Button for Completed Properties */}
+            {!isInvestment && (
+              <div className="text-center">
+                <a 
+                  href={`tel:${contactPhone || '+919604304919'}`}
+                  className="inline-flex items-center bg-amber-gold text-deep-teal px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-gold/90 transition-colors"
+                >
+                  <i className="fas fa-phone mr-2"></i>
+                  Contact Sales
+                </a>
+              </div>
+            )}
+            
+            {/* Investment Property Buttons */}
+            {isInvestment && (
+              <div className="grid grid-cols-2 gap-2 mt-4">
+                <a 
+                  href={`tel:${contactPhone || '+919604304919'}`}
+                  className="flex items-center justify-center bg-deep-teal text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-deep-teal/90 transition-colors"
+                >
+                  <i className="fas fa-phone-alt mr-1.5"></i>
+                  Call Now
+                </a>
+                <a 
+                  href={`https://wa.me/${contactPhone?.replace(/[^0-9]/g, '') || '919604304919'}?text=Hi, I'm interested in ${name} at ${location?.address || location?.city}. Please share details about this investment opportunity.`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"
+                >
+                  <FaWhatsapp className="mr-1.5" />
+                  WhatsApp
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : isUpcoming ? (
+        // For upcoming properties
+        <Link to={`/property/${id}`} className="block h-full">
+          <div className="h-full flex flex-col">
+            <div className="relative overflow-hidden h-52 group">
+              <div className="h-full w-full">
+                <ImageWithFallback
+                  src={propertyImageUrl}
+                  alt={name}
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-all duration-700 ease-in-out"
+                />
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+              
+              <motion.div 
+                className={`absolute top-4 left-4 px-3 py-1.5 rounded-full shadow-md ${currentStatus.color} flex items-center`}
+                variants={badgeVariants}
+                initial="initial"
+                animate="animate"
+                whileHover="hover"
+              >
+                <i className={`${currentStatus.icon} mr-1.5`}></i>
+                <span className="font-medium">{currentStatus.label}</span>
+              </motion.div>
+              
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-xl font-display font-bold text-white mb-1">{name}</h3>
+                <div className="flex items-center text-sm text-white/90">
+                  <FiMapPin className="mr-1.5" />
+                  <span>{location?.address || location?.city || "N/A"}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-6 flex-grow flex flex-col">
+              {/* Show message for upcoming property */}
+              <div className="mb-4 flex items-center text-blue-600">
+                <FiCalendar className="mr-2" />
+                <span className="font-medium">Coming Soon</span>
+              </div>
+              
+              {/* Short Description with "Will be updated soon" if missing */}
+              <p className="text-sm text-gray-600 mb-4 flex-grow">
+                {shortDescription || "More details about this exciting upcoming project will be updated soon. Register your interest to stay informed!"}
+              </p>
+              
+              {/* Price or CTA */}
+              <div className="flex items-center justify-between mt-auto">
+                <div>
+                  {startingPrice ? (
+                    <div className="text-amber-gold font-bold">{displayPrice}</div>
+                  ) : (
+                    <div className="text-gray-500 text-sm">Price coming soon</div>
+                  )}
+                </div>
+                
+                <div className="group-hover:translate-x-2 transition-transform duration-300 text-deep-teal font-medium text-sm flex items-center">
+                  Register Interest
+                  <i className="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      ) : (
+        // For ongoing/regular properties with link to detail page
+        <Link to={`/property/${id}`} className="block h-full">
+          <div className="h-full flex flex-col">
+            <div className="relative overflow-hidden h-52 group">
+              <motion.div
+                whileHover={imageHoverVariants.hover}
+                className="h-full w-full"
+              >
+                <ImageWithFallback
+                  src={propertyImageUrl}
+                  alt={name}
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-all duration-700 ease-in-out"
+                />
+              </motion.div>
+              
+              <motion.div 
+                className={`absolute top-4 left-4 px-3 py-1.5 rounded-full shadow-md ${currentStatus.color} flex items-center`}
+                variants={badgeVariants}
+                initial="initial"
+                animate="animate"
+                whileHover="hover"
+              >
+                <i className={`${currentStatus.icon} mr-1.5`}></i>
+                <span className="font-medium">{currentStatus.label}</span>
+              </motion.div>
+              
+              {startingPrice && (
+                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-deep-teal font-bold">
+                  {displayPrice}
+                </div>
+              )}
+            </div>
+            
+            <div className="p-6 flex-grow flex flex-col">
+              <h3 className="text-xl font-display font-bold text-deep-teal group-hover:text-amber-gold transition-colors mb-2">{name}</h3>
+              
+              <div className="flex items-center text-sm text-gray-500 mb-4">
+                <FiMapPin className="mr-1.5 text-sage-teal" />
+                <span>{location?.address || location?.city || "N/A"}</span>
+              </div>
+              
+              {/* Key Features */}
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                {type && !isInvestment && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <FiHome className="text-amber-gold mb-1" />
+                    <span className="text-xs text-center text-gray-600">{type}</span>
+                  </div>
+                )}
+                
+                {subType && isInvestment && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <FiHome className="text-amber-gold mb-1" />
+                    <span className="text-xs text-center text-gray-600">{subType}</span>
+                  </div>
+                )}
+                
+                {flatTypes && flatTypes.length > 0 && !isInvestment && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <FaBed className="text-amber-gold mb-1" />
+                    <span className="text-xs text-center text-gray-600">
+                      {flatTypes.map(flat => flat.type.replace(' BHK', '')).join(' & ')} BHK
+                    </span>
+                  </div>
+                )}
+                
+                {area && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <FaRulerCombined className="text-amber-gold mb-1" />
+                    <span className="text-xs text-center text-gray-600">{area}</span>
+                  </div>
+                )}
+              </div>
+              
+              {/* Short Description */}
+              <div className="mb-4">
+                <p className="text-sm text-gray-600 line-clamp-3">{shortDescription || description?.substring(0, 120) + '...' || "A premium property by Shankeshwar Realty designed to provide exceptional living experience."}</p>
+              </div>
+              
+              {/* View Details Button for Ongoing Properties */}
+              <div className="mt-auto group-hover:translate-x-2 transition-transform duration-300 text-deep-teal font-medium flex items-center justify-end">
+                View Details
+                <i className="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all"></i>
+              </div>
+            </div>
+          </div>
+        </Link>
+      )}
     </motion.div>
   );
 };

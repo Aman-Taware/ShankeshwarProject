@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { motion, AnimatePresence } from 'framer-motion';
+import { companyInfo } from '../../data/clientData.js';
 
 export default function Layout({ children }) {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -66,6 +67,21 @@ export default function Layout({ children }) {
             </motion.button>
           )}
         </AnimatePresence>
+        
+        {/* WhatsApp floating button */}
+        <motion.a
+          href={`https://wa.me/${companyInfo.primaryPhone?.replace(/[^0-9]/g, '') || '919604304919'}?text=Hi, I'm interested in knowing more about Shankeshwar Buildcorp projects. Please provide more details.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors z-40 bottom-20 left-4 md:bottom-8 md:left-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
+          aria-label="Chat on WhatsApp"
+        >
+          <i className="fab fa-whatsapp text-2xl"></i>
+        </motion.a>
       </main>
       <Footer />
     </div>

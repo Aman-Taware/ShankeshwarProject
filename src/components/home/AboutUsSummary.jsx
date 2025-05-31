@@ -50,7 +50,7 @@ const AboutUsSummary = () => {
                 OUR STORY
               </div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-deep-teal mb-6">
-                Crafting <span className="text-amber-gold">Exceptional</span> Living Spaces Since 2008
+                Crafting <span className="text-amber-gold">Exceptional</span> Living Spaces Since 2011
               </h2>
             </motion.div>
             
@@ -98,7 +98,7 @@ const AboutUsSummary = () => {
             {/* Main image */}
             <div className="aspect-[4/5] relative rounded-lg shadow-xl overflow-hidden">
               <img 
-                src="https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                src="/images/website/completed-building.jpeg" 
                 alt="Shankeshwar Realty Team" 
                 className="w-full h-full object-cover"
               />
@@ -190,7 +190,7 @@ const AboutUsSummary = () => {
                 </svg>
               </div>
               <h4 className="text-xl font-display font-bold text-deep-teal mb-4">Customer Trust</h4>
-              <p className="text-deep-teal/70">Building relationships through transparency, reliability, and keeping our promises has been the foundation of our success since 2008.</p>
+              <p className="text-deep-teal/70">Building relationships through transparency, reliability, and keeping our promises has been the foundation of our success since 2011.</p>
             </motion.div>
           </div>
         </motion.div>

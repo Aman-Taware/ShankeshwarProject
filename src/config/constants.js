@@ -4,6 +4,12 @@
 
 // Property status constants with display text and badge variants
 export const PROPERTY_STATUS = {
+  UPCOMING: {
+    value: 'upcoming',
+    label: 'Upcoming',
+    color: 'bg-blue-500 text-white',
+    icon: 'fas fa-calendar-alt'
+  },
   UNDER_CONSTRUCTION: { 
     value: 'under-construction', 
     label: 'Under Construction',
@@ -65,6 +71,7 @@ export const PLACEHOLDER_IMAGES = {
   VIDEO: '/images/placeholders/video-thumbnail.svg',
   FLOORPLAN: '/images/placeholders/floorplan.svg',
   LOGO: '/images/logo.svg',
+  TEAM_MEMBER: '/images/website/placeholder-team.jpg',
 };
 
 // Form validation regexes
@@ -164,4 +171,31 @@ export const IMAGE_SIZES = {
     width: 1920,
     height: 1080
   }
+};
+
+// Property helper functions
+export const getPropertyStatusConfig = (status) => {
+  // First check if it matches one of our constants
+  for (const key in PROPERTY_STATUS) {
+    if (PROPERTY_STATUS[key].value === status) {
+      return {
+        label: PROPERTY_STATUS[key].label,
+        bgColor: PROPERTY_STATUS[key].color,
+        textColor: PROPERTY_STATUS[key].color.includes('text-') 
+          ? '' 
+          : PROPERTY_STATUS[key].color.includes('bg-sage-teal') 
+            ? 'text-deep-teal'
+            : 'text-white',
+        icon: PROPERTY_STATUS[key].icon
+      };
+    }
+  }
+  
+  // Fallback
+  return {
+    label: status ? status.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : "N/A",
+    bgColor: 'bg-gray-500',
+    textColor: 'text-white',
+    icon: 'fas fa-building'
+  };
 }; 

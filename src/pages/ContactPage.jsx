@@ -5,6 +5,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsap
 
 import Container from '../components/ui/Container';
 import { siteConfig } from '../config/site';
+import { sendContactFormEmail } from '../utils/emailService';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +13,8 @@ const ContactPage = () => {
     email: '',
     phone: '',
     subject: '',
-    message: ''
+    message: '',
+    inquiryType: 'General Inquiry'
   });
   
   const [errors, setErrors] = useState({});
@@ -21,7 +23,7 @@ const ContactPage = () => {
   
   useEffect(() => {
     // Set page title
-    document.title = "Contact Us | Shankeshwar Group";
+    document.title = "Contact Us | Shankeshwar Buildcorp";
     
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -80,23 +82,31 @@ const ContactPage = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Send email using our email service
+      const response = await sendContactFormEmail(formData);
       
-      // Reset form and show success message
-      setIsSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
+      if (response.success) {
+        // Reset form and show success message
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+          inquiryType: 'General Inquiry'
+        });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        // Handle error
+        setErrors({
+          submit: response.message || 'There was an error submitting your request. Please try again.'
+        });
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
       setErrors({
@@ -436,6 +446,27 @@ const ContactPage = () => {
                         className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal"
                         placeholder="How can we help you?"
                       />
+                    </div>
+                    
+                    {/* Inquiry Type (new field) */}
+                    <div>
+                      <label htmlFor="inquiryType" className="block text-gray-700 font-medium mb-2">
+                        Inquiry Type
+                      </label>
+                      <select
+                        id="inquiryType"
+                        name="inquiryType"
+                        value={formData.inquiryType}
+                        onChange={handleChange}
+                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal"
+                      >
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Property Interest">Property Interest</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Career">Career Opportunity</option>
+                        <option value="Partnership">Partnership Proposal</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                   </div>
                   

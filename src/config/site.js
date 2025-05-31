@@ -2,11 +2,11 @@ export const siteConfig = {
   name: "Shankeshwar Buildcorp",
   description: "Premier real estate developer in Pune, Maharashtra. Luxury apartments, villas, and commercial spaces crafted with excellence.",
   url: "https://shankeshwarbuildcorp.com",
-  founded: 2010,
+  founded: 2011,
   legalName: 'Shankeshwar Buildcorp Pvt. Ltd.',
   registration: {
     gst: 'GSTIN12345678901',
-    cin: 'U45309MH2010PTC123456',
+    cin: 'U45309MH2011PTC123456',
   },
   logo: "/images/logo.svg", // Main logo
   favicon: "/favicon.ico",
@@ -36,36 +36,36 @@ export const siteConfig = {
   },
   contact: {
     sales: {
-      name: "Priya Sharma",
-      position: "Sales Executive",
-      phone: "9112233445",
-      email: "sales@shankeshwar.com",
+      name: "Hritik Chopda",
+      position: "Director",
+      phone: "9604304919",
+      email: "shankeshwarbuildcorp@gmail.com",
       image: "/images/team/sales-agent.jpg"
     },
     customerService: {
-      name: "Rahul Mehta",
-      position: "Customer Relations",
-      phone: "9223344556",
-      email: "support@shankeshwar.com",
+      name: "Kapil Chopda",
+      position: "Managing Director",
+      phone: "9890255936",
+      email: "shankeshwarbuildcorp@gmail.com",
       image: "/images/team/customer-service.jpg"
     },
-    officeAddress: "Shankeshwar House, Plot 42, Sector 27, Pune, Maharashtra 411027", // Main office address from previous version
-    officePhone: "020-27455500",
-    officeEmail: "info@shankeshwar.com",
-    whatsapp: "9112233445",
-    socialLinks: { // Merged and more consistent naming
+    officeAddress: "Agresan Apartments, 001, Plot No-96, near Gandhi Nursing Home, Sector No. 24, Pradhikaran, Nigdi, Pune, Maharashtra 411044",
+    officePhone: "9604304919",
+    officeEmail: "shankeshwarbuildcorp@gmail.com",
+    whatsapp: "9604304919",
+    socialLinks: {
       facebook: "https://facebook.com/shankeshwarbuildcorp",
-      twitter: "https://twitter.com/shankeshwarbuild" , // Note: old project had shankeshwarbuild, previous siteConfig had shankeshwarbc
-      instagram: "https://instagram.com/shankeshwarbuildcorp",
-      linkedin: "https://linkedin.com/company/shankeshwar-buildcorp",
-      youtube: "https://youtube.com/@shankeshwarbuildcorp" // Note: old project added @ symbol
+      twitter: "https://twitter.com/shankeshwarbuild",
+      instagram: "https://www.instagram.com/suresteprealty?igsh=MTBkMmppYXpuYmg3YQ",
+      linkedin: "https://www.linkedin.com/company/shankeshwar-group/",
+      youtube: "https://youtube.com/@shankeshwarbuildcorp"
     },
   },
   mainOffice: {
-    address: 'Survey No. 270, Ravet, Pune, Maharashtra',
+    address: 'Agresan Apartments, 001, Plot No-96, near Gandhi Nursing Home, Sector No. 24, Pradhikaran, Nigdi',
     city: 'Pune',
     state: 'Maharashtra',
-    pincode: '411033',
+    pincode: '411044',
     country: 'India',
     location: {
       latitude: 18.6501,
@@ -74,11 +74,11 @@ export const siteConfig = {
   },
   branches: [
     {
-      name: 'Mumbai Office',
-      address: '42, Maker Towers, Cuffe Parade, Mumbai, Maharashtra',
-      city: 'Mumbai',
+      name: 'Site Office',
+      address: 'Shankeshwar Pearl, Ravet, Pune, Maharashtra',
+      city: 'Pune',
       state: 'Maharashtra',
-      pincode: '400005',
+      pincode: '411033',
     },
   ],
 }; 

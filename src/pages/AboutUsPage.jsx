@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
+// Import team and milestone data
+import { teamMembers, companyMilestones } from '../data/clientData.js';
 
 const AboutUsPage = () => {
   // Animation variants
@@ -29,67 +31,11 @@ const AboutUsPage = () => {
     }
   };
 
-  // Team members data
-  const teamMembers = [
-    {
-      name: "Rajesh Sharma",
-      position: "Founder & CEO",
-      bio: "With over 25 years of experience in real estate development, Rajesh leads our company with passion and strategic vision.",
-      image: "/images/website/placeholder-team.jpg"
-    },
-    {
-      name: "Priya Patel",
-      position: "Chief Architect",
-      bio: "Priya brings creative solutions and innovative designs to all our projects, ensuring both functionality and aesthetic appeal.",
-      image: "/images/website/placeholder-team.jpg"
-    },
-    {
-      name: "Amit Desai",
-      position: "Construction Director",
-      bio: "Amit ensures all our developments are built to the highest standards of quality and safety, always delivering on time.",
-      image: "/images/website/placeholder-team.jpg"
-    },
-    {
-      name: "Neha Singh",
-      position: "Customer Relations Head",
-      bio: "Neha leads our customer experience team, making sure every client's journey with us is smooth and satisfying.",
-      image: "/images/website/placeholder-team.jpg"
-    }
-  ];
+  // Use imported team members data
+  // Note: The teamMembers array is now imported from clientData.js
 
-  // Milestones data
-  const milestones = [
-    {
-      year: "2008",
-      title: "Company Founded",
-      description: "Shankeshwar Realty was established with a vision to transform the real estate landscape of Pune."
-    },
-    {
-      year: "2010",
-      title: "First Residential Project",
-      description: "Successfully completed our first residential project, establishing our reputation for quality construction."
-    },
-    {
-      year: "2015",
-      title: "Expansion Phase",
-      description: "Expanded our operations to include commercial properties and entered new markets in Maharashtra."
-    },
-    {
-      year: "2018",
-      title: "Sustainability Initiative",
-      description: "Launched our green building initiative, incorporating eco-friendly practices in all new projects."
-    },
-    {
-      year: "2020",
-      title: "Digital Transformation",
-      description: "Embraced technology to enhance customer experience and streamline our development process."
-    },
-    {
-      year: "2023",
-      title: "25+ Projects Milestone",
-      description: "Celebrated the successful completion of over 25 projects and 200+ happy families."
-    }
-  ];
+  // Use imported milestone data
+  // Note: The milestones array is now imported from clientData.js
 
   return (
     <div className="bg-cream min-h-screen">
@@ -119,7 +65,7 @@ const AboutUsPage = () => {
               Building <span className="text-amber-gold">Tomorrow's</span> Landmarks Today
             </h1>
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              At Shankeshwar Realty, we're more than developers—we're visionaries crafting spaces where memories are made, businesses thrive, and communities flourish.
+              At Shankeshwar Buildcorp, we're more than developers—we're visionaries crafting spaces where memories are made, businesses thrive, and communities flourish.
             </p>
             <div className="flex gap-4 justify-center">
               <Button 
@@ -176,11 +122,11 @@ const AboutUsPage = () => {
               >
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-4xl font-display font-bold text-deep-teal">15+</p>
+                    <p className="text-4xl font-display font-bold text-deep-teal">14+</p>
                     <p className="text-sm text-deep-teal/60">Years Experience</p>
                   </div>
                   <div>
-                    <p className="text-4xl font-display font-bold text-amber-gold">25+</p>
+                    <p className="text-4xl font-display font-bold text-amber-gold">9+</p>
                     <p className="text-sm text-deep-teal/60">Projects Delivered</p>
                   </div>
                 </div>
@@ -200,7 +146,7 @@ const AboutUsPage = () => {
               
               <motion.div variants={fadeIn}>
                 <p className="text-lg text-deep-teal/80 mb-6 leading-relaxed">
-                  Founded in 2008, Shankeshwar Realty has grown from a small real estate venture to one of the most trusted developers in Pune. Our journey has been defined by an unwavering commitment to quality, innovation, and customer satisfaction.
+                  Founded in 2011, Shankeshwar Buildcorp has grown from a small real estate venture to one of the most trusted developers in Pune. Our journey has been defined by an unwavering commitment to quality, innovation, and customer satisfaction.
                 </p>
                 <p className="text-lg text-deep-teal/80 mb-8 leading-relaxed">
                   Over the years, we have successfully delivered residential, commercial, and mixed-use projects that stand as testaments to our dedication to excellence. Each property we develop is crafted with meticulous attention to detail, using the finest materials and cutting-edge construction techniques.
@@ -298,11 +244,11 @@ const AboutUsPage = () => {
               Meet The <span className="text-amber-gold">Experts</span> Behind Our Success
             </h2>
             <p className="text-lg text-deep-teal/80 leading-relaxed">
-              Our team of dedicated professionals brings together decades of experience in real estate development, architecture, construction, and customer service.
+              Our team of dedicated professionals brings together experience in real estate development, architecture, construction, and customer service.
             </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => (
               <motion.div 
                 key={index}
@@ -312,18 +258,68 @@ const AboutUsPage = () => {
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="aspect-[3/4] relative overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-deep-teal/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-deep-teal mb-1">{member.name}</h3>
-                  <p className="text-amber-gold font-medium text-sm mb-4">{member.position}</p>
-                  <p className="text-deep-teal/70 text-sm">{member.bio}</p>
+                <div className="flex flex-col md:flex-row">
+                  <div className="md:w-2/5 overflow-hidden relative">
+                    <div className="aspect-square md:h-full relative overflow-hidden">
+                      <img 
+                        src={member.image} 
+                        alt={member.name} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-deep-teal/70 via-deep-teal/20 to-transparent opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    
+                    {/* Decorative accent */}
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-amber-gold transform origin-left transition-transform duration-300 group-hover:scale-x-100"></div>
+                    
+                    {/* Name overlay for mobile */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-deep-teal/90 to-transparent md:hidden">
+                      <h3 className="text-xl font-display font-bold text-white">{member.name}</h3>
+                      <p className="text-amber-gold font-medium text-sm">{member.position}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="md:w-3/5 p-6 flex flex-col justify-between relative">
+                    {/* Name and position (hidden on mobile, shown on desktop) */}
+                    <div className="hidden md:block mb-4">
+                      <h3 className="text-xl font-display font-bold text-deep-teal mb-1">{member.name}</h3>
+                      <div className="flex items-center">
+                        <div className="w-10 h-0.5 bg-amber-gold mr-3"></div>
+                        <p className="text-amber-gold font-medium text-sm">{member.position}</p>
+                      </div>
+                    </div>
+                    
+                    {/* Bio */}
+                    <div className="mt-4 md:mt-0">
+                      <p className="text-deep-teal/70 text-sm md:text-base leading-relaxed">{member.detailedBio}</p>
+                    </div>
+                    
+                    {/* Social links if available */}
+                    {member.socialLinks && (
+                      <div className="flex space-x-3 mt-4 pt-4 border-t border-gray-100">
+                        {member.socialLinks.linkedin && (
+                          <a 
+                            href={member.socialLinks.linkedin} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-deep-teal/60 hover:text-amber-gold transition-colors"
+                            aria-label={`${member.name}'s LinkedIn profile`}
+                          >
+                            <i className="fab fa-linkedin-in"></i>
+                          </a>
+                        )}
+                        {member.socialLinks.email && (
+                          <a 
+                            href={`mailto:${member.socialLinks.email}`}
+                            className="text-deep-teal/60 hover:text-amber-gold transition-colors"
+                            aria-label={`Email ${member.name}`}
+                          >
+                            <i className="far fa-envelope"></i>
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -376,7 +372,7 @@ const AboutUsPage = () => {
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-amber-gold/30 transform -translate-x-1/2 hidden md:block"></div>
             
             <div className="space-y-12">
-              {milestones.map((milestone, index) => (
+              {companyMilestones.map((milestone, index) => (
                 <motion.div 
                   key={index}
                   className={`md:flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}

@@ -9,9 +9,10 @@ import { motion } from 'framer-motion';
  * @param {React.ReactNode} props.icon - Icon to display
  * @param {string} props.label - Tab label text
  * @param {string} props['data-tab'] - Data attribute for identifying the tab
+ * @param {string} props.className - Additional CSS class for custom styling
  * @returns {JSX.Element} TabButton component
  */
-const TabButton = ({ active, onClick, icon, label, 'data-tab': dataTab, ...rest }) => {
+const TabButton = ({ active, onClick, icon, label, 'data-tab': dataTab, className = '', ...rest }) => {
   return (
     <motion.button
       onClick={onClick}
@@ -22,6 +23,7 @@ const TabButton = ({ active, onClick, icon, label, 'data-tab': dataTab, ...rest 
         ${active 
           ? 'bg-deep-teal text-white shadow-md' 
           : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'}
+        ${className}
       `}
       whileHover={!active ? { scale: 1.02 } : {}}
       whileTap={{ scale: 0.98 }}

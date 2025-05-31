@@ -1,50 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../ui/Container';
+import { testimonials } from '../../data/clientData.js'; // Import testimonials from clientData
 
-// Enhanced testimonials data with more details and ratings
-const testimonials = [
-  { 
-    id: 1, 
-    name: 'Rajesh Mehta',
-    avatar: '/images/website/avatar-fallback.jpg',
-    feedback: "Buying our home with Shankeshwar Realty was one of the best decisions we made. The quality construction, attention to detail, and the team's professionalism throughout the process was incredible. Our 3 BHK apartment exceeded all our expectations.",
-    project: 'Shankeshwar Pearl',
-    rating: 5,
-    occupation: 'IT Professional',
-    location: 'Pune'
-  },
-  { 
-    id: 2, 
-    name: 'Priya Sharma', 
-    avatar: '/images/website/avatar-fallback.jpg',
-    feedback: "What impressed me most was the transparency and integrity in all dealings. From booking to possession, everything went smoothly. The amenities are world-class and the design of our home is both functional and beautiful. Highly recommended!",
-    project: 'Shankeshwar Villa',
-    rating: 5,
-    occupation: 'Healthcare Professional',
-    location: 'Ravet'
-  },
-  { 
-    id: 3, 
-    name: 'Aditya Patil',
-    avatar: '/images/website/avatar-fallback.jpg',
-    feedback: "As a first-time homebuyer, I was nervous about the process. The Shankeshwar team guided me every step of the way. The promised delivery timeline was met, and they've been responsive even after handover with maintenance support.",
-    project: 'Skyline One',
-    rating: 4,
-    occupation: 'Business Owner',
-    location: 'Charohli'
-  },
-  { 
-    id: 4, 
-    name: 'Sunita and Rahul Joshi',
-    avatar: '/images/website/avatar-fallback.jpg',
-    feedback: "We were looking for a child-friendly home and Shankeshwar Sparsh perfectly met our needs. The well-planned layout, dedicated children's amenities, and secure environment give us peace of mind. Our kids love the play areas!",
-    project: 'Shankeshwar Sparsh',
-    rating: 5,
-    occupation: 'Teachers',
-    location: 'Moshi'
-  }
-];
+// Use imported testimonials data from clientData.js
+// Note: We'll use the imported testimonials array instead of the local one
 
 const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -153,7 +113,7 @@ const TestimonialsSection = () => {
             What Our <span className="text-amber-gold">Clients</span> Say
           </h2>
           <p className="text-lg text-deep-teal/70 max-w-2xl mx-auto">
-            Don't just take our word for it. Hear from our happy homeowners about their experience with Shankeshwar Realty.
+            Don't just take our word for it. Hear from our happy homeowners about their experience with Shankeshwar Buildcorp.
           </p>
         </motion.div>
         

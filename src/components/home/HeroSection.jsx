@@ -1,13 +1,18 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
 
-// Image imports
-import heroImageDesktop from '/images/website/hero-building.jpeg';
-import heroImageMobile from '/images/website/hero-building.jpeg';
+// Define slide images - we'll use several images for the slider
+const sliderImages = [
+  '/images/website/hero-building.jpeg',
+  '/images/website/building-modern.jpeg',
+  '/images/website/completed-building.jpeg',
+  '/images/website/shankeshwar-pride.jpg'
+];
 
 const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
   
   // Parallax effect refs and values
   const heroRef = useRef(null);
@@ -34,27 +39,92 @@ const HeroSection = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Auto-rotate slides
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+    }, 5000); // Change slide every 5 seconds
+    
+    return () => clearInterval(timer);
+  }, []);
+
+  // Handle manual slide navigation
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? sliderImages.length - 1 : prev - 1));
+  };
+
   return (
     <section 
       ref={heroRef}
       className="relative h-screen w-full overflow-hidden"
     >
-      {/* Single Hero Image with parallax effect - changed to use local images */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: isMobile 
-            ? `url(${heroImageMobile})`
-            : `url(${heroImageDesktop})`,
-          y: buildingY
-        }}
-      />
+      {/* Image Slider with parallax effect */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          className="absolute inset-0 bg-cover bg-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          style={{
+            backgroundImage: `url(${sliderImages[currentSlide]})`,
+            y: buildingY
+          }}
+        />
+      </AnimatePresence>
       
       {/* Enhanced gradient overlay for better contrast */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-black/70 via-deep-teal/60 to-black/60"
         style={{ opacity: overlayOpacity }}
       />
+      
+      {/* Slider controls */}
+      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 hidden md:block">
+        <button 
+          onClick={prevSlide}
+          className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-amber-gold hover:text-deep-teal flex items-center justify-center mb-4 transition-colors"
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
+        </button>
+        <button 
+          onClick={nextSlide}
+          className="w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-amber-gold hover:text-deep-teal flex items-center justify-center transition-colors"
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+      
+      {/* Slide indicators */}
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+        {sliderImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-all ${
+              currentSlide === index 
+                ? 'bg-amber-gold w-8' 
+                : 'bg-white/50 hover:bg-white/80'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
       
       {/* Architectural blueprint elements - parallax at different rate */}
       <motion.div
@@ -110,7 +180,7 @@ const HeroSection = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-deep-teal" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <span className="text-xs font-semibold text-deep-teal tracking-wide">TRUSTED EXCELLENCE SINCE 2008</span>
+            <span className="text-xs font-semibold text-deep-teal tracking-wide">TRUSTED EXCELLENCE SINCE 2011</span>
           </motion.div>
           
           {/* Main heading with staggered reveal - updated messaging */}
@@ -164,9 +234,9 @@ const HeroSection = () => {
             Shankeshwar Realty transforms visions into vibrant communities. Crafting premium living spaces with uncompromising quality and timeless design.
           </motion.p>
           
-          {/* CTA Buttons - updated text */}
+          {/* CTA Buttons - Fixed positioning to prevent overlap, increased bottom margin */}
           <motion.div
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 mb-16 md:mb-28 lg:mb-24"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -192,10 +262,10 @@ const HeroSection = () => {
         </div>
       </motion.div>
       
-      {/* Floating achievement elements that parallax differently - updated content */}
+      {/* Floating achievement elements - adjusted positioning to avoid overlap */}
       <motion.div
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
-        className="absolute bottom-12 md:bottom-24 left-6 md:left-16 flex flex-col md:flex-row gap-4 md:gap-8 z-10"
+        className="absolute bottom-4 md:bottom-6 lg:bottom-8 left-6 md:left-16 flex flex-col md:flex-row gap-4 md:gap-8 z-10"
       >
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -203,7 +273,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 1 }}
           className="backdrop-blur-sm bg-black/40 px-4 py-3 rounded-lg border border-white/10 flex items-center"
         >
-          <span className="text-3xl md:text-4xl font-display font-bold text-amber-gold mr-3">25+</span>
+          <span className="text-3xl md:text-4xl font-display font-bold text-amber-gold mr-3">9+</span>
           <span className="text-sm text-white/90">Premium<br />Projects</span>
         </motion.div>
         
@@ -213,7 +283,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="backdrop-blur-sm bg-black/40 px-4 py-3 rounded-lg border border-white/10 flex items-center"
         >
-          <span className="text-3xl md:text-4xl font-display font-bold text-amber-gold mr-3">200+</span>
+          <span className="text-3xl md:text-4xl font-display font-bold text-amber-gold mr-3">800+</span>
           <span className="text-sm text-white/90">Happy<br />Families</span>
         </motion.div>
         
@@ -223,14 +293,14 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 1.4 }}
           className="backdrop-blur-sm bg-black/40 px-4 py-3 rounded-lg border border-white/10 flex items-center hidden md:flex"
         >
-          <span className="text-3xl md:text-4xl font-display font-bold text-amber-gold mr-3">15+</span>
+          <span className="text-3xl md:text-4xl font-display font-bold text-amber-gold mr-3">14+</span>
           <span className="text-sm text-white/90">Years of<br />Excellence</span>
         </motion.div>
       </motion.div>
       
       {/* Decorative vertical line with animated dot */}
       <motion.div
-        className="absolute left-1/2 bottom-0 hidden md:flex flex-col items-center z-10"
+        className="absolute left-1/2 bottom-4 hidden md:flex flex-col items-center z-10"
         initial={{ height: 0 }}
         animate={{ height: 120 }}
         transition={{ duration: 1, delay: 1 }}

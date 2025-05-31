@@ -3,20 +3,22 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
+import { companyInfo } from '../../data/clientData.js';
 
+// Updated navigation with client data
 const navigation = {
   main: [
     { name: 'Home', href: '/' },
-    { name: 'Ongoing Projects', href: '/projects/ongoing' },
-    { name: 'Completed Projects', href: '/projects/completed' },
+    { name: 'Projects', href: '/projects/all' },
+    { name: 'Redevelopment', href: '/redevelopment' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ],
   projects: [
-    { name: 'Emerald Heights', href: '/projects/emerald-heights' },
-    { name: 'Sapphire Residency', href: '/projects/sapphire-residency' },
-    { name: 'Ruby Towers', href: '/projects/ruby-towers' },
-    { name: 'Diamond Plaza', href: '/projects/diamond-plaza' },
+    { name: 'Shankeshwar Pearl', href: '/property/shankeshwar-pearl' },
+    { name: 'Shankeshwar Sparsh', href: '/property/shankeshwar-sparsh' },
+    { name: 'Shankeshwar Harmony', href: '/property/shankeshwar-harmony' },
+    { name: 'Skyline One', href: '/property/skyline-one' },
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy-policy' },
@@ -27,7 +29,7 @@ const navigation = {
   social: [
     {
       name: 'Facebook',
-      href: 'https://facebook.com',
+      href: companyInfo.socialMedia.facebook || 'https://facebook.com',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -40,7 +42,7 @@ const navigation = {
     },
     {
       name: 'Instagram',
-      href: 'https://instagram.com',
+      href: companyInfo.socialMedia.instagram || 'https://instagram.com',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -52,21 +54,8 @@ const navigation = {
       ),
     },
     {
-      name: 'YouTube',
-      href: 'https://youtube.com',
-      icon: (props) => (
-        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-          <path
-            fillRule="evenodd"
-            d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-            clipRule="evenodd"
-          />
-        </svg>
-      ),
-    },
-    {
       name: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: companyInfo.socialMedia.linkedin || 'https://linkedin.com',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -129,28 +118,34 @@ export default function Footer() {
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="text-cream text-2xl font-display font-bold"
+                className="flex items-center"
               >
-                Shankeshwar<span className="text-amber-gold">Realty</span>
+                <img 
+                  src="/images/website/logo.png" 
+                  alt="Shankeshwar Buildcorp Logo" 
+                  className="h-14 mr-2"
+                />
               </motion.div>
             </Link>
             <p className="text-sm text-sage-teal/90 mb-5 leading-relaxed">
-              Crafting exceptional living spaces since 2010. We build homes that redefine luxury and comfort with quality construction and timeless design.
+              {companyInfo.fullDescription.substring(0, 150)}...
             </p>
             <div className="flex space-x-4">
               {navigation.social.map((item) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sage-teal hover:text-amber-gold transition-colors duration-300"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
-                </motion.a>
+                item.href && item.href !== "" ? (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    className="text-sage-teal hover:text-amber-gold transition-colors duration-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <span className="sr-only">{item.name}</span>
+                    <item.icon className="h-6 w-6" aria-hidden="true" />
+                  </motion.a>
+                ) : null
               ))}
             </div>
           </motion.div>
@@ -204,19 +199,19 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
-                123 Builder Street, Business District, City 12345
+                {companyInfo.address.line1}, {companyInfo.address.line2}, {companyInfo.address.city} - {companyInfo.address.pinCode}
               </p>
               <p className="flex items-center mb-2">
                 <svg className="w-4 h-4 mr-2 text-amber-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
-                info@shankeshwarrealty.com
+                {companyInfo.primaryEmail}
               </p>
               <p className="flex items-center">
                 <svg className="w-4 h-4 mr-2 text-amber-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
-                +91 9876543210
+                {companyInfo.primaryPhone}
               </p>
             </address>
             <Button 
@@ -233,7 +228,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-sage-teal/20 flex flex-col md:flex-row justify-between items-center">
           <p className="text-xs text-sage-teal/80">
-            &copy; {currentYear} Shankeshwar Realty. All rights reserved.
+            &copy; {currentYear} {companyInfo.name}. All rights reserved.
           </p>
           <ul className="flex flex-wrap justify-center space-x-6 mt-4 md:mt-0">
             {navigation.legal.map((item) => (

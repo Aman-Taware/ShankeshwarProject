@@ -5,6 +5,7 @@ import { FiChevronLeft, FiChevronRight, FiX, FiMaximize } from 'react-icons/fi';
 const PropertyGallery = ({ images = [] }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('all');
 
   // If no images provided, show a placeholder
   if (!images || images.length === 0) {
@@ -15,15 +16,26 @@ const PropertyGallery = ({ images = [] }) => {
     );
   }
 
+  // Group images by type
+  const imageCategories = images.reduce((acc, img) => {
+    const type = img.type || 'other';
+    if (!acc[type]) acc[type] = [];
+    acc[type].push(img);
+    return acc;
+  }, { all: images });
+
+  // Filter images based on active category
+  const filteredImages = activeCategory === 'all' ? images : imageCategories[activeCategory] || [];
+
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? filteredImages.length - 1 : prevIndex - 1
     );
   };
 
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) => 
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === filteredImages.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -35,66 +47,107 @@ const PropertyGallery = ({ images = [] }) => {
     setIsFullscreen(!isFullscreen);
   };
 
+  // Handle category change
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    setCurrentImageIndex(0); // Reset to first image in the category
+  };
+
+  // Get available categories
+  const categories = Object.keys(imageCategories).filter(cat => cat !== 'all');
+
   return (
     <>
-      {/* Main Gallery */}
-      <div className="relative">
-        <div className="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
-          <img
-            src={images[currentImageIndex].url}
-            alt={images[currentImageIndex].alt || `Property Image ${currentImageIndex + 1}`}
-            className="object-cover w-full h-full"
-          />
-        </div>
+      {/* Gallery Container */}
+      <div className="mx-auto max-w-5xl">
+        {/* Image Categories */}
+        {categories.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-2">
+            <button
+              onClick={() => handleCategoryChange('all')}
+              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                activeCategory === 'all'
+                ? 'bg-deep-teal text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+              }`}
+            >
+              All Images
+            </button>
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium capitalize transition-colors ${
+                  activeCategory === category
+                  ? 'bg-deep-teal text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
 
-        {/* Navigation Controls */}
-        <button
-          onClick={handlePrevImage}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md"
-          aria-label="Previous image"
-        >
-          <FiChevronLeft className="text-gray-800 text-xl" />
-        </button>
-
-        <button
-          onClick={handleNextImage}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md"
-          aria-label="Next image"
-        >
-          <FiChevronRight className="text-gray-800 text-xl" />
-        </button>
-
-        <button
-          onClick={toggleFullscreen}
-          className="absolute top-4 right-4 bg-white/80 hover:bg-white rounded-full p-2 shadow-md"
-          aria-label="Toggle fullscreen"
-        >
-          <FiMaximize className="text-gray-800" />
-        </button>
-
-        {/* Image Counter */}
-        <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
-          {currentImageIndex + 1} / {images.length}
-        </div>
-      </div>
-
-      {/* Thumbnails */}
-      <div className="mt-4 flex space-x-2 overflow-x-auto pb-2 hide-scrollbar">
-        {images.map((image, index) => (
-          <button
-            key={index}
-            onClick={() => handleThumbnailClick(index)}
-            className={`flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border-2 transition-all ${
-              index === currentImageIndex ? 'border-teal-500 opacity-100' : 'border-transparent opacity-70 hover:opacity-100'
-            }`}
-          >
+        {/* Main Image Display */}
+        <div className="relative rounded-lg overflow-hidden shadow-md border border-gray-100 bg-gray-50">
+          <div className="aspect-w-16 aspect-h-9 md:aspect-h-10 lg:aspect-h-9">
             <img
-              src={image.url}
-              alt={image.alt || `Thumbnail ${index + 1}`}
+              src={filteredImages[currentImageIndex].url}
+              alt={filteredImages[currentImageIndex].alt || `Property Image ${currentImageIndex + 1}`}
               className="object-cover w-full h-full"
             />
+          </div>
+
+          {/* Navigation Controls */}
+          <button
+            onClick={handlePrevImage}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-amber-gold/50"
+            aria-label="Previous image"
+          >
+            <FiChevronLeft className="text-deep-teal text-xl" />
           </button>
-        ))}
+
+          <button
+            onClick={handleNextImage}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-amber-gold/50"
+            aria-label="Next image"
+          >
+            <FiChevronRight className="text-deep-teal text-xl" />
+          </button>
+
+          <button
+            onClick={toggleFullscreen}
+            className="absolute top-4 right-4 bg-white/80 hover:bg-white rounded-full p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-amber-gold/50"
+            aria-label="Toggle fullscreen"
+          >
+            <FiMaximize className="text-deep-teal" />
+          </button>
+
+          {/* Image Counter */}
+          <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
+            {currentImageIndex + 1} / {filteredImages.length}
+          </div>
+        </div>
+
+        {/* Thumbnails */}
+        <div className="mt-4 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2">
+          {filteredImages.map((image, index) => (
+            <button
+              key={index}
+              onClick={() => handleThumbnailClick(index)}
+              className={`relative aspect-square rounded-md overflow-hidden border-2 transition-all ${
+                index === currentImageIndex ? 'border-amber-gold shadow-sm' : 'border-gray-200 opacity-70 hover:opacity-100'
+              }`}
+            >
+              <img
+                src={image.url}
+                alt={image.alt || `Thumbnail ${index + 1}`}
+                className="object-cover w-full h-full"
+              />
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Fullscreen Modal */}
@@ -116,9 +169,9 @@ const PropertyGallery = ({ images = [] }) => {
 
             <div className="relative w-full max-w-6xl max-h-full">
               <img
-                src={images[currentImageIndex].url}
-                alt={images[currentImageIndex].alt || `Property Image ${currentImageIndex + 1}`}
-                className="object-contain w-full h-full"
+                src={filteredImages[currentImageIndex].url}
+                alt={filteredImages[currentImageIndex].alt || `Property Image ${currentImageIndex + 1}`}
+                className="object-contain w-full h-full max-h-[85vh]"
               />
 
               <button
@@ -139,7 +192,7 @@ const PropertyGallery = ({ images = [] }) => {
 
               {/* Image Counter */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full">
-                {currentImageIndex + 1} / {images.length}
+                {currentImageIndex + 1} / {filteredImages.length}
               </div>
             </div>
           </motion.div>

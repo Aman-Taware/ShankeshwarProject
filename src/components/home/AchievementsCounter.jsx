@@ -1,40 +1,41 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import Container from '../ui/Container';
+import { companyAchievements } from '../../data/clientData.js';
 
-// Enhanced achievement data with icons and descriptions
+// Enhanced achievement data with icons and descriptions based on client data
 const achievements = [
+  { 
+    id: 'experience',
+    name: 'Years of Experience', 
+    value: companyAchievements.yearsInBusiness, 
+    suffix: '+',
+    icon: 'fas fa-calendar-alt',
+    description: 'Building excellence in real estate since 2011'
+  },
   { 
     id: 'projects',
     name: 'Projects Completed', 
-    value: 50, 
+    value: companyAchievements.projectsCompleted, 
     suffix: '+',
     icon: 'fas fa-building',
     description: 'Successful real estate projects delivered with excellence'
   },
   { 
-    id: 'clients',
-    name: 'Happy Clients', 
-    value: 1000, 
+    id: 'families',
+    name: 'Happy Families', 
+    value: companyAchievements.happyFamilies, 
     suffix: '+',
     icon: 'fas fa-smile',
-    description: 'Families and businesses who trust our quality and service'
+    description: 'Families who trust our quality and service'
   },
   { 
-    id: 'experience',
-    name: 'Years of Experience', 
-    value: 15, 
-    suffix: '+',
-    icon: 'fas fa-calendar-alt',
-    description: 'Building excellence in the real estate industry since 2008'
-  },
-  { 
-    id: 'awards',
-    name: 'Awards Won', 
-    value: 12, 
-    suffix: '+',
-    icon: 'fas fa-trophy',
-    description: 'Recognition for our innovative designs and quality'
+    id: 'area',
+    name: 'Area Developed', 
+    value: 9, 
+    suffix: 'L+ sq.ft.',
+    icon: 'fas fa-chart-area',
+    description: 'Total constructed area with premium design and quality'
   }
 ];
 

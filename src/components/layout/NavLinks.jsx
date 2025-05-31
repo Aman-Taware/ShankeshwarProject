@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 // Define navigation links
 export const navigationLinks = [
   { name: 'Home', href: '/' },
-  { name: 'Ongoing Projects', href: '/projects/ongoing' },
-  { name: 'Completed Projects', href: '/projects/completed' },
+  { name: 'Projects', href: '/projects/all' },
+  { name: 'Redevelopment', href: '/redevelopment' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -34,14 +34,14 @@ const NavLinks = ({
             <Link
               to={item.href}
               className={`block py-2 text-base font-medium transition-colors hover:text-amber-gold ${
-                pathname === item.href
+                pathname === item.href || (item.href === '/projects/all' && pathname.startsWith('/projects/'))
                   ? 'text-amber-gold'
                   : 'text-deep-teal'
               }`}
               onClick={onClick}
             >
               {item.name}
-              {showIndicators && pathname === item.href && (
+              {showIndicators && (pathname === item.href || (item.href === '/projects/all' && pathname.startsWith('/projects/'))) && (
                 <motion.span 
                   className="ml-2 inline-block h-1 w-1 rounded-full bg-amber-gold"
                   layoutId="mobileNavIndicator"
@@ -62,10 +62,10 @@ const NavLinks = ({
           to={item.href}
           className="relative text-sm font-medium group"
         >
-          <span className={`${pathname === item.href ? 'text-amber-gold' : 'text-deep-teal group-hover:text-amber-gold transition-colors'}`}>
+          <span className={`${pathname === item.href || (item.href === '/projects/all' && pathname.startsWith('/projects/')) ? 'text-amber-gold' : 'text-deep-teal group-hover:text-amber-gold transition-colors'}`}>
             {item.name}
           </span>
-          {showIndicators && pathname === item.href && (
+          {showIndicators && (pathname === item.href || (item.href === '/projects/all' && pathname.startsWith('/projects/'))) && (
             <motion.span 
               className="absolute -bottom-1 left-0 w-full h-0.5 bg-amber-gold" 
               layoutId="navIndicator"

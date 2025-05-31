@@ -60,19 +60,17 @@ export default function Header() {
       <Container className="h-full">
         <div className="flex items-center justify-between h-full">
           <Link to="/" className="flex items-center group">
-            <motion.span 
-              className="text-deep-teal text-xl md:text-2xl font-display font-bold relative"
+            <motion.div 
+              className="relative"
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.2 }}
             >
-              Shankeshwar
-              <span className="text-amber-gold">Realty</span>
-              <motion.span 
-                className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-gold group-hover:w-full"
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.3 }}
+              <img 
+                src="/images/website/logo.png" 
+                alt="Shankeshwar Buildcorp Logo" 
+                className="h-10 md:h-12"
               />
-            </motion.span>
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
