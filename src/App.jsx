@@ -7,6 +7,8 @@ import PropertyDetailPage from './pages/PropertyDetailPage';
 import ContactPage from './pages/ContactPage';
 import AboutUsPage from './pages/AboutUsPage';
 import RedevelopmentPage from './pages/RedevelopmentPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 // Import other pages here as you create them
 // import AboutPage from './pages/AboutPage'; 
 
@@ -25,6 +27,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-conditions" element={<TermsAndConditionsPage />} />
         {/* Define other routes here */}
         {/* <Route path="/about" element={<AboutPage />} /> */}
       </Routes>

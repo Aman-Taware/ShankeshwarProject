@@ -568,7 +568,7 @@ const ongoingProperties = [
     possessionDate: 'September 2025',
     reraNumber: 'P52100055256',
     reraCertificatePath: '/documents/properties/shankeshwar-sparsh/rera-certificate.pdf',
-    reraRegistrationUrl: 'https://maharera.mahaonline.gov.in',
+    reraRegistrationUrl: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwNTUyNTYmU2NhbnR5cGU9UHJvbW90ZXJMb2dpblFSQ29kZQ==',
     priceRange: {
       min: 3800000,
       max: 6200000

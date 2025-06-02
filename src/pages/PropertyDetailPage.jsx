@@ -257,38 +257,17 @@ const PropertyDetailPage = () => {
   return (
     <div className="bg-cream min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        {/* Property Gallery at the Top */}
-        <motion.div 
-          className="mb-8 bg-white rounded-lg shadow-md p-4 md:p-6 overflow-hidden"
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-        >
-          {displayProperty.images && displayProperty.images.length > 0 ? (
-          <PropertyGallery images={displayProperty.images} />
-          ) : (
-            <div className="aspect-w-16 aspect-h-9 bg-gray-100 flex items-center justify-center">
-              <div className="text-center p-8">
-                <FaExclamationTriangle className="text-amber-gold text-4xl mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-deep-teal mb-2">Property Images Coming Soon</h3>
-                <p className="text-gray-500">
-                  Our team is working on capturing beautiful images of this upcoming project.
-                  Check back soon for updates!
-                </p>
-              </div>
-            </div>
-          )}
-        </motion.div>
-        
-        {/* Property Header */}
-        <motion.div 
-          className="mb-8"
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <div className="flex flex-col md:flex-row md:justify-between md:items-start">
-            <motion.div variants={fadeInUp}>
+        {/* Top Section with Gallery and Property Details Side by Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Property Header & Details on the Left */}
+          <motion.div 
+            className="flex flex-col order-2 lg:order-1"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <div className="bg-white rounded-lg shadow-md p-5 md:p-6 h-full flex flex-col">
+              {/* Breadcrumb Navigation */}
               <div className="flex items-center mb-2 text-xs">
                 <Link to="/" className="text-gray-500 hover:text-deep-teal">Home</Link>
                 <span className="mx-2">›</span>
@@ -297,175 +276,210 @@ const PropertyDetailPage = () => {
                 <span className="text-gray-700">{displayProperty.name}</span>
               </div>
               
-              <h1 className="text-3xl md:text-4xl font-display font-bold mb-2 text-deep-teal">{displayProperty.name}</h1>
-              
-              <div className="flex items-center mb-2">
-                <FiMapPin className="text-amber-gold mr-2 flex-shrink-0" />
-                <span className="text-gray-700">{displayProperty.location.address}, {displayProperty.location.city}</span>
-              </div>
-              
-              {/* Status Badge */}
-              <div className="flex items-center mb-4 flex-wrap gap-2">
-                <span 
-                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${statusConfig.bgColor} ${statusConfig.textColor}`}
-                >
-                  <i className={`${statusConfig.icon} mr-1`}></i>
-                  <span>{statusConfig.label}</span>
-                </span>
+              <motion.div variants={fadeInUp} className="mb-4">
+                <h1 className="text-3xl md:text-4xl font-display font-bold mb-3 text-deep-teal">{displayProperty.name}</h1>
                 
-                {isUpcoming && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-blue-700 bg-blue-100">
-                    <FiClock className="mr-1" />
-                    Coming Soon
-                  </span>
-                )}
+                <div className="flex items-center mb-3">
+                  <FiMapPin className="text-amber-gold mr-2 flex-shrink-0" />
+                  <span className="text-gray-700">{displayProperty.location.address}, {displayProperty.location.city}</span>
+                </div>
                 
-                {isUnderConstruction && displayProperty.possessionDate && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-deep-teal bg-sage-teal/20">
-                    <FiClock className="mr-1" />
-                    Possession by: {displayProperty.possessionDate}
-                  </span>
-                )}
-              </div>
-              
-              {/* Key features badges */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {displayProperty.flatTypes && displayProperty.flatTypes.length > 0 && displayProperty.flatTypes.map((type, index) => (
+                {/* Status Badge */}
+                <div className="flex items-center mb-4 flex-wrap gap-2">
                   <span 
-                    key={index}
-                    className="inline-flex items-center px-3 py-1.5 bg-white rounded-md text-sm text-gray-700 border border-gray-200 shadow-sm"
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${statusConfig.bgColor} ${statusConfig.textColor}`}
                   >
-                    <FaBed className="mr-2 text-amber-gold" />
-                    {type.type}
+                    <i className={`${statusConfig.icon} mr-1`}></i>
+                    <span>{statusConfig.label}</span>
                   </span>
-                ))}
-                
-                {displayProperty.projectOverview?.total_area && (
-                  <span className="inline-flex items-center px-3 py-1.5 bg-white rounded-md text-sm text-gray-700 border border-gray-200 shadow-sm">
-                    <FaRulerCombined className="mr-2 text-amber-gold" />
-                    {displayProperty.projectOverview.total_area}
-                  </span>
-                )}
-                
-                {displayProperty.type && (
-                  <span className="inline-flex items-center px-3 py-1.5 bg-white rounded-md text-sm text-gray-700 border border-gray-200 shadow-sm">
-                    <FaBuilding className="mr-2 text-amber-gold" />
-                    {displayProperty.type}
-                  </span>
-                )}
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="mt-4 md:mt-0 md:text-right bg-white p-5 rounded-lg shadow-sm md:ml-4"
-              variants={fadeInUp}
-            >
-              <div className="text-2xl md:text-3xl font-bold text-amber-gold flex items-center md:justify-end">
-                <FaRupeeSign className="mr-1" />
-                <span>{isUpcoming && !displayProperty.startingPrice ? "Price Coming Soon" : formatPriceRange().replace('₹', '')}</span>
-              </div>
-              <div className="text-sm text-gray-600 mb-3">{isUpcoming && !displayProperty.priceUnit ? "Register for early pricing" : (displayProperty.priceUnit || 'onwards')}</div>
+                  
+                  {isUpcoming && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-blue-700 bg-blue-100">
+                      <FiClock className="mr-1" />
+                      Coming Soon
+                    </span>
+                  )}
+                  
+                  {isUnderConstruction && displayProperty.possessionDate && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-deep-teal bg-sage-teal/20">
+                      <FiClock className="mr-1" />
+                      Possession by: {displayProperty.possessionDate}
+                    </span>
+                  )}
+                </div>
+              </motion.div>
               
-              {/* CTA buttons */}
-              <div className="flex flex-wrap gap-3 mt-4">
-                <a 
-                  href={`tel:${displayProperty.contactPhone || '+919876543210'}`} 
-                  className="flex items-center justify-center px-4 py-2.5 bg-amber-gold hover:bg-amber-gold/90 text-deep-teal font-medium rounded-lg transition-colors w-full sm:w-auto"
-                >
-                  <FaPhone className="mr-2" />
-                  Call Now
-                </a>
+              {/* Project Highlights */}
+              <motion.div variants={fadeInUp} className="mb-5">
+                <h3 className="text-lg font-medium text-deep-teal mb-3">Project Highlights</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Key features in card format */}
+                  {displayProperty.flatTypes && displayProperty.flatTypes.length > 0 && (
+                    <div className="bg-sage-teal/5 p-3 rounded-lg flex items-center">
+                      <FaBed className="text-amber-gold text-xl mr-3" />
+                      <div>
+                        <div className="text-sm text-gray-500">Configuration</div>
+                        <div className="font-medium">
+                          {displayProperty.flatTypes.map((type, i) => 
+                            <span key={i}>{type.type}{i < displayProperty.flatTypes.length - 1 ? ', ' : ''}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {displayProperty.projectOverview?.total_area && (
+                    <div className="bg-sage-teal/5 p-3 rounded-lg flex items-center">
+                      <FaRulerCombined className="text-amber-gold text-xl mr-3" />
+                      <div>
+                        <div className="text-sm text-gray-500">Total Area</div>
+                        <div className="font-medium">{displayProperty.projectOverview.total_area}</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {displayProperty.type && (
+                    <div className="bg-sage-teal/5 p-3 rounded-lg flex items-center">
+                      <FaBuilding className="text-amber-gold text-xl mr-3" />
+                      <div>
+                        <div className="text-sm text-gray-500">Property Type</div>
+                        <div className="font-medium">{displayProperty.type}</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {displayProperty.amenities && displayProperty.amenities.length > 0 && (
+                    <div className="bg-sage-teal/5 p-3 rounded-lg flex items-center">
+                      <FiStar className="text-amber-gold text-xl mr-3" />
+                      <div>
+                        <div className="text-sm text-gray-500">Amenities</div>
+                        <div className="font-medium">{displayProperty.amenities.length}+ Lifestyle Amenities</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+              
+              {/* Quick Action Buttons */}
+              <motion.div variants={fadeInUp} className="mb-5">
+                <h3 className="text-lg font-medium text-deep-teal mb-3">Quick Actions</h3>
+                <div className="flex flex-wrap gap-2">
+                  {displayProperty.brochureUrl && (
+                    <a
+                      href={displayProperty.brochureUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center bg-white border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 text-sm text-deep-teal shadow-sm"
+                    >
+                      <FiDownload className="mr-2" />
+                      Brochure
+                    </a>
+                  )}
+                  
+                  {displayProperty.floorPlanPdf && (
+                    <a
+                      href={displayProperty.floorPlanPdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center bg-white border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 text-sm text-deep-teal shadow-sm"
+                    >
+                      <FiGrid className="mr-2" />
+                      Floor Plans
+                    </a>
+                  )}
+                  
+                  {displayProperty.reraCertificatePath && (
+                    <a
+                      href={displayProperty.reraCertificatePath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center bg-white border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 text-sm text-deep-teal shadow-sm"
+                    >
+                      <FiCheckCircle className="mr-2" />
+                      RERA
+                    </a>
+                  )}
+                  
+                  {displayProperty.location?.coordinates?.lat && displayProperty.location?.coordinates?.lng && (
+                    <a
+                      href={`https://maps.google.com/?q=${displayProperty.location.coordinates.lat},${displayProperty.location.coordinates.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center bg-white border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 text-sm text-deep-teal shadow-sm"
+                    >
+                      <FiMapPin className="mr-2" />
+                      Map
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+              
+              {/* Price and CTA Section */}
+              <motion.div 
+                className="mt-auto bg-deep-teal/5 p-5 rounded-lg"
+                variants={fadeInUp}
+              >
+                <div className="text-2xl md:text-3xl font-bold text-amber-gold flex items-center mb-1">
+                  <FaRupeeSign className="mr-1" />
+                  <span>{isUpcoming && !displayProperty.startingPrice ? "Price Coming Soon" : formatPriceRange().replace('₹', '')}</span>
+                </div>
+                <div className="text-sm text-gray-600 mb-3">{isUpcoming && !displayProperty.priceUnit ? "Register for early pricing" : (displayProperty.priceUnit || 'onwards')}</div>
                 
-                <button 
-                  onClick={scrollToContactForm}
-                  className="flex items-center justify-center px-4 py-2.5 border border-deep-teal text-deep-teal hover:bg-deep-teal/10 font-medium rounded-lg transition-colors w-full sm:w-auto"
-                >
-                  <FaHandshake className="mr-2" />
-                  {isUpcoming ? "Register Interest" : "Get Callback"}
-                </button>
+                {/* CTA buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+                  <a 
+                    href={`tel:${displayProperty.contactPhone || '+919876543210'}`} 
+                    className="flex items-center justify-center px-4 py-2.5 bg-amber-gold hover:bg-amber-gold/90 text-deep-teal font-medium rounded-lg transition-colors"
+                  >
+                    <FaPhone className="mr-2" />
+                    Call Now
+                  </a>
+                  
+                  <button 
+                    onClick={scrollToContactForm}
+                    className="flex items-center justify-center px-4 py-2.5 border border-deep-teal text-deep-teal hover:bg-deep-teal/10 font-medium rounded-lg transition-colors"
+                  >
+                    <FaHandshake className="mr-2" />
+                    {isUpcoming ? "Register Interest" : "Get Callback"}
+                  </button>
 
-                <a 
-                  href={`https://wa.me/${displayProperty.contactPhone?.replace(/[^0-9]/g, '') || '919604304919'}?text=Hi, I'm interested in ${displayProperty.name} at ${displayProperty.location.address}. Please provide more details.`}
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-center px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors w-full sm:w-auto"
-                >
-                  <i className="fab fa-whatsapp mr-2 text-lg"></i>
-                  WhatsApp
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-        
-        {/* Quick Action Buttons - Modified to include floor plan download */}
-        <motion.div 
-          className="flex flex-wrap gap-3 mb-8 justify-center md:justify-start overflow-x-auto py-2 -mx-4 px-4 md:mx-0 md:px-0"
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          {displayProperty.brochureUrl && (
-            <motion.a
-              variants={fadeInUp}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={displayProperty.brochureUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white shadow-sm border border-gray-200 px-4 py-2.5 rounded-lg hover:bg-gray-50 flex items-center text-sm font-medium text-deep-teal flex-shrink-0"
-            >
-              <FiDownload className="mr-2" />
-              Download Brochure
-            </motion.a>
-          )}
+                  <a 
+                    href={`https://wa.me/${displayProperty.contactPhone?.replace(/[^0-9]/g, '') || '919604304919'}?text=Hi, I'm interested in ${displayProperty.name} at ${displayProperty.location.address}. Please provide more details.`}
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="flex items-center justify-center px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors"
+                  >
+                    <i className="fab fa-whatsapp mr-2 text-lg"></i>
+                    WhatsApp
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
           
-          {displayProperty.floorPlanPdf && (
-            <motion.a
-              variants={fadeInUp}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={displayProperty.floorPlanPdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white shadow-sm border border-gray-200 px-4 py-2.5 rounded-lg hover:bg-gray-50 flex items-center text-sm font-medium text-deep-teal flex-shrink-0"
-            >
-              <FiGrid className="mr-2" />
-              Download Floor Plans
-            </motion.a>
-          )}
-          
-          {/* RERA Certificate Download Button - only show if path exists */}
-          {displayProperty.reraCertificatePath && (
-            <motion.a
-              variants={fadeInUp}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={displayProperty.reraCertificatePath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white shadow-sm border border-gray-200 px-4 py-2.5 rounded-lg hover:bg-gray-50 flex items-center text-sm font-medium text-deep-teal flex-shrink-0"
-            >
-              <FiCheckCircle className="mr-2" />
-              RERA Certificate
-            </motion.a>
-          )}
-          
-          {displayProperty.location?.coordinates?.lat && displayProperty.location?.coordinates?.lng && (
-          <motion.a
+          {/* Property Gallery on the Right */}
+          <motion.div 
+            className="bg-white rounded-lg shadow-md p-4 md:p-6 overflow-hidden h-full order-1 lg:order-2"
+            initial="hidden"
+            animate="visible"
             variants={fadeInUp}
-              href={`https://maps.google.com/?q=${displayProperty.location.coordinates.lat},${displayProperty.location.coordinates.lng}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white shadow-sm border border-gray-200 px-4 py-2.5 rounded-lg hover:bg-gray-50 flex items-center text-sm font-medium text-deep-teal flex-shrink-0"
           >
-            <FiMapPin className="mr-2" />
-            View on Map
-          </motion.a>
-          )}
-        </motion.div>
+            {displayProperty.images && displayProperty.images.length > 0 ? (
+            <PropertyGallery images={displayProperty.images} />
+            ) : (
+              <div className="aspect-w-16 aspect-h-9 bg-gray-100 flex items-center justify-center">
+                <div className="text-center p-8">
+                  <FaExclamationTriangle className="text-amber-gold text-4xl mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-deep-teal mb-2">Property Images Coming Soon</h3>
+                  <p className="text-gray-500">
+                    Our team is working on capturing beautiful images of this upcoming project.
+                    Check back soon for updates!
+                  </p>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </div>
         
         {/* Tabs */}
         <div 
