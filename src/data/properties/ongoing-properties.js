@@ -18,8 +18,8 @@ const ongoingProperties = [
       state: 'Maharashtra',
       zipCode: '412101',
       coordinates: {
-        lat: 18.6501,
-        lng: 73.7568,
+        lat: 18.662495947400885,
+        lng: 73.74524432404442,
       },
       landmarks: [
         { name: 'Akurdi Railway Station', distance: '2.5 km', type: 'commute', details: 'Suburban railway station with connectivity across Pune' },
@@ -341,8 +341,8 @@ const ongoingProperties = [
       state: 'Maharashtra',
       zipCode: '413015',
       coordinates: {
-        lat: 18.6791,
-        lng: 73.8249,
+        lat: 18.67159381786681,
+        lng: 73.86041782740445,
       },
       landmarks: [
         { name: 'D Y Patil International School', distance: '1.8 km', type: 'education', details: 'Premier educational institution with excellent facilities' },
@@ -380,7 +380,7 @@ const ongoingProperties = [
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-1.jpeg', alt: 'Shankeshwar Sparsh Exterior', type: 'exterior' },
       { url: '/images/property/shankeshwar-sparsh/interior/sparsh-interior-1.jpeg', alt: 'Shankeshwar Sparsh Living Room', type: 'interior' },
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-4.jpeg', alt: 'Shankeshwar Sparsh Living Room', type: 'interior' },
-      { url: '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-1.jpg', alt: 'Children\'s Play Area', type: 'amenity' },
+      // { url: '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-1.jpg', alt: 'Children\'s Play Area', type: 'amenity' },
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-2.jpeg', alt: 'Shankeshwar Sparsh Building View', type: 'exterior' },
       { url: '/images/property/shankeshwar-sparsh/interior/sparsh-interior-2.jpeg', alt: 'Modern Kitchen', type: 'interior' }
     ],
