@@ -147,3 +147,17 @@ The property data toggle feature allows you to control which sections of data ar
 - **Pre-Launch:** Show specifications and floor plans, but hide RERA (if not yet processed)
 - **During Construction:** Show all sections except for gallery (if professional photos aren't ready)
 - **Project Updates:** Temporarily disable a section while you update the content
+
+
+prompt:
+
+update the hero section.
+The hero section should be aesthtic, minimal, modern, dynamic and properly structured. 
+Refer the image attached. 
+update the header accroding to following requirments:
+1. project option should have sub options of ongoing, completed and upcoming.
+2. add new option of investment.
+Then do following updates:
+1. as we created sub options for property then show similar data on properties page as clicked.
+2. remove the investment properties from properties page.
+3. create a investment property page similar to properties page to showcase only investment properties. Showcase the investment properties there. Also don't exactly copy the properties page, just refer and create page related to investment properties.

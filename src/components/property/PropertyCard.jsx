@@ -166,6 +166,46 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
       >
         <div className="absolute top-0 left-0 h-full w-1.5 bg-amber-gold"></div>
         
+        {/* For completed properties or investment properties, show a 'Download Brochure' button if a brochure link exists */}
+        {/* Note: For investment properties, documents are now an array. This logic might need adjustment if 'documents.brochure' is not the primary way to access it. */}
+        {(isCompleted || isInvestment) && documents && (
+          (() => {
+            // For investment properties, find the brochure from the documents array
+            const brochureDoc = isInvestment 
+              ? documents.find(doc => doc.name?.toLowerCase().includes('brochure')) 
+              : (documents.brochure ? { pdfPath: documents.brochure } : null);
+            
+            if (brochureDoc && brochureDoc.pdfPath) {
+              return (
+                <Button 
+                  href={brochureDoc.pdfPath} 
+                  variant="secondaryOutline"
+                  size="small"
+                  className="w-full sm:w-auto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  icon={<FiDownload className="mr-2"/>}
+                >
+                  Brochure
+                </Button>
+              );
+            }
+            return null;
+          })()
+        )}
+        
+        {/* For investment properties, show a 'View Details' button */}
+        {isInvestment && (
+          <Button 
+            href={`/property/${id}`} 
+            variant="primary"
+            size="small"
+            className="w-full sm:w-auto"
+          >
+            View Details
+          </Button>
+        )}
+        
         {/* For completed properties, don't link to detail page */}
         {isCompleted ? (
           <div className="flex w-full">
@@ -378,7 +418,11 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               {area && (
                 <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
                   <FaRulerCombined className="text-amber-gold mb-1" />
-                  <span className="text-xs text-center text-gray-600">{area}</span>
+                  <span className="text-xs text-center text-gray-600">
+                    {typeof area === 'object' && area !== null 
+                      ? (area.display || (area.value && area.unit ? `${area.value} ${area.unit}` : 'N/A')) 
+                      : area}
+                  </span>
                 </div>
               )}
               
@@ -392,29 +436,10 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
             
             {/* Short Description */}
             <div className="mb-4">
-              <p className="text-sm text-gray-600 line-clamp-3">{shortDescription || description?.substring(0, 120) + '...' || "A premium property by Shankeshwar Realty designed to provide exceptional living experience."}</p>
+              <p className="text-sm text-gray-600 line-clamp-3">{shortDescription || description?.substring(0, 120) + '...' || "A premium property by Shankeshwar BuildCorp designed to provide exceptional living experience."}</p>
             </div>
             
-            {/* Investment-specific details */}
-            {isInvestment && (
-              <div className="bg-amber-gold/10 p-3 rounded-md mb-4">
-                <div className="text-deep-teal font-medium text-sm mb-2">Investment Highlights</div>
-                <div className="grid grid-cols-2 gap-2">
-                  {rentalYield && (
-                    <div className="flex items-center">
-                      <i className="fas fa-chart-line text-amber-gold mr-2"></i>
-                      <span className="text-xs">Rental Yield: {rentalYield}</span>
-                    </div>
-                  )}
-                  {expectedAppreciation && (
-                    <div className="flex items-center">
-                      <i className="fas fa-arrow-trend-up text-amber-gold mr-2"></i>
-                      <span className="text-xs">Appreciation: {expectedAppreciation}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+
             
             {/* Documents for investment properties */}
             {isInvestment && documents && documents.length > 0 && (
@@ -424,7 +449,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
                   {documents.map((doc, idx) => (
                     <a 
                       key={idx}
-                      href={doc.url} 
+                      href={doc.pdfPath} /* Corrected to pdfPath */
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center text-xs bg-gray-100 hover:bg-deep-teal/10 px-3 py-1.5 rounded text-deep-teal transition-colors"
@@ -451,24 +476,17 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
             )}
             
             {/* Investment Property Buttons */}
-            {isInvestment && (
-              <div className="grid grid-cols-2 gap-2 mt-4">
-                <a 
-                  href={`tel:${contactPhone || '+919604304919'}`}
-                  className="flex items-center justify-center bg-deep-teal text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-deep-teal/90 transition-colors"
+            {isInvestment && slug && (
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <Button 
+                  href={`/investment/${slug}`} 
+                  variant="primary"
+                  size="small"
+                  className="w-full"
+                  icon={<FiInfo className="mr-2"/>}
                 >
-                  <i className="fas fa-phone-alt mr-1.5"></i>
-                  Call Now
-                </a>
-                <a 
-                  href={`https://wa.me/${contactPhone?.replace(/[^0-9]/g, '') || '919604304919'}?text=Hi, I'm interested in ${name} at ${location?.address || location?.city}. Please share details about this investment opportunity.`}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors"
-                >
-                  <FaWhatsapp className="mr-1.5" />
-                  WhatsApp
-                </a>
+                  View Investment Details
+                </Button>
               </div>
             )}
           </div>
@@ -615,7 +633,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               
               {/* Short Description */}
               <div className="mb-4">
-                <p className="text-sm text-gray-600 line-clamp-3">{shortDescription || description?.substring(0, 120) + '...' || "A premium property by Shankeshwar Realty designed to provide exceptional living experience."}</p>
+                <p className="text-sm text-gray-600 line-clamp-3">{shortDescription || description?.substring(0, 120) + '...' || "A premium property by Shankeshwar BuildCorp designed to provide exceptional living experience."}</p>
               </div>
               
               {/* View Details Button for Ongoing Properties */}

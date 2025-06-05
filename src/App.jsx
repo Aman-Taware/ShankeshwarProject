@@ -9,6 +9,8 @@ import AboutUsPage from './pages/AboutUsPage';
 import RedevelopmentPage from './pages/RedevelopmentPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
+import InvestmentPage from './pages/InvestmentPage'; // Added import
+import InvestmentPropertyDetailPage from './pages/InvestmentPropertyDetailPage'; // Added import
 // Import other pages here as you create them
 // import AboutPage from './pages/AboutPage'; 
 
@@ -29,6 +31,8 @@ function App() {
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/terms-conditions" element={<TermsAndConditionsPage />} />
+        <Route path="/investment" element={<InvestmentPage />} /> {/* Added route */}
+        <Route path="/investment/:propertySlug" element={<InvestmentPropertyDetailPage />} /> {/* Added route */}
         {/* Define other routes here */}
         {/* <Route path="/about" element={<AboutPage />} /> */}
       </Routes>

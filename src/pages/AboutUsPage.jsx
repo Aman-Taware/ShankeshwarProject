@@ -106,7 +106,7 @@ const AboutUsPage = () => {
               <div className="aspect-[4/3] relative rounded-lg shadow-xl overflow-hidden">
                 <img 
                   src="/images/website/building-modern.jpeg" 
-                  alt="Shankeshwar Realty Building" 
+                  alt="Shankeshwar BuildCorp Building" 
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-deep-teal/40 to-transparent"></div>

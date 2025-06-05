@@ -8,7 +8,7 @@ const companyTimelineEvents = [
     id: 'founding',
     year: '2008', 
     title: 'Company Founded', 
-    description: 'Shankeshwar Realty began its journey with a vision to create exceptional living spaces that blend luxury, comfort and sustainability.',
+    description: 'Shankeshwar BuildCorp began its journey with a vision to create exceptional living spaces that blend luxury, comfort and sustainability.',
     icon: 'fas fa-flag',
     color: 'amber-gold'
   },
@@ -74,7 +74,7 @@ const ProjectTimelineSimple = () => {
             Our <span className="text-amber-gold">Journey</span> Through Time
           </h2>
           <p className="text-lg text-deep-teal/80 max-w-2xl mx-auto">
-            From our humble beginnings to becoming one of the region's most trusted developers - explore the key milestones that shaped Shankeshwar Realty.
+            From our humble beginnings to becoming one of the region's most trusted developers - explore the key milestones that shaped Shankeshwar BuildCorp.
           </p>
         </motion.div>
         

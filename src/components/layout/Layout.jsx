@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,6 +7,7 @@ import { companyInfo } from '../../data/clientData.js';
 
 export default function Layout({ children }) {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const location = useLocation();
   
   // Handle scroll event to show/hide scroll-to-top button
   useEffect(() => {
@@ -16,6 +18,11 @@ export default function Layout({ children }) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   
   // Scroll to top function
   const scrollToTop = () => {
@@ -28,7 +35,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen bg-cream">
       <Header />
-      <main className="flex-grow pt-16 md:pt-20 pb-12 md:pb-16">
+      <main className="flex-grow pt-12 md:pt-16 pb-12 md:pb-16">
         {/* Page content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

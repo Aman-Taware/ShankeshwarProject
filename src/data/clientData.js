@@ -177,7 +177,7 @@ export const testimonials = [
     name: "Rajesh Mehta", // Replace with actual name when available
     avatar: "/images/website/avatar-fallback.jpg", // Replace with actual image path
     feedback: "Buying our home with Shankeshwar Buildcorp was one of the best decisions we made. The quality construction, attention to detail, and the team's professionalism throughout the process was incredible. Our apartment exceeded all our expectations.",
-    project: "Shankeshwar Pearl", // Project name
+    project: "Shankeshwar Villa", // Project name
     rating: 5, // Out of 5
     occupation: "IT Professional", // Optional
     location: "Pune" // Optional
@@ -190,27 +190,27 @@ export const testimonials = [
     project: "Shankeshwar Villa",
     rating: 5,
     occupation: "Healthcare Professional",
-    location: "Nigdi"
+    location: "Ravet"
   },
   { 
     id: 3, 
     name: "Aditya Patil",
     avatar: "/images/website/avatar-fallback.jpg",
     feedback: "As a first-time homebuyer, I was nervous about the process. The Shankeshwar team guided me every step of the way. The promised delivery timeline was met, and they've been responsive even after handover with maintenance support.",
-    project: "Skyline One",
+    project: "Shankeshwar Pride",
     rating: 4,
     occupation: "Business Owner",
-    location: "Pune"
+    location: "Moshi"
   },
   { 
     id: 4, 
     name: "Sunita and Rahul Joshi",
     avatar: "/images/website/avatar-fallback.jpg",
-    feedback: "We were looking for a family-friendly home and Shankeshwar Sparsh perfectly met our needs. The well-planned layout, dedicated amenities, and secure environment give us peace of mind. Our kids love the play areas!",
-    project: "Shankeshwar Sparsh",
+    feedback: "We were looking for a family-friendly home and Shankeshwar Royale perfectly met our needs. The well-planned layout, dedicated amenities, and secure environment give us peace of mind. Our kids love the play areas!",
+    project: "Shankeshwar Royale",
     rating: 5,
     occupation: "Teachers",
-    location: "Pradhikaran"
+    location: "Chikhali"
   }
   // Add more testimonials as needed
 ];

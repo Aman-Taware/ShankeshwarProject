@@ -56,7 +56,7 @@ const AboutUsSummary = () => {
             
             <motion.div variants={itemVariants}>
               <p className="text-lg text-deep-teal/80 mb-6 leading-relaxed">
-                At Shankeshwar Realty, we don't just build structures; we create vibrant communities where dreams take shape and families thrive. With an unwavering commitment to quality and attention to detail, our projects stand as testaments to architectural excellence and timeless design.
+                At Shankeshwar BuildCorp, we don't just build structures; we create vibrant communities where dreams take shape and families thrive. With an unwavering commitment to quality and attention to detail, our projects stand as testaments to architectural excellence and timeless design.
               </p>
               <p className="text-lg text-deep-teal/80 mb-8 leading-relaxed">
                 From concept to completion, our team of experienced professionals works tirelessly to ensure each development exceeds expectations and enriches lives.
@@ -99,7 +99,7 @@ const AboutUsSummary = () => {
             <div className="aspect-[4/5] relative rounded-lg shadow-xl overflow-hidden">
               <img 
                 src="/images/website/completed-building.jpeg" 
-                alt="Shankeshwar Realty Team" 
+                alt="Shankeshwar BuildCorp Team" 
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-teal/50 to-transparent"></div>

@@ -60,10 +60,14 @@ const AllProjectsPage = () => {
   const allProperties = getAllProperties();
   
   // Categorize properties by status and type
-  const upcomingProperties = allProperties.filter(p => p.status === PROPERTY_STATUS.UPCOMING.value);
+  const upcomingProperties = allProperties.filter(p => 
+    p.status === PROPERTY_STATUS.UPCOMING.value &&
+    p.type?.toLowerCase() !== 'investment'
+  );
   const ongoingProperties = allProperties.filter(p => 
-    p.status === PROPERTY_STATUS.UNDER_CONSTRUCTION.value || 
-    p.status === PROPERTY_STATUS.NEARING_POSSESSION.value
+    (p.status === PROPERTY_STATUS.UNDER_CONSTRUCTION.value || 
+    p.status === PROPERTY_STATUS.NEARING_POSSESSION.value) &&
+    p.type?.toLowerCase() !== 'investment'
   );
   
   // Filter out investment properties from the completed properties
@@ -95,7 +99,7 @@ const AllProjectsPage = () => {
       case 'completed':
         return completedProperties;
       default:
-        return allProperties;
+        return allProperties.filter(p => p.type?.toLowerCase() !== 'investment');
     }
   };
 

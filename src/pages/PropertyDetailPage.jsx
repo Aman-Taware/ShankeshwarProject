@@ -260,12 +260,12 @@ const PropertyDetailPage = () => {
         {/* Top Section with Gallery and Property Details Side by Side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Property Header & Details on the Left */}
-          <motion.div 
+        <motion.div 
             className="flex flex-col order-2 lg:order-1"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
             <div className="bg-white rounded-lg shadow-md p-5 md:p-6 h-full flex flex-col">
               {/* Breadcrumb Navigation */}
               <div className="flex items-center mb-2 text-xs">
@@ -278,21 +278,21 @@ const PropertyDetailPage = () => {
               
               <motion.div variants={fadeInUp} className="mb-4">
                 <h1 className="text-3xl md:text-4xl font-display font-bold mb-3 text-deep-teal">{displayProperty.name}</h1>
-                
+              
                 <div className="flex items-center mb-3">
-                  <FiMapPin className="text-amber-gold mr-2 flex-shrink-0" />
-                  <span className="text-gray-700">{displayProperty.location.address}, {displayProperty.location.city}</span>
-                </div>
+                <FiMapPin className="text-amber-gold mr-2 flex-shrink-0" />
+                <span className="text-gray-700">{displayProperty.location.address}, {displayProperty.location.city}</span>
+              </div>
+              
+              {/* Status Badge */}
+              <div className="flex items-center mb-4 flex-wrap gap-2">
+                <span 
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${statusConfig.bgColor} ${statusConfig.textColor}`}
+                >
+                  <i className={`${statusConfig.icon} mr-1`}></i>
+                  <span>{statusConfig.label}</span>
+                </span>
                 
-                {/* Status Badge */}
-                <div className="flex items-center mb-4 flex-wrap gap-2">
-                  <span 
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${statusConfig.bgColor} ${statusConfig.textColor}`}
-                  >
-                    <i className={`${statusConfig.icon} mr-1`}></i>
-                    <span>{statusConfig.label}</span>
-                  </span>
-                  
                   {isUpcoming && (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-blue-700 bg-blue-100">
                       <FiClock className="mr-1" />
@@ -301,12 +301,12 @@ const PropertyDetailPage = () => {
                   )}
                   
                   {isUnderConstruction && displayProperty.possessionDate && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-deep-teal bg-sage-teal/20">
-                      <FiClock className="mr-1" />
-                      Possession by: {displayProperty.possessionDate}
-                    </span>
-                  )}
-                </div>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm text-deep-teal bg-sage-teal/20">
+                    <FiClock className="mr-1" />
+                    Possession by: {displayProperty.possessionDate}
+                  </span>
+                )}
+              </div>
               </motion.div>
               
               {/* Project Highlights */}
@@ -327,8 +327,8 @@ const PropertyDetailPage = () => {
                       </div>
                     </div>
                   )}
-                  
-                  {displayProperty.projectOverview?.total_area && (
+                
+                {displayProperty.projectOverview?.total_area && (
                     <div className="bg-sage-teal/5 p-3 rounded-lg flex items-center">
                       <FaRulerCombined className="text-amber-gold text-xl mr-3" />
                       <div>
@@ -336,9 +336,9 @@ const PropertyDetailPage = () => {
                         <div className="font-medium">{displayProperty.projectOverview.total_area}</div>
                       </div>
                     </div>
-                  )}
-                  
-                  {displayProperty.type && (
+                )}
+                
+                {displayProperty.type && (
                     <div className="bg-sage-teal/5 p-3 rounded-lg flex items-center">
                       <FaBuilding className="text-amber-gold text-xl mr-3" />
                       <div>
@@ -410,38 +410,38 @@ const PropertyDetailPage = () => {
                       <FiMapPin className="mr-2" />
                       Map
                     </a>
-                  )}
-                </div>
-              </motion.div>
-              
+                )}
+              </div>
+            </motion.div>
+            
               {/* Price and CTA Section */}
-              <motion.div 
+            <motion.div 
                 className="mt-auto bg-deep-teal/5 p-5 rounded-lg"
-                variants={fadeInUp}
-              >
+              variants={fadeInUp}
+            >
                 <div className="text-2xl md:text-3xl font-bold text-amber-gold flex items-center mb-1">
-                  <FaRupeeSign className="mr-1" />
+                <FaRupeeSign className="mr-1" />
                   <span>{isUpcoming && !displayProperty.startingPrice ? "Price Coming Soon" : formatPriceRange().replace('₹', '')}</span>
-                </div>
+              </div>
                 <div className="text-sm text-gray-600 mb-3">{isUpcoming && !displayProperty.priceUnit ? "Register for early pricing" : (displayProperty.priceUnit || 'onwards')}</div>
-                
-                {/* CTA buttons */}
+              
+              {/* CTA buttons */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                  <a 
-                    href={`tel:${displayProperty.contactPhone || '+919876543210'}`} 
+                <a 
+                  href={`tel:${displayProperty.contactPhone || '+919876543210'}`} 
                     className="flex items-center justify-center px-4 py-2.5 bg-amber-gold hover:bg-amber-gold/90 text-deep-teal font-medium rounded-lg transition-colors"
-                  >
-                    <FaPhone className="mr-2" />
-                    Call Now
-                  </a>
-                  
-                  <button 
-                    onClick={scrollToContactForm}
+                >
+                  <FaPhone className="mr-2" />
+                  Call Now
+                </a>
+                
+                <button 
+                  onClick={scrollToContactForm}
                     className="flex items-center justify-center px-4 py-2.5 border border-deep-teal text-deep-teal hover:bg-deep-teal/10 font-medium rounded-lg transition-colors"
-                  >
-                    <FaHandshake className="mr-2" />
+                >
+                  <FaHandshake className="mr-2" />
                     {isUpcoming ? "Register Interest" : "Get Callback"}
-                  </button>
+                </button>
 
                   <a 
                     href={`https://wa.me/${displayProperty.contactPhone?.replace(/[^0-9]/g, '') || '919604304919'}?text=Hi, I'm interested in ${displayProperty.name} at ${displayProperty.location.address}. Please provide more details.`}
@@ -452,16 +452,16 @@ const PropertyDetailPage = () => {
                     <i className="fab fa-whatsapp mr-2 text-lg"></i>
                     WhatsApp
                   </a>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-          
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+        
           {/* Property Gallery on the Right */}
-          <motion.div 
+        <motion.div 
             className="bg-white rounded-lg shadow-md p-4 md:p-6 overflow-hidden h-full order-1 lg:order-2"
-            initial="hidden"
-            animate="visible"
+          initial="hidden"
+          animate="visible"
             variants={fadeInUp}
           >
             {displayProperty.images && displayProperty.images.length > 0 ? (
@@ -478,7 +478,7 @@ const PropertyDetailPage = () => {
                 </div>
               </div>
             )}
-          </motion.div>
+        </motion.div>
         </div>
         
         {/* Tabs */}
