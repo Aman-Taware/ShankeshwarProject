@@ -52,7 +52,7 @@ export const companyInfo = {
   website: "www.shankeshwarbuildcorp.com",
   socialMedia: {
     facebook: "", // Not provided in client data
-    instagram: "https://www.instagram.com/suresteprealty?igsh=MTBkMmppYXpuYmg3YQ",
+    instagram: "https://www.instagram.com/shankeshwargroup/?igsh=a3lyMnMyaG1tanc1",
     linkedin: "https://www.linkedin.com/company/shankeshwar-group/",
     twitter: "", // Not provided in client data
     youtube: "" // Not provided in client data

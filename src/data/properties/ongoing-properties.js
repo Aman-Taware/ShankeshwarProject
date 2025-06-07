@@ -29,46 +29,43 @@ const ongoingProperties = [
         { name: 'D Mart Ready', distance: '100 m', type: 'shopping', details: 'Convenience grocery outlet located right next door' },
         { name: 'Reliance Smart', distance: '2.5 km', type: 'shopping', details: 'Multi-brand supermarket for all household needs' },
         { name: 'Star Bazaar', distance: '6.0 km', type: 'shopping', details: 'Large-format hypermarket with groceries and apparel' },
-        { name: 'Elpro Mall', distance: '4.0 km', type: 'recreation', details: 'Shopping mall with retail, dining and entertainment options' },
+        { name: 'Elpro Mall', distance: '4.0 km', type: 'shopping', details: 'Shopping mall with retail, dining and entertainment options' }, // Changed type to 'shopping' for consistency, can also be 'recreation' or have multiple types if supported
         { name: 'Gahunje Stadium', distance: '4.0 km', type: 'recreation', details: 'Cricket stadium known for IPL and other sports events' },
         { name: 'Upcoming Phoenix Mall', distance: '6.5 km', type: 'shopping', details: 'Under-construction premium lifestyle mall' },
-        { name: 'PVR', distance: '7.0 km', type: 'recreation', details: 'Popular multiplex for latest movies and leisure' }
-      ],
-      
-      nearby: {
-        schools: [
-          { name: 'S B Patil Public School', distance: '1.5 km', rating: 4.4, details: 'CBSE-affiliated school with modern learning environment' },
-          { name: 'City Pride School', distance: '1.0 km', rating: 4.5, details: 'Reputed school offering quality education' },
-          { name: 'D.Y. Patil School', distance: '2.5 km', rating: 4.3, details: 'School with strong academic and co-curricular focus' },
-          { name: 'Elpro School', distance: '6.0 km', rating: 4.2, details: 'Known for holistic development and infrastructure' }
-        ],
-        colleges: [
-          { name: 'Symbiosis College', distance: '3.0 km', rating: 4.6, details: 'Prestigious institution offering diverse undergraduate programs' },
-          { name: 'Indira Institute', distance: '7.0 km', rating: 4.3, details: 'Well-known management and technical college' },
-          { name: 'JSPM', distance: '6.5 km', rating: 4.2, details: 'Engineering and technology institute with strong faculty' },
-          { name: 'PCCOE (Pimpri-Chinchwad College of Engineering)', distance: '4.0 km', rating: 4.5, details: 'Renowned engineering college with strong placement record' }
-        ],
-        hospitals: [
-          { name: 'Ojas Multispeciality Hospital', distance: '2.5 km', rating: 4.1, details: 'Full-service hospital for general and specialized treatments' },
-          { name: 'Sterling Multispeciality Hospital', distance: '2.0 km', rating: 4.2, details: 'Modern facility with emergency and surgical care' },
-          { name: 'Aditya Birla Hospital', distance: '5.0 km', rating: 4.4, details: 'Multi-specialty hospital with 24/7 emergency services' },
-          { name: 'Lokmanya Hospital', distance: '7.0 km', rating: 4.0, details: 'Trusted name in orthopedics and trauma care' }
-        ],
-        shopping: [
-          { name: 'D Mart', distance: '2.0 km', rating: 4.3, details: 'Comprehensive supermarket for everyday essentials' },
-          { name: 'Reliance Smart', distance: '2.5 km', rating: 4.2, details: 'Convenient shopping for groceries and household goods' },
-          { name: 'Star Bazaar', distance: '6.0 km', rating: 4.1, details: 'Hypermarket with food, fashion and electronics' },
-          { name: 'Elpro Mall', distance: '4.0 km', rating: 4.4, details: 'Retail and entertainment complex with PVR and food court' },
-          { name: 'Upcoming Phoenix Mall', distance: '6.5 km', rating: null, details: 'Upcoming luxury shopping destination under development' }
-        ],
-        transportation: [
-          { name: 'Akurdi Railway Station', distance: '2.5 km', details: 'Key railway hub for local and intercity trains' },
-          { name: 'Chinchwad Railway Station', distance: '7.0 km', details: 'Another nearby rail connectivity option' },
-          { name: 'PMPML Bus Stand', distance: '0.9 km', details: 'Regular PMPML bus routes to various parts of Pune' },
-          { name: 'Pune-Mumbai Expressway', distance: '2.0 km', details: 'Direct access to highway for intercity commute' },
-          { name: 'Bhakti-Shakti Chowk', distance: '2.0 km', details: 'Major traffic junction with connectivity to multiple suburbs' }
-        ]
-      }
+        { name: 'PVR', distance: '7.0 km', type: 'recreation', details: 'Popular multiplex for latest movies and leisure' },
+
+        // Merged from nearby.schools
+        { name: 'S B Patil Public School', distance: '1.5 km', rating: 4.4, details: 'CBSE-affiliated school with modern learning environment', type: 'education' },
+        { name: 'City Pride School', distance: '1.0 km', rating: 4.5, details: 'Reputed school offering quality education', type: 'education' },
+        { name: 'D.Y. Patil School', distance: '2.5 km', rating: 4.3, details: 'School with strong academic and co-curricular focus', type: 'education' },
+        { name: 'Elpro School', distance: '6.0 km', rating: 4.2, details: 'Known for holistic development and infrastructure', type: 'education' },
+
+        // Merged from nearby.colleges
+        { name: 'Symbiosis College', distance: '3.0 km', rating: 4.6, details: 'Prestigious institution offering diverse undergraduate programs', type: 'education' },
+        { name: 'Indira Institute', distance: '7.0 km', rating: 4.3, details: 'Well-known management and technical college', type: 'education' },
+        { name: 'JSPM', distance: '6.5 km', rating: 4.2, details: 'Engineering and technology institute with strong faculty', type: 'education' },
+        { name: 'PCCOE (Pimpri-Chinchwad College of Engineering)', distance: '4.0 km', rating: 4.5, details: 'Renowned engineering college with strong placement record', type: 'education' },
+
+        // Merged from nearby.hospitals
+        { name: 'Ojas Multispeciality Hospital', distance: '2.5 km', rating: 4.1, details: 'Full-service hospital for general and specialized treatments', type: 'healthcare' },
+        { name: 'Sterling Multispeciality Hospital', distance: '2.0 km', rating: 4.2, details: 'Modern facility with emergency and surgical care', type: 'healthcare' },
+        { name: 'Aditya Birla Hospital', distance: '5.0 km', rating: 4.4, details: 'Multi-specialty hospital with 24/7 emergency services', type: 'healthcare' },
+        { name: 'Lokmanya Hospital', distance: '7.0 km', rating: 4.0, details: 'Trusted name in orthopedics and trauma care', type: 'healthcare' },
+
+        // Merged from nearby.shopping (Note: some items might be duplicates of existing landmarks, review for uniqueness if needed)
+        { name: 'D Mart', distance: '2.0 km', rating: 4.3, details: 'Comprehensive supermarket for everyday essentials', type: 'shopping' },
+        // { name: 'Reliance Smart', distance: '2.5 km', rating: 4.2, details: 'Convenient shopping for groceries and household goods', type: 'shopping' }, // Already in landmarks
+        // { name: 'Star Bazaar', distance: '6.0 km', rating: 4.1, details: 'Hypermarket with food, fashion and electronics', type: 'shopping' }, // Already in landmarks
+        // { name: 'Elpro Mall', distance: '4.0 km', rating: 4.4, details: 'Retail and entertainment complex with PVR and food court', type: 'shopping' }, // Already in landmarks
+        // { name: 'Upcoming Phoenix Mall', distance: '6.5 km', rating: null, details: 'Upcoming luxury shopping destination under development', type: 'shopping' } // Already in landmarks
+
+        // Merged from nearby.transportation (Note: some items might be duplicates of existing landmarks, review for uniqueness if needed)
+        // { name: 'Akurdi Railway Station', distance: '2.5 km', details: 'Key railway hub for local and intercity trains', type: 'commute' }, // Already in landmarks
+        // { name: 'Chinchwad Railway Station', distance: '7.0 km', details: 'Another nearby rail connectivity option', type: 'commute' }, // Already in landmarks
+        { name: 'PMPML Bus Stand', distance: '0.9 km', details: 'Regular PMPML bus routes to various parts of Pune', type: 'commute' }
+        // { name: 'Pune-Mumbai Expressway', distance: '2.0 km', details: 'Direct access to highway for intercity commute', type: 'commute' }, // Already in landmarks
+        // { name: 'Bhakti-Shakti Chowk', distance: '2.0 km', details: 'Major traffic junction with connectivity to multiple suburbs', type: 'commute' } // Already in landmarks
+      ]
       
     },
     images: [
@@ -259,11 +256,8 @@ const ongoingProperties = [
     reraNumber: 'P52100035074',
     reraCertificatePath: '/documents/properties/shankeshwar-pearl/rera-certificate.pdf',
     reraRegistrationUrl: 'https://maharera.mahaonline.gov.in',
-    priceRange: {
-      min: 4600000,
-      max: 10800000
-    },
-    startingPrice: 4600000,
+    priceRange: { min: 8250000, max: 11200000 },
+    startingPrice: 8250000,
     completionPercentage: 75,
     brochureUrl: '/documents/properties/shankeshwar-pearl/shankeshwar-pearl-brochure.pdf',
     floorPlanPdf: '/documents/properties/shankeshwar-pearl/shankeshwar-pearl-floorplans.pdf',
@@ -345,34 +339,37 @@ const ongoingProperties = [
         lng: 73.86041782740445,
       },
       landmarks: [
-        { name: 'D Y Patil International School', distance: '1.8 km', type: 'education', details: 'Premier educational institution with excellent facilities' },
-        { name: 'Moshi Bus Terminal', distance: '1 km', type: 'commute', details: 'Major transportation hub with connectivity to all parts of Pune' },
-        { name: 'Aditya Birla Hospital', distance: '5.2 km', type: 'healthcare', details: 'Multi-specialty hospital with 24/7 emergency services' },
-        { name: 'Indrayani River View', distance: '3.2 km', type: 'recreation', details: 'Beautiful river view with jogging tracks' },
-        { name: 'Pune-Nashik Highway', distance: '0.8 km', type: 'connectivity', details: 'Easy access to major highway for intercity travel' },
-        { name: 'D Mart Supermarket', distance: '2.1 km', type: 'shopping', details: 'Large retail store for everyday shopping needs' }
+        { name: 'City Pride International School', distance: '2.0 km', type: 'education', details: 'Renowned CBSE school with excellent academic reputation' },
+        { name: 'Moshi Bus Terminal (PMPL Bus Station)', distance: '2.5 km', type: 'commute', details: 'Major transportation hub with connectivity to all parts of Pune' },
+        { name: 'Pune International Exhibition Center', distance: '2.3 km', type: 'event/infra', details: 'Popular venue for international exhibitions and events' },
+        { name: 'Indrayani River', distance: '3.0 km', type: 'recreation', details: 'Scenic river offering peaceful views and greenery' },
+        { name: 'Nashik Road (Pune-Nashik Highway)', distance: '0.7 km', type: 'connectivity', details: 'Direct access to Nashik and Pune via highway' },
+        { name: 'D Mart', distance: '2.0 km', type: 'shopping', details: 'Large retail supermarket for daily groceries and essentials' }
       ],
       nearby: {
         schools: [
-          { name: 'D Y Patil International School', distance: '1.8 km', rating: 4.6, details: 'CBSE curriculum, Grades KG-12' },
-          { name: 'Priyadarshani School', distance: '3.2 km', rating: 4.2, details: 'State board with modern facilities' },
-          { name: 'Podar International School', distance: '4.5 km', rating: 4.4, details: 'ICSE curriculum school' }
+          { name: 'City Pride International School', distance: '2.0 km', rating: 4.5, details: 'CBSE curriculum with modern campus and facilities' },
+          { name: 'SNBP International School', distance: '2.2 km', rating: 4.3, details: 'CBSE affiliated school with holistic education' },
+          { name: 'Aditya International School', distance: '1.2 km', rating: 4.1, details: 'English medium school focused on academic excellence' }
+        ],
+        colleges: [
+          {name:'MIT College',distance:'2.5 km',rating:4.2,details:'Private college offering engineering and management courses'},
+          {name:'Sharadchandra College', distance:'2.5 km',rating:4.2,details:'Private college offering engineering and management courses'}
         ],
         hospitals: [
-          { name: 'Aditya Birla Hospital', distance: '5.2 km', rating: 4.5, details: 'Multi-specialty hospital with emergency services' },
-          { name: 'Noble Hospital', distance: '6.1 km', rating: 4.2, details: 'Advanced healthcare facility' }
+          { name: 'Bharat Petroleum Medical Center (Nearby)', distance: '1.5 km', rating: 4.0, details: 'Local healthcare and emergency support nearby' },
+          { name: 'Noble Hospital (Yerwada)', distance: '6.5 km', rating: 4.2, details: 'Full-service multi-specialty hospital' }
         ],
         shopping: [
-          { name: 'D Mart', distance: '2.1 km', rating: 4.3, details: 'Supermarket for daily needs' },
-          { name: 'Nexus Westend Mall', distance: '7.8 km', rating: 4.5, details: 'Shopping mall with entertainment options' }
+          { name: 'D Mart', distance: '2.0 km', rating: 4.3, details: 'Supermarket for daily needs and household items' },
+          { name: 'Reliance Trends', distance: '2.1 km', rating: 4.2, details: 'Fashion and clothing store' },
+          { name: 'Spine City Mall', distance: '5.0 km', rating: 4.4, details: 'Mall with multiple stores and entertainment zones' },
+          {name: 'Zudio', distance: '2.5 km', rating: 4.2, details: 'Fashion and clothing store'},
+          { name: 'Reliance Digital', distance: '2.5 km', rating: 4.2, details: 'Electronics store'}
         ],
         restaurants: [
-          { name: 'Hotel Ashoka', distance: '1.5 km', rating: 4.0, details: 'Multi-cuisine restaurant' },
-          { name: 'Spice Garden', distance: '2.8 km', rating: 4.2, details: 'Family restaurant with outdoor seating' }
-        ],
-        transportation: [
-          { name: 'Moshi Bus Terminal', distance: '1.0 km', details: 'Major bus terminal with city and intercity services' },
-          { name: 'Dehu Road Railway Station', distance: '8.5 km', details: 'Railway connectivity to major cities' }
+          { name: 'Chowdhary Dhaba', distance: '1.2 km', rating: 4.1, details: 'Casual dining with North Indian cuisine' },
+          { name: 'Hotel Ashoka ', distance: '1.5 km', rating: 4.0, details: 'Multi-cuisine family restaurant' }
         ]
       }
     },
@@ -569,11 +566,8 @@ const ongoingProperties = [
     reraNumber: 'P52100055256',
     reraCertificatePath: '/documents/properties/shankeshwar-sparsh/rera-certificate.pdf',
     reraRegistrationUrl: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwNTUyNTYmU2NhbnR5cGU9UHJvbW90ZXJMb2dpblFSQ29kZQ==',
-    priceRange: {
-      min: 3800000,
-      max: 6200000
-    },
-    startingPrice: 3800000,
+    priceRange: { min: 3200000, max: 4700000 },
+    startingPrice: 3200000,
     completionPercentage: 60,
     brochureUrl: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-brochure.pdf',
     floorPlanPdf: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-floorplans.pdf',

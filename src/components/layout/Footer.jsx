@@ -17,7 +17,6 @@ const navigation = {
   projects: [
     { name: 'Shankeshwar Pearl', href: '/property/shankeshwar-pearl' },
     { name: 'Shankeshwar Sparsh', href: '/property/shankeshwar-sparsh' },
-    { name: 'Shankeshwar Harmony', href: '/property/shankeshwar-harmony' },
     { name: 'Skyline One', href: '/property/skyline-one' },
   ],
   legal: [

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMaximize2 } from 'react-icons/fi';
 import { FaRupeeSign } from 'react-icons/fa';
-import { formatPrice } from '../../utils/formatters';
+import { formatPrice, formatPriceRange } from '../../data/properties';
 
 /**
  * FloorPlanSection component for displaying floor plans with tabs for different apartment types
@@ -54,19 +54,16 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
 
   // Helper function to get range text for a flat type
   const getFlatTypeRangeText = (flatType) => {
-    if (!flatType.configurations || flatType.configurations.length === 0) return '';
+    if (!flatType.configurations || flatType.configurations.length === 0) return 'Price on Request';
     
-    const prices = flatType.configurations.map(cfg => cfg.price).filter(Boolean);
-    if (prices.length === 0) return '';
+    const prices = flatType.configurations.map(cfg => cfg.price).filter(p => typeof p === 'number' && p > 0);
+    if (prices.length === 0) return 'Price on Request';
     
     const minPrice = Math.min(...prices);
     const maxPrice = Math.max(...prices);
     
-    if (minPrice === maxPrice) {
-      return `${formatPrice(minPrice)} L`;
-    }
-    
-    return `${formatPrice(minPrice)} L - ${formatPrice(maxPrice)} L`;
+    // Use the imported formatPriceRange which handles 'Onwards' and '₹ X - Y' with Lacs/Crores
+    return formatPriceRange({ min: minPrice, max: maxPrice });
   };
 
   return (
@@ -77,14 +74,15 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
           <div
             key={index}
             onClick={() => setSelectedTypeIndex(index)}
-            className={`px-6 py-4 rounded-lg cursor-pointer transition-all ${
+            className={`px-4 py-2 rounded-lg cursor-pointer transition-all ${
               selectedTypeIndex === index
                 ? 'bg-deep-teal text-white shadow-md'
                 : 'bg-white border border-gray-200 text-gray-700 hover:border-deep-teal/30'
             }`}
           >
-            <div className="font-medium">{type.type} Apartment</div>
-            <div className="text-xs mt-1 opacity-90">{getFlatTypeRangeText(type)}</div>
+            <div className="text-sm font-medium whitespace-nowrap">
+              {type.type} <span className="text-xs opacity-90 font-normal ml-1">{getFlatTypeRangeText(type)}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -96,13 +94,13 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
             <div
               key={index}
               onClick={() => setSelectedConfigIndex(index)}
-              className={`flex-shrink-0 px-4 py-2 border ${
+              className={`flex-shrink-0 px-3 py-1.5 border ${
                 selectedConfigIndex === index
                   ? 'border-amber-gold bg-amber-gold/10 text-amber-gold font-medium'
                   : 'border-gray-300 text-gray-700'
               } rounded-lg cursor-pointer transition-all hover:border-amber-gold/50`}
             >
-              {config.superBuiltUpArea} SQ.FT
+              <span className="text-xs">{config.superBuiltUpArea} SQ.FT</span>
             </div>
           ))}
         </div>
@@ -111,8 +109,8 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
       {/* Price Display */}
       <div className="mb-6">
         <div className="flex items-center">
-          <FaRupeeSign className="text-amber-gold text-2xl mr-1" />
-          <span className="text-3xl font-bold">{formatPrice(currentConfig.price)} L</span>
+          {/* formatPrice from data/properties now includes ₹ and Lacs/Cr */}
+          <span className="text-3xl font-bold">{formatPrice(currentConfig.price)}</span>
         </div>
       </div>
       
@@ -165,9 +163,9 @@ const FloorPlanSection = ({ flatTypes = [] }) => {
           {/* Price */}
           <div className="bg-gray-50 p-3 rounded-lg">
             <div className="text-sm text-gray-500">Price</div>
-            <div className="font-medium flex items-center">
-              <FaRupeeSign className="text-amber-gold text-sm mr-1" />
-              {formatPrice(currentConfig.price)} L
+            <div className="font-medium">
+              {/* formatPrice from data/properties now includes ₹ and Lacs/Cr */}
+              {formatPrice(currentConfig.price)}
             </div>
           </div>
         </div>

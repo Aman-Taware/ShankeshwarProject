@@ -11,16 +11,32 @@
  */
 export const formatPrice = (price, withSymbol = true) => {
   if (!price) return 'Price on Request';
-  
+
   const symbol = withSymbol ? '₹ ' : '';
-  
-  // Convert to crores and lakhs
-  if (price >= 10000000) {
-    const crores = (price / 10000000).toFixed(2);
-    return `${symbol}${parseFloat(crores)} Cr`;
+  const crore = 10000000;
+  const lakh = 100000;
+
+  if (price >= crore) {
+    let value = price / crore;
+    value = parseFloat(value.toFixed(2)); // Remove trailing .0 or .00
+    return `${symbol}${value} Cr`;
+  } else if (price >= lakh) {
+    let value = price / lakh;
+    value = parseFloat(value.toFixed(1)); // Remove trailing .0
+    return `${symbol}${value} Lakh`;
   } else {
-    const lakhs = (price / 100000).toFixed(1);
-    return `${symbol}${parseFloat(lakhs)} Lacs`;
+    // For prices less than 1 Lakh, use standard Indian currency format
+    const formatter = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+      // To control the symbol, we handle it manually based on withSymbol
+      // So, we format without the symbol here and prepend it if needed.
+      currencyDisplay: 'code' // Use 'code' to get 'INR' then replace it or parse number
+    });
+    // A bit of a workaround to use Intl.NumberFormat but control the symbol
+    let formattedPrice = formatter.format(price).replace('INR', '').trim();
+    return `${symbol}${formattedPrice}`;
   }
 };
 

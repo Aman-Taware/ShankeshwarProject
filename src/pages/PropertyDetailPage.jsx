@@ -736,7 +736,7 @@ const PropertyDetailPage = () => {
                   ) : (
                     <PropertyAmenities 
                       amenities={displayProperty.amenities}
-                      amenityImages={displayProperty.amenityImages || []}
+                      amenityImages={[]}
                     />
                   )}
                 </>
@@ -964,7 +964,7 @@ const PropertyDetailPage = () => {
       </div>
 
       {/* Add custom styles for sticky tabs and hiding scrollbar */}
-      <style jsx>{`
+      <style>{`
         .sticky-tabs {
           transition: all 0.3s ease;
         }

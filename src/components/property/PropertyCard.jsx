@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getPropertyImageUrl, formatPropertyPrice } from '../../data/properties';
+import { getPropertyImageUrl, formatPriceRange } from '../../data/properties';
 import ImageWithFallback from '../ui/ImageWithFallback';
 import { PROPERTY_STATUS } from '../../config/constants';
 import Button from '../ui/Button';
@@ -27,7 +27,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
     height,
     location,
     slug,
-    startingPrice,
+    priceRange, // Replaced startingPrice with priceRange
     shortDescription,
     completionPercentage,
     possessionDate,
@@ -151,7 +151,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
 
   // Get appropriate image
   const propertyImageUrl = getPropertyImageUrl(property, 'exterior');
-  const displayPrice = formatPropertyPrice(property.startingPrice);
+  const displayPrice = formatPriceRange(property.priceRange);
   
   // Compact Card (Simplified)
   if (compact) {
@@ -341,7 +341,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
             
 
             
-            {startingPrice && !isCompletedProperty && (
+            {displayPrice && displayPrice !== 'Price on Request' && !isCompletedProperty && (
               <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-deep-teal font-bold">
                 {displayPrice}
               </div>
@@ -518,7 +518,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               {/* Price or CTA */}
               <div className="flex items-center justify-between mt-auto">
                 <div>
-                  {startingPrice ? (
+                  {displayPrice && displayPrice !== 'Price on Request' ? (
                     <div className="text-amber-gold font-bold">{displayPrice}</div>
                   ) : (
                     <div className="text-gray-500 text-sm">Price coming soon</div>
@@ -551,7 +551,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               
 
               
-              {startingPrice && (
+              {displayPrice && displayPrice !== 'Price on Request' && (
                 <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-deep-teal font-bold">
                   {displayPrice}
                 </div>

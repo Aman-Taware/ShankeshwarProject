@@ -10,15 +10,29 @@ import { PROPERTY_STATUS } from '../config/constants';
  */
 export const formatPropertyPrice = (price) => {
   if (!price) return 'Price on Request';
-  
-  // Format as Indian currency (lakhs and crores)
-  const formatter = new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  });
-  
-  return formatter.format(price);
+
+  const crore = 10000000;
+  const lakh = 100000;
+
+  if (price >= crore) {
+    let value = price / crore;
+    // Round to 2 decimal places if needed, remove trailing .0 or .00
+    value = parseFloat(value.toFixed(2)); 
+    return `₹${value} Cr`;
+  } else if (price >= lakh) {
+    let value = price / lakh;
+    // Round to 1 decimal place if needed, remove trailing .0
+    value = parseFloat(value.toFixed(1));
+    return `₹${value} Lakh`;
+  } else {
+    // For prices less than 1 Lakh, use standard Indian currency format without decimals
+    const formatter = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+    });
+    return formatter.format(price);
+  }
 };
 
 /**

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
@@ -11,12 +11,58 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import InvestmentPage from './pages/InvestmentPage'; // Added import
 import InvestmentPropertyDetailPage from './pages/InvestmentPropertyDetailPage'; // Added import
+import Preloader from './components/Preloader'; // Import the Preloader component
 // Import other pages here as you create them
 // import AboutPage from './pages/AboutPage'; 
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      // Add a small delay for the fade-out transition to be visible
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500); // Adjust delay as needed, should be less than or equal to Preloader transition time
+    };
+
+    // Check if the document is already loaded
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+      // Cleanup event listener
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
+
+  // Always render Preloader, its visibility is controlled by its own opacity based on isLoading
+  // The main content will render underneath and become visible once Preloader fades out.
+  // However, to prevent interaction with underlying elements while preloader is active and fading,
+  // we can conditionally render the main layout only after a delay or keep it simple by rendering both.
+  // For simplicity and to ensure smooth transition, we render both and Preloader handles its visibility.
+
+  // A more robust way for complex apps might involve not rendering Layout until isLoading is truly false
+  // after transition, but this approach is simpler for now.
+
+  // return (
+  //   <>
+  //     <Preloader isLoading={isLoading} />
+  //     {!isLoading && (
+  //       <Layout>
+  //         <Routes> ... </Routes>
+  //       </Layout>
+  //     )}
+  //   </>
+  // );
+  // For now, let's keep the main layout rendering and let Preloader overlay it.
+  // The Preloader's pointerEvents: 'none' when !isLoading will handle interaction.
+
+
   return (
-    <Layout>
+    <>
+      <Preloader isLoading={isLoading} />
+      <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         {/* Redirect /projects to /projects/all */}
@@ -37,6 +83,7 @@ function App() {
         {/* <Route path="/about" element={<AboutPage />} /> */}
       </Routes>
     </Layout>
+    </>
   );
 }
 

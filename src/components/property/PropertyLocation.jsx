@@ -230,7 +230,7 @@ const PropertyLocation = ({ location = {} }) => {
       
       {/* Location categories */}
       <div className="mb-8 flex justify-center">
-        <div className="flex items-center justify-between bg-white rounded-full shadow-md p-1.5 border border-gray-100 overflow-x-auto max-w-full hide-scrollbar">
+        <div className="flex flex-wrap items-center justify-center sm:justify-between bg-white rounded-full shadow-md p-1.5 border border-gray-100 max-w-full hide-scrollbar">
           {LOCATION_CATEGORIES.map(category => (
             <button
               key={category.id}

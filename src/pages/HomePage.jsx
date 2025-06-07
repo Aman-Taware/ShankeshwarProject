@@ -10,6 +10,7 @@ import AboutUsSummary from '../components/home/AboutUsSummary';
 import AchievementsCounter from '../components/home/AchievementsCounter';
 import TestimonialsSection from '../components/home/TestimonialsSection';
 import OngoingPropertiesSlider from '../components/home/OngoingPropertiesSlider';
+import OurCoreValues from '../components/home/OurCoreValues'; // Import the new component
 
 // Animation variants
 const sectionVariants = {
@@ -33,12 +34,14 @@ export default function HomePage() {
       {/* Hero Section - Full width, no container */}
       <HeroSection />
       
-      {/* About Us Summary with Core Values */}
+      {/* About Us Summary */}
       <AboutUsSummary />
       
-      
-      {/* Add 3D Slider for Ongoing Properties */}
+      {/* Ongoing Properties Slider */}
       <OngoingPropertiesSlider />
+      
+      {/* Our Core Values Section */}
+      <OurCoreValues />
       
       {/* Achievements Counter Section */}
       <AchievementsCounter />

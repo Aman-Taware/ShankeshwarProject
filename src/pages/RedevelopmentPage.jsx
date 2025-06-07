@@ -141,8 +141,13 @@ const RedevelopmentPage = () => {
         className="bg-gradient-to-br from-deep-teal via-sage-teal to-deep-teal py-20 md:py-28 text-white relative overflow-hidden"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
       >
-        <div className="absolute inset-0 opacity-10">
-          {/* Subtle background pattern or image */}
+        <div className="absolute inset-0 opacity-50"> {/* Adjusted opacity for better visibility */}
+          <img 
+            src="/images/website/redevelopment/re-1.jpg" 
+            alt="Modern redevelopment project background" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-teal via-deep-teal/50 to-transparent"></div> {/* Optional: Add a gradient overlay for better text readability */}
         </div>
         <Container className="relative z-10">
           <motion.div className="max-w-3xl mx-auto text-center" variants={fadeIn} initial="hidden" animate="visible">

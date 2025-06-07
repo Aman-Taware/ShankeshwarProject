@@ -35,7 +35,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen bg-cream">
       <Header />
-      <main className="flex-grow pt-12 md:pt-16 pb-12 md:pb-16">
+      <main className="flex-grow pt-[4.625rem] md:pt-[4.25rem] pb-12 md:pb-16">
         {/* Page content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
