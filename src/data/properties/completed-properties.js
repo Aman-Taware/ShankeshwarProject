@@ -10,7 +10,7 @@ const completedProperties = [
     slug: 'shankeshwar-villa',
     status: 'completed',
     type: 'Mixed-Use',
-    shortDescription: '1 & 2 BHK Homes & Commercial Spaces in Ravet',
+    shortDescription: '1 & 2 BHK Homes & Offices in Ravet',
     location: {
       address: 'Ravet, Off Pune-Mumbai Highway',
       city: 'Pune',
@@ -27,7 +27,7 @@ const completedProperties = [
     flatTypes: [
       { type: '1 BHK' },
       { type: '2 BHK' },
-      { type: 'Commercial' }
+      { type: 'Offices' }
     ],
     amenities: [
       { name: 'Landscaped Garden', category: 'recreational' },
@@ -125,7 +125,7 @@ const completedProperties = [
     slug: 'shankeshwar-dang-ikon-phase2',
     status: 'completed',
     type: 'Mixed-Use',
-    shortDescription: '1, 2 & 3 BHK Homes & Commercial Spaces in Ravet',
+    shortDescription: '1, 2 & 3 BHK Homes & Offices in Ravet',
     location: {
       address: 'Ravet, Pune',
       city: 'Pune',
@@ -143,7 +143,7 @@ const completedProperties = [
       { type: '1 BHK' },
       { type: '2 BHK' },
       { type: '3 BHK' },
-      { type: 'Commercial' }
+      { type: 'Offices' }
     ],
     amenities: [
       { name: 'Garden Area', category: 'recreational' },
@@ -165,7 +165,7 @@ const completedProperties = [
     slug: 'shankeshwar-darshan',
     status: 'completed',
     type: 'Mixed-Use',
-    shortDescription: '2 & 3 BHK Homes & Commercial Spaces in Pimpri',
+    shortDescription: '2 & 3 BHK Homes & Offices in Pimpri',
     location: {
       address: 'Pimpri, Pune',
       city: 'Pune',
@@ -182,7 +182,7 @@ const completedProperties = [
     flatTypes: [
       { type: '2 BHK' },
       { type: '3 BHK' },
-      { type: 'Commercial' }
+      { type: 'Offices' }
     ],
     amenities: [
       { name: 'Garden Area', category: 'recreational' },
@@ -240,8 +240,8 @@ const completedProperties = [
     name: 'Shankeshwar Royale',
     slug: 'shankeshwar-royale',
     status: 'completed',
-    type: 'Mixed-Use',
-    shortDescription: '1 & 2 BHK Homes & Commercial Spaces in Chikhali',
+    type: 'Commercial',
+    shortDescription: 'Spacious Offices in Chikhali',
     location: {
       address: 'Chikhali, Pune',
       city: 'Pune',
@@ -256,9 +256,7 @@ const completedProperties = [
       { url: '/images/properties/completed/shankeshwar-royale.jpg', alt: 'Shankeshwar Royale Exterior', type: 'exterior' }
     ],
     flatTypes: [
-      { type: '1 BHK' },
-      { type: '2 BHK' },
-      { type: 'Commercial' }
+      { type: 'Offices' }
     ],
     amenities: [
       { name: 'Garden Area', category: 'recreational' },
@@ -315,8 +313,8 @@ const completedProperties = [
     name: 'Shankeshwar Gravity',
     slug: 'shankeshwar-gravity',
     status: 'completed',
-    type: 'Mixed-Use',
-    shortDescription: '1 & 2 BHK Homes & Commercial Spaces in Moshi',
+    type: 'Commercial',
+    shortDescription: 'Premium Offices in Moshi Pradhikaran',
     location: {
       address: 'Moshi, Pune',
       city: 'Pune',

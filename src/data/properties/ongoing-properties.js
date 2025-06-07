@@ -11,7 +11,7 @@ const ongoingProperties = [
     status: 'under-construction',
     type: 'Residential',
     shortDescription: '1 & 2 BHK Luxury Homes in Ravet',
-    description: 'Shankeshwar Pearl is a premium residential project offering luxurious 1, 2, 2.5 & 3 BHK homes with spacious carpet areas in the prime location of Ravet. These thoughtfully designed residences provide a perfect blend of comfort, elegance, and modern amenities to elevate your living experience. Surrounded by lush greenery and excellent connectivity, Shankeshwar Pearl presents the perfect balance of serene living and urban convenience.',
+    description: 'Shankeshwar Pearl is a premium residential project offering luxurious 2 & 3 BHK homes with spacious carpet areas in the prime location of Ravet. These thoughtfully designed residences provide a perfect blend of comfort, elegance, and modern amenities to elevate your living experience. Surrounded by lush greenery and excellent connectivity, Shankeshwar Pearl presents the perfect balance of serene living and urban convenience.',
     location: {
       address: ' Survey No. 97/1A/1A/1, Opposite PCMC Watertanks, Maskevasti, Ravet ',
       city: 'Pune',

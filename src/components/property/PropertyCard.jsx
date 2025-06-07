@@ -224,16 +224,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
                 />
               </motion.div>
               
-              <motion.div 
-                className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full shadow ${currentStatus.color} flex items-center`}
-                variants={badgeVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-              >
-                <i className={`${currentStatus.icon} mr-1`}></i>
-                <span>{currentStatus.label}</span>
-              </motion.div>
+
             </motion.div>
             
             <motion.div 
@@ -257,13 +248,16 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
                 <span className="truncate">{location?.address || location?.city || "N/A"}</span>
               </motion.div>
               
-              <motion.p 
-                variants={childVariants}
-                custom={2}
-                className="text-md font-bold text-amber-gold"
-              >
-                {displayPrice}
-              </motion.p>
+              {/* Price is not shown for completed properties in compact view */}
+              {!isCompletedProperty && startingPrice && (
+                <motion.p 
+                  variants={childVariants}
+                  custom={2}
+                  className="text-md font-bold text-amber-gold"
+                >
+                  {displayPrice}
+                </motion.p>
+              )}
             </motion.div>
           </div>
         ) : (
@@ -283,16 +277,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
                 />
               </motion.div>
               
-              <motion.div 
-                className={`absolute top-2 right-2 px-3 py-1 text-xs font-semibold rounded-full shadow ${currentStatus.color} flex items-center`}
-                variants={badgeVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-              >
-                <i className={`${currentStatus.icon} mr-1`}></i>
-                <span>{currentStatus.label}</span>
-              </motion.div>
+
             </motion.div>
             
             <motion.div 
@@ -354,18 +339,9 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               />
             </motion.div>
             
-            <motion.div 
-              className={`absolute top-4 left-4 px-3 py-1.5 rounded-full shadow-md ${currentStatus.color} flex items-center`}
-              variants={badgeVariants}
-              initial="initial"
-              animate="animate"
-              whileHover="hover"
-            >
-              <i className={`${currentStatus.icon} mr-1.5`}></i>
-              <span className="font-medium">{currentStatus.label}</span>
-            </motion.div>
+
             
-            {startingPrice && (
+            {startingPrice && !isCompletedProperty && (
               <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-deep-teal font-bold">
                 {displayPrice}
               </div>
@@ -390,49 +366,59 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               )}
             </div>
             
-            {/* Key Features */}
-            <div className="grid grid-cols-3 gap-3 mb-4">
-              {type && !isInvestment && (
-                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
-                  <FiHome className="text-amber-gold mb-1" />
-                  <span className="text-xs text-center text-gray-600">{type}</span>
-                </div>
-              )}
-              
-              {subType && isInvestment && (
-                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
-                  <FiHome className="text-amber-gold mb-1" />
-                  <span className="text-xs text-center text-gray-600">{subType}</span>
-                </div>
-              )}
-              
-              {flatTypes && flatTypes.length > 0 && !isInvestment && (
-                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
-                  <FaBed className="text-amber-gold mb-1" />
-                  <span className="text-xs text-center text-gray-600">
-                    {flatTypes.map(flat => flat.type.replace(' BHK', '')).join(' & ')} BHK
-                  </span>
-                </div>
-              )}
-              
-              {area && (
-                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
-                  <FaRulerCombined className="text-amber-gold mb-1" />
-                  <span className="text-xs text-center text-gray-600">
-                    {typeof area === 'object' && area !== null 
-                      ? (area.display || (area.value && area.unit ? `${area.value} ${area.unit}` : 'N/A')) 
-                      : area}
-                  </span>
-                </div>
-              )}
-              
-              {height && isInvestment && (
-                <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
-                  <i className="fas fa-arrows-alt-v text-amber-gold mb-1"></i>
-                  <span className="text-xs text-center text-gray-600">Height: {height}</span>
-                </div>
-              )}
-            </div>
+            {/* Key Features - Not shown for completed properties */}
+            {!isCompletedProperty && (
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                {/* Logic for non-investment properties */}
+                {!isInvestment && (() => {
+                  let displayIcon = <FiHome className="text-amber-gold mb-1" />;
+                  let displayText = type;
+
+                  // Existing logic for non-completed, non-investment properties
+                  if (flatTypes && flatTypes.length > 0) {
+                    displayText = `${flatTypes.map(flat => flat.type.replace(' BHK', '')).join(' & ')} BHK`;
+                    displayIcon = <FaBed className="text-amber-gold mb-1" />;
+                  } else {
+                    displayText = type;
+                  }
+                  
+                  return (
+                    <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                      {displayIcon}
+                      <span className="text-xs text-center text-gray-600">{displayText}</span>
+                    </div>
+                  );
+                })()}
+
+                {/* Logic for investment properties (subType) */}
+                {subType && isInvestment && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <FiHome className="text-amber-gold mb-1" />
+                    <span className="text-xs text-center text-gray-600">{subType}</span>
+                  </div>
+                )}
+                
+                {/* Area display (common for all) */}
+                {area && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <FaRulerCombined className="text-amber-gold mb-1" />
+                    <span className="text-xs text-center text-gray-600">
+                      {typeof area === 'object' && area !== null 
+                        ? (area.display || (area.value && area.unit ? `${area.value} ${area.unit}` : 'N/A')) 
+                        : area}
+                    </span>
+                  </div>
+                )}
+                
+                {/* Height display (for investment) */}
+                {height && isInvestment && (
+                  <div className="p-2 bg-gray-50 rounded-md flex flex-col items-center justify-center">
+                    <i className="fas fa-arrows-alt-v text-amber-gold mb-1"></i>
+                    <span className="text-xs text-center text-gray-600">Height: {height}</span>
+                  </div>
+                )}
+              </div>
+            )}
             
             {/* Short Description */}
             <div className="mb-4">
@@ -462,8 +448,8 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
               </div>
             )}
             
-            {/* Contact Sales Button for Completed Properties */}
-            {!isInvestment && (
+            {/* Contact Sales Button for Non-Completed, Non-Investment Properties */}
+            {!isCompletedProperty && !isInvestment && (
               <div className="text-center">
                 <a 
                   href={`tel:${contactPhone || '+919604304919'}`}
@@ -506,16 +492,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               
-              <motion.div 
-                className={`absolute top-4 left-4 px-3 py-1.5 rounded-full shadow-md ${currentStatus.color} flex items-center`}
-                variants={badgeVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-              >
-                <i className={`${currentStatus.icon} mr-1.5`}></i>
-                <span className="font-medium">{currentStatus.label}</span>
-              </motion.div>
+
               
               <div className="absolute bottom-4 left-4 right-4">
                 <h3 className="text-xl font-display font-bold text-white mb-1">{name}</h3>
@@ -572,16 +549,7 @@ const PropertyCard = ({ property, compact = false, index = 0, isCompletedPropert
                 />
               </motion.div>
               
-              <motion.div 
-                className={`absolute top-4 left-4 px-3 py-1.5 rounded-full shadow-md ${currentStatus.color} flex items-center`}
-                variants={badgeVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-              >
-                <i className={`${currentStatus.icon} mr-1.5`}></i>
-                <span className="font-medium">{currentStatus.label}</span>
-              </motion.div>
+
               
               {startingPrice && (
                 <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md text-deep-teal font-bold">

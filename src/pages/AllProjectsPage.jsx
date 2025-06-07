@@ -33,18 +33,28 @@ const sectionVariants = {
 const AllProjectsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('all');
-  
-  // Check URL for filter parameters on component mount
-  useEffect(() => {
+
+  // Initialize activeFilter directly from URL params
+  const getInitialFilter = () => {
     const params = new URLSearchParams(location.search);
     const statusParam = params.get('filter');
-    const typeParam = params.get('type');
-    
     if (statusParam && ['all', 'upcoming', 'ongoing', 'completed'].includes(statusParam)) {
-      setActiveFilter(statusParam);
+      return statusParam;
     }
-  }, [location]);
+    return 'all'; // Default if no valid filter in URL
+  };
+
+  const [activeFilter, setActiveFilter] = useState(getInitialFilter);
+  
+  // This effect ensures that if the URL is changed externally (e.g. browser back/forward)
+  // while the component is mounted, the activeFilter state syncs up.
+  useEffect(() => {
+    const currentUrlFilter = getInitialFilter();
+    if (activeFilter !== currentUrlFilter) {
+      setActiveFilter(currentUrlFilter);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]); // We only want this to re-sync if location changes.
 
   // Update URL when filter changes
   const handleFilterChange = (filter) => {

@@ -33,6 +33,35 @@ const PropertySpecifications = ({ specifications = {} }) => {
         acc[category] = Array.isArray(details) ? details : [{ description: details }];
         return acc;
       }, {});
+
+  // Refined specsByCategory to handle nested objects like 'electrical'
+  const processedSpecsByCategory = Object.entries(specifications).reduce((acc, [category, details]) => {
+    if (typeof details === 'object' && !Array.isArray(details) && details !== null) {
+      // Handle specific known nested structures like 'electrical'
+      if (category.toLowerCase() === 'electrical' && details.internal && details.external) {
+        acc[category] = [
+          { feature: 'Internal', description: details.internal },
+          { feature: 'External', description: details.external },
+        ];
+      } else if (category.toLowerCase() === 'doors' && details.main && details.internal && details.toilet) {
+        acc[category] = [
+          { feature: 'Main Door', description: details.main },
+          { feature: 'Internal Doors', description: details.internal },
+          { feature: 'Toilet Doors', description: details.toilet },
+        ];
+      } else {
+        // Fallback for other unexpected objects: try to list key-value pairs
+        acc[category] = Object.entries(details).map(([key, value]) => ({
+          feature: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize key
+          description: typeof value === 'string' ? value : JSON.stringify(value) // Render string or stringify
+        }));
+      }
+    } else {
+      // Existing logic for strings or arrays of objects
+      acc[category] = Array.isArray(details) ? details : [{ description: details }];
+    }
+    return acc;
+  }, {});
   
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
@@ -72,7 +101,8 @@ const PropertySpecifications = ({ specifications = {} }) => {
             {spec.room || spec.feature || 'All Areas'}
           </div>
           <div className="md:col-span-3 text-gray-600">
-            {spec.description || spec.material || spec.details}
+            {typeof spec.description === 'string' ? spec.description : 
+             (spec.material || spec.details || 'N/A')}
           </div>
         </div>
       </div>
@@ -91,7 +121,7 @@ const PropertySpecifications = ({ specifications = {} }) => {
       </div>
       
       <div className="space-y-4">
-        {Object.keys(specsByCategory).map((category) => (
+        {Object.keys(processedSpecsByCategory).map((category) => (
           <div 
             key={category} 
             className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm"
@@ -119,7 +149,7 @@ const PropertySpecifications = ({ specifications = {} }) => {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="p-6">{renderSpecifications(specsByCategory[category])}</div>
+                  <div className="p-6">{renderSpecifications(processedSpecsByCategory[category])}</div>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -267,7 +267,7 @@ const OngoingPropertiesSlider = () => {
                     variants={positionVariants}
                     onClick={() => {
                       if (positions[1] === index) {
-                        window.location.href = `/properties/${property.slug}`;
+                        window.location.href = `/property/${property.slug}`;
                       } else if (positions[0] === index) {
                         rotateLeft();
                       } else if (positions[2] === index) {
