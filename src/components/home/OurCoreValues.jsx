@@ -88,8 +88,8 @@ const OurCoreValues = () => {
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-12 relative z-10">
             <div className="md:max-w-xl">
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-4">Ready to Find Your Dream Property?</h3>
-              <p className="text-white/80">Let us guide you through our portfolio of premium properties and help you find the perfect space that meets your unique requirements.</p>
+              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-4">Ready to Find Your Dream Home?</h3>
+              <p className="text-white/80">Let us guide you through our premium properties and help you find the perfect space that meets your unique requirements.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-end">
               <Button

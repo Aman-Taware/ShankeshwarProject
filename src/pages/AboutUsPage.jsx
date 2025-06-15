@@ -111,26 +111,7 @@ const AboutUsPage = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-deep-teal/40 to-transparent"></div>
               </div>
-              
-              {/* Stats card */}
-              <motion.div 
-                className="bg-white rounded-lg shadow-lg p-6 absolute -bottom-5 -left-5 md:bottom-8 md:-left-8 max-w-[250px] border-t-4 border-amber-gold"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-4xl font-display font-bold text-deep-teal">14+</p>
-                    <p className="text-sm text-deep-teal/60">Years Experience</p>
-                  </div>
-                  <div>
-                    <p className="text-4xl font-display font-bold text-amber-gold">9+</p>
-                    <p className="text-sm text-deep-teal/60">Projects Delivered</p>
-                  </div>
-                </div>
-              </motion.div>
+
             </motion.div>
             
             {/* Text content column */}

@@ -8,9 +8,9 @@ const ongoingProperties = [
     id: 'shankeshwar-pearl',
     name: 'Shankeshwar Pearl',
     slug: 'shankeshwar-pearl',
-    status: 'under-construction',
-    type: 'Residential',
-    shortDescription: '1 & 2 BHK Luxury Homes in Ravet',
+    status: 'nearing-possession',
+    type: 'Residential & Commercial',
+    shortDescription: '2 & 3 BHK Large Carpet Homes & Commercial Spaces in Ravet',
     description: 'Shankeshwar Pearl is a premium residential project offering luxurious 2 & 3 BHK homes with spacious carpet areas in the prime location of Ravet. These thoughtfully designed residences provide a perfect blend of comfort, elegance, and modern amenities to elevate your living experience. Surrounded by lush greenery and excellent connectivity, Shankeshwar Pearl presents the perfect balance of serene living and urban convenience.',
     location: {
       address: ' Survey No. 97/1A/1A/1, Opposite PCMC Watertanks, Maskevasti, Ravet ',
@@ -35,25 +35,25 @@ const ongoingProperties = [
         { name: 'PVR', distance: '7.0 km', type: 'recreation', details: 'Popular multiplex for latest movies and leisure' },
 
         // Merged from nearby.schools
-        { name: 'S B Patil Public School', distance: '1.5 km', rating: 4.4, details: 'CBSE-affiliated school with modern learning environment', type: 'education' },
-        { name: 'City Pride School', distance: '1.0 km', rating: 4.5, details: 'Reputed school offering quality education', type: 'education' },
-        { name: 'D.Y. Patil School', distance: '2.5 km', rating: 4.3, details: 'School with strong academic and co-curricular focus', type: 'education' },
-        { name: 'Elpro School', distance: '6.0 km', rating: 4.2, details: 'Known for holistic development and infrastructure', type: 'education' },
+        { name: 'S B Patil Public School', distance: '1.5 km', details: 'CBSE-affiliated school with modern learning environment', type: 'education' },
+        { name: 'City Pride School', distance: '1.0 km', details: 'Reputed school offering quality education', type: 'education' },
+        { name: 'D.Y. Patil School', distance: '2.5 km', details: 'School with strong academic and co-curricular focus', type: 'education' },
+        { name: 'Elpro School', distance: '6.0 km', details: 'Known for holistic development and infrastructure', type: 'education' },
 
         // Merged from nearby.colleges
-        { name: 'Symbiosis College', distance: '3.0 km', rating: 4.6, details: 'Prestigious institution offering diverse undergraduate programs', type: 'education' },
-        { name: 'Indira Institute', distance: '7.0 km', rating: 4.3, details: 'Well-known management and technical college', type: 'education' },
-        { name: 'JSPM', distance: '6.5 km', rating: 4.2, details: 'Engineering and technology institute with strong faculty', type: 'education' },
-        { name: 'PCCOE (Pimpri-Chinchwad College of Engineering)', distance: '4.0 km', rating: 4.5, details: 'Renowned engineering college with strong placement record', type: 'education' },
+        { name: 'Symbiosis College', distance: '3.0 km', details: 'Prestigious institution offering diverse undergraduate programs', type: 'education' },
+        { name: 'Indira Institute', distance: '7.0 km', details: 'Well-known management and technical college', type: 'education' },
+        { name: 'JSPM', distance: '6.5 km', details: 'Engineering and technology institute with strong faculty', type: 'education' },
+        { name: 'PCCOE (Pimpri-Chinchwad College of Engineering)', distance: '4.0 km', details: 'Renowned engineering college with strong placement record', type: 'education' },
 
         // Merged from nearby.hospitals
-        { name: 'Ojas Multispeciality Hospital', distance: '2.5 km', rating: 4.1, details: 'Full-service hospital for general and specialized treatments', type: 'healthcare' },
-        { name: 'Sterling Multispeciality Hospital', distance: '2.0 km', rating: 4.2, details: 'Modern facility with emergency and surgical care', type: 'healthcare' },
-        { name: 'Aditya Birla Hospital', distance: '5.0 km', rating: 4.4, details: 'Multi-specialty hospital with 24/7 emergency services', type: 'healthcare' },
-        { name: 'Lokmanya Hospital', distance: '7.0 km', rating: 4.0, details: 'Trusted name in orthopedics and trauma care', type: 'healthcare' },
+        { name: 'Ojas Multispeciality Hospital', distance: '2.5 km', details: 'Full-service hospital for general and specialized treatments', type: 'healthcare' },
+        { name: 'Sterling Multispeciality Hospital', distance: '2.0 km', details: 'Modern facility with emergency and surgical care', type: 'healthcare' },
+        { name: 'Aditya Birla Hospital', distance: '5.0 km', details: 'Multi-specialty hospital with 24/7 emergency services', type: 'healthcare' },
+        { name: 'Lokmanya Hospital', distance: '7.0 km', details: 'Trusted name in orthopedics and trauma care', type: 'healthcare' },
 
         // Merged from nearby.shopping (Note: some items might be duplicates of existing landmarks, review for uniqueness if needed)
-        { name: 'D Mart', distance: '2.0 km', rating: 4.3, details: 'Comprehensive supermarket for everyday essentials', type: 'shopping' },
+        { name: 'D Mart', distance: '2.0 km', details: 'Comprehensive supermarket for everyday essentials', type: 'shopping' },
         // { name: 'Reliance Smart', distance: '2.5 km', rating: 4.2, details: 'Convenient shopping for groceries and household goods', type: 'shopping' }, // Already in landmarks
         // { name: 'Star Bazaar', distance: '6.0 km', rating: 4.1, details: 'Hypermarket with food, fashion and electronics', type: 'shopping' }, // Already in landmarks
         // { name: 'Elpro Mall', distance: '4.0 km', rating: 4.4, details: 'Retail and entertainment complex with PVR and food court', type: 'shopping' }, // Already in landmarks
@@ -79,32 +79,20 @@ const ongoingProperties = [
         type: '3 BHK',
         configurations: [
           {
-            name: '3 BHK Type A',
             carpetArea: 1136,
-            netCarpetAreaSqm: 94.32,
-            balconyAreaSqm: 11.25,
-            totalCarpetAreaSqm: 105.56,
-            superBuiltUpArea: 1350,
-            price: 9800000,
+            price: 11900000,
             bedrooms: 3,
             bathrooms: 2,
             balconies: 2,
-            additionalRooms: [],
             facing: 'East',
           },
           {
-            name: '3 BHK Type B',
             carpetArea: 1142,
-            netCarpetAreaSqm: 94.80,
-            balconyAreaSqm: 11.25,
-            totalCarpetAreaSqm: 106.05,
-            superBuiltUpArea: 1360,
-            price: 9900000,
+            price:  12000000,
             bedrooms: 3,
             bathrooms: 2,
             balconies: 2,
-            additionalRooms: [],
-            facing: 'North-East',
+            facing: 'North-East'
           }
         ]
       },
@@ -112,136 +100,42 @@ const ongoingProperties = [
         type: '2 BHK',
         configurations: [
           {
-            name: '2 BHK Type A',
             carpetArea: 835,
-            netCarpetAreaSqm: 69.14,
-            balconyAreaSqm: 8.43,
-            totalCarpetAreaSqm: 77.58,
-            superBuiltUpArea: 995,
-            price: 7200000,
+            price: 8236000,
             bedrooms: 2,
             bathrooms: 2,
             balconies: 1,
-            additionalRooms: [],
-            facing: 'North-East',
-            count: 14
-          },
-          {
-            name: '2 BHK Type B',
-            carpetArea: 905,
-            netCarpetAreaSqm: 75.48,
-            balconyAreaSqm: 8.57,
-            totalCarpetAreaSqm: 84.06,
-            superBuiltUpArea: 1075,
-            price: 7800000,
-            bedrooms: 2,
-            bathrooms: 2,
-            balconies: 1,
-            additionalRooms: [],
-            facing: 'South-East',
-          },
-          {
-            name: '2 BHK Type C',
-            carpetArea: 909,
-            netCarpetAreaSqm: 75.90,
-            balconyAreaSqm: 8.57,
-            totalCarpetAreaSqm: 84.47,
-            superBuiltUpArea: 1080,
-            price: 7850000,
-            bedrooms: 2,
-            bathrooms: 2,
-            balconies: 1,
-            additionalRooms: [],
-            facing: 'North',
-          }
-        ]
-      },
-      { 
-        type: 'Duplex',
-        configurations: [
-          {
-            name: 'Duplex Type A',
-            carpetArea: 2015,
-            netCarpetAreaSqm: 161.94,
-            balconyAreaSqm: 25.23,
-            totalCarpetAreaSqm: 187.17,
-            superBuiltUpArea: 2400,
-            price: 16500000,
-            bedrooms: 4,
-            bathrooms: 3,
-            balconies: 3,
-            additionalRooms: ['Study Room', 'Servant Room'],
-            facing: 'East',
-          },
-          {
-            name: 'Duplex Type B',
-            carpetArea: 879,
-            netCarpetAreaSqm: 76.92,
-            balconyAreaSqm: 4.76,
-            totalCarpetAreaSqm: 81.68,
-            superBuiltUpArea: 1050,
-            price: 8000000,
-            bedrooms: 2,
-            bathrooms: 2,
-            balconies: 1,
-            additionalRooms: ['Study Room'],
-            facing: 'North',
+            facing: 'North-East'
           }
         ]
       }
     ],
+    
     amenities: [
         // Sustainability
         { name: 'Limited Solar Water System', category: 'sustainability' },
         { name: 'Rainwater Harvesting System', category: 'sustainability' },
       
         // Security
-        { name: 'Security Cabin with Modern Equipment', category: 'security' },
-        { name: 'CCTV System for Common Areas', category: 'security' },
+        { name: 'CCTV Surveillance', category: 'security' },
         { name: 'Video Door Phone with Intercom Facility', category: 'security' },
-        { name: 'Individual Fire Extinguisher in Each Flat', category: 'security' },
-        { name: '24/7 Security', category: 'security' },
-        { name: 'LED Street Lighting', category: 'security' },
+        { name: 'Fire Fighting System', category: 'security' },
+        { name: 'Grand Entrance Gate with Security Cabin', category: 'security' },
       
         // Recreational & Lifestyle
-        { name: 'Double Height Entrance Lobby', category: 'recreational' },
+        { name: 'Co-Working Space', category: 'recreational' },
         { name: 'Childrens Play Area', category: 'recreational' },
-        { name: 'Equipped Gym', category: 'recreational' },
-        { name: 'Yoga Deck', category: 'recreational' },
-        { name: 'Indoor Games Zone', category: 'recreational' },
-        { name: 'Multipurpose Area', category: 'recreational' },
-        { name: 'Creche', category: 'recreational' },
-        { name: 'Lounge', category: 'recreational' },
-        { name: 'Co-working & Library Space', category: 'recreational' },
-        { name: 'Amphitheater', category: 'recreational' },
-        { name: 'Gazebo & Seating Areas', category: 'recreational' },
-        { name: 'Jogging Track', category: 'recreational' },
-        { name: 'Badminton Court', category: 'recreational' },
-        { name: 'Yoga & Meditation Area', category: 'recreational' },
-        { name: 'A Wide Range of Amenities', category: 'recreational' }, // summary/highlight from brochure
-      
-        // Design
-        { name: 'Vastu Compliant Design', category: 'design' },
-      
-        // Convenience
-        { name: 'Branded Lift with Power Backup', category: 'convenience' },
-        { name: 'Letter Box with Name Plate', category: 'convenience' },
-        { name: 'Garbage Chute', category: 'convenience' },
-        { name: 'Covered Car Parking', category: 'convenience' },
-        { name: 'Visitor Parking', category: 'convenience' },
-        { name: '24x7 Water Supply', category: 'convenience' },
-        { name: 'Water Purification System', category: 'convenience' },
-        { name: 'High-Speed Elevators', category: 'convenience' },
-        { name: 'Senior Citizen Sitting Area', category: 'convenience' },
-        { name: 'Power Backup for Common Areas', category: 'convenience' },
-        { name: 'Temple', category: 'convenience' },
-        { name: 'Choice of Parking', category: 'convenience' },
-      
-        // Unique/Project Features
-        { name: 'Dedicated Puja Room', category: 'special' },
-        { name: 'Dedicated Storage Room', category: 'special' },
-        { name: 'Granite Platform & Sink in Dry Balcony', category: 'special' },
-        { name: 'Largest Carpet Area in the Vicinity', category: 'special' }
+        { name: 'Indoor Games Room', category: 'recreational' },
+        { name: 'Gymnasium', category: 'recreational' },
+        { name: 'Senior Citizen Sit-out Area', category: 'recreational' },
+        { name: 'Multipurpose Hall', category: 'recreational' },
+        { name: 'Creche Area', category: 'recreational' },
+        { name: 'Sky Lounge', category: 'recreational' },
+
+        // Utilities
+        { name: 'Power Backup for Common Areas & Lifts', category: 'utilities' },
+        { name: 'Automatic Elevators', category: 'utilities' },
+        { name: 'Ample Parking Space', category: 'utilities' }
       ],
       
     amenityImages: [
@@ -293,28 +187,28 @@ const ongoingProperties = [
       },
       
     constructionProgress: {
-      overall: 75,
+      overall: 90,
       stages: [
         { name: 'Foundation', percentage: 100 },
-        { name: 'Structure', percentage: 95 },
-        { name: 'Brickwork', percentage: 85 },
-        { name: 'Plumbing', percentage: 70 },
-        { name: 'Electrical', percentage: 60 },
-        { name: 'Flooring', percentage: 50 },
-        { name: 'Finishing', percentage: 30 }
+        { name: 'Structure', percentage: 100 },
+        { name: 'Brickwork', percentage: 100 },
+        { name: 'Plumbing', percentage: 100 },
+        { name: 'Electrical', percentage: 100 },
+        { name: 'Flooring', percentage: 90 },
+        { name: 'Finishing', percentage: 90 }
       ]
     },
     projectOverview: {
-      total_area: '5.2 Acres',
-      total_buildings: '3 Towers',
-      total_units: '240 Apartments',
-      unit_variants: '1 & 2 BHK',
+      total_area: '22,000 Sq.ft',
+      total_buildings: 'Single Tower',
+      total_units: '70 Units & 14 Shops',
+      unit_variants: '2 BHK, 3 BHK, Duplex',
       open_space: '65% of Total Area',
       car_parking: '1 per Apartment',
-      completion_date: 'December 2025',
-      possession_date: 'March 2026',
+      completion_date: 'Mid 2025',
+      possession_date: 'Dec 2025',
       rera_registration: 'P52100035074',
-      project_architect: 'Karan Darda Architects',
+      project_architect: 'Usha Rangrajan',
       landscape_architect: 'Vikas Labba-Design Terra',
       legal_advisor: 'Adv. Shrikant Kadam'
     },
@@ -326,17 +220,17 @@ const ongoingProperties = [
     name: 'Shankeshwar Sparsh',
     slug: 'shankeshwar-sparsh',
     status: 'under-construction',
-    type: 'Residential',
-    shortDescription: '1 & 2 BHK Child Centric Homes in Moshi',
-    description: 'Shankeshwar Sparsh is a child-centric residential project in Moshi offering thoughtfully designed 1 & 2 BHK apartments. The project features dedicated spaces and amenities for children\'s growth and development, making it the perfect home for young families.',
+    type: 'Residential & Commercial',
+    shortDescription: '1 & 2 BHK Homes & Commercial Spaces in Moshi.',
+    description: 'Shankeshwar Sparsh offers thoughtfully designed 1 and 2 BHK homes in the rapidly developing localion of Moshi. Experience a harmonious blend of modern living and tranquility with well-planned layouts, quality construction, and essential amenities. Ideal for families looking for comfort and convenience at an affordable price point.',
     location: {
-      address: 'Kudale Vasti, Moshi, Pune',
+      address: 'Gat No. 334, Kudale Wasti, near Shankeshwar Gravity, near Swami Samarth Math, Bhim Nagar, Moshi',
       city: 'Pune',
       state: 'Maharashtra',
-      zipCode: '413015',
+      zipCode: '412105',
       coordinates: {
-        lat: 18.67159381786681,
-        lng: 73.86041782740445,
+        lat: 18.671311021962357,
+        lng: 73.86038236855323
       },
       landmarks: [
         { name: 'City Pride International School', distance: '2.0 km', type: 'education', details: 'Renowned CBSE school with excellent academic reputation' },
@@ -344,34 +238,22 @@ const ongoingProperties = [
         { name: 'Pune International Exhibition Center', distance: '2.3 km', type: 'event/infra', details: 'Popular venue for international exhibitions and events' },
         { name: 'Indrayani River', distance: '3.0 km', type: 'recreation', details: 'Scenic river offering peaceful views and greenery' },
         { name: 'Nashik Road (Pune-Nashik Highway)', distance: '0.7 km', type: 'connectivity', details: 'Direct access to Nashik and Pune via highway' },
-        { name: 'D Mart', distance: '2.0 km', type: 'shopping', details: 'Large retail supermarket for daily groceries and essentials' }
-      ],
-      nearby: {
-        schools: [
-          { name: 'City Pride International School', distance: '2.0 km', rating: 4.5, details: 'CBSE curriculum with modern campus and facilities' },
-          { name: 'SNBP International School', distance: '2.2 km', rating: 4.3, details: 'CBSE affiliated school with holistic education' },
-          { name: 'Aditya International School', distance: '1.2 km', rating: 4.1, details: 'English medium school focused on academic excellence' }
-        ],
-        colleges: [
-          {name:'MIT College',distance:'2.5 km',rating:4.2,details:'Private college offering engineering and management courses'},
-          {name:'Sharadchandra College', distance:'2.5 km',rating:4.2,details:'Private college offering engineering and management courses'}
-        ],
-        hospitals: [
-          { name: 'Bharat Petroleum Medical Center (Nearby)', distance: '1.5 km', rating: 4.0, details: 'Local healthcare and emergency support nearby' },
-          { name: 'Noble Hospital (Yerwada)', distance: '6.5 km', rating: 4.2, details: 'Full-service multi-specialty hospital' }
-        ],
-        shopping: [
-          { name: 'D Mart', distance: '2.0 km', rating: 4.3, details: 'Supermarket for daily needs and household items' },
-          { name: 'Reliance Trends', distance: '2.1 km', rating: 4.2, details: 'Fashion and clothing store' },
-          { name: 'Spine City Mall', distance: '5.0 km', rating: 4.4, details: 'Mall with multiple stores and entertainment zones' },
-          {name: 'Zudio', distance: '2.5 km', rating: 4.2, details: 'Fashion and clothing store'},
-          { name: 'Reliance Digital', distance: '2.5 km', rating: 4.2, details: 'Electronics store'}
-        ],
-        restaurants: [
-          { name: 'Chowdhary Dhaba', distance: '1.2 km', rating: 4.1, details: 'Casual dining with North Indian cuisine' },
-          { name: 'Hotel Ashoka ', distance: '1.5 km', rating: 4.0, details: 'Multi-cuisine family restaurant' }
-        ]
-      }
+        { name: 'D Mart', distance: '2.0 km', type: 'shopping', details: 'Large retail supermarket for daily groceries and essentials' },
+        { name: 'City Pride International School', distance: '2.0 km',type: 'education', details: 'CBSE curriculum with modern campus and facilities' },
+        { name: 'SNBP International School', distance: '2.2 km',type: 'education', details: 'CBSE affiliated school with holistic education' },
+        { name: 'Aditya International School', distance: '1.2 km',type: 'education', details: 'English medium school focused on academic excellence' },
+        { name: 'MIT College', distance: '2.5 km',type: 'education', details: 'Private college offering engineering and management courses' },
+        { name: 'Sharadchandra College', distance: '2.5 km',type: 'education', details: 'Private college offering engineering and management courses' },
+        { name: 'Bharat Petroleum Medical Center (Nearby)', distance: '1.5 km',type: 'health', details: 'Local healthcare and emergency support nearby' },
+        { name: 'Noble Hospital (Yerwada)', distance: '6.5 km',type: 'health', details: 'Full-service multi-specialty hospital' },
+        { name: 'D Mart', distance: '2.0 km',type: 'shopping', details: 'Supermarket for daily needs and household items' },
+        { name: 'Reliance Trends', distance: '2.1 km',type: 'shopping', details: 'Fashion and clothing store' },
+        { name: 'Spine City Mall', distance: '5.0 km',type: 'shopping', details: 'Mall with multiple stores and entertainment zones' },
+        {name: 'Zudio', distance: '2.5 km',type: 'shopping', details: 'Fashion and clothing store'},
+        { name: 'Reliance Digital', distance: '2.5 km',type: 'shopping', details: 'Electronics store'},
+        { name: 'Chowdhary Dhaba', distance: '1.2 km',type: 'food', details: 'Casual dining with North Indian cuisine' },
+        { name: 'Hotel Ashoka ', distance: '1.5 km',type: 'food', details: 'Multi-cuisine family restaurant' }
+      ]
     },
     images: [
       { url: '/images/property/shankeshwar-sparsh/exterior/sparsh-exterior-1.jpeg', alt: 'Shankeshwar Sparsh Exterior', type: 'exterior' },
@@ -386,64 +268,40 @@ const ongoingProperties = [
             type: '2 BHK',
             configurations: [
               {
-                name: '2 BHK - 632',
                 carpetArea: 632,
-                builtUpArea: 725,
-                superBuiltUpArea: 755,
-                NetCarpetAre: 53.05,
-                NetBalconyArea: 5.70,
-                price: 3800000,
-                floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-2bhk-633-2d.png',
+                price: 4637000,
+                floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-2bhk-632-2d.png',
                 bedrooms: 2,
                 bathrooms: 2,
                 balconies: 1,
                 DryBalcony: 1,
-                additionalRooms: []
               },
               {
-                name: '2 BHK - 663',
                 carpetArea: 663,
-                builtUpArea: 750,
-                superBuiltUpArea: 790,
-                NetCarpetAre: 53.54,
-                NetBalconyArea: 8.05,
-                price: 3800000,
+                price: 4863000,
                 floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-2bhk-663-2d.png',
                 bedrooms: 2,
                 bathrooms: 2,
-                balconies: 1,
+                balconies: 2,
                 DryBalcony: 1,
-                additionalRooms: []
               },
               {
-                name: '2 BHK - 633',
-                carpetArea: 633,
-                builtUpArea: 726,
-                superBuiltUpArea: 756,
-                NetCarpetAre: 53.38,
-                NetBalconyArea: 5.48,
-                price: 3800000,
-                floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-2bhk-633-2d.png',
+                carpetArea: 628,
+                price: 4608000,
+                floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-2bhk-628-2d.png',
                 bedrooms: 2,
                 bathrooms: 2,
                 balconies: 1,
                 DryBalcony: 1,
-                additionalRooms: []
               },
               {
-                name: '2 BHK - 665',
                 carpetArea: 665,
-                builtUpArea: 752,
-                superBuiltUpArea: 792,
-                NetCarpetAre: 53.99,
-                NetBalconyArea: 7.80,
                 price: 5500000,
                 floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-2bhk-665-2d.png',
                 bedrooms: 2,
                 bathrooms: 2,
-                balconies: 1,
+                balconies: 2,
                 DryBalcony: 1,
-                additionalRooms: []
               }
             ]
           },
@@ -451,13 +309,8 @@ const ongoingProperties = [
             type: '1 BHK',
             configurations: [
               {
-                name: '1 BHK - 452',
                 carpetArea: 452,
-                builtUpArea: 510,
-                superBuiltUpArea: 540,
-                ReraCarpet: 392,
-                BalconyArea: 61,
-                price: 5500000,
+                price: 3325000,
                 floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-1bhk-452-2d.png',
                 bedrooms: 1,
                 bathrooms: 2,
@@ -466,13 +319,8 @@ const ongoingProperties = [
                 additionalRooms: []
               },
               {
-                name: '1 BHK - 459',
                 carpetArea: 459,
-                builtUpArea: 520,
-                superBuiltUpArea: 550,
-                ReraCarpet: 387,
-                BalconyArea: 72,
-                price: 5500000,
+                price: 3368820,
                 floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-1bhk-459-2d.png',
                 bedrooms: 1,
                 bathrooms: 2,
@@ -481,13 +329,8 @@ const ongoingProperties = [
                 additionalRooms: []
               },
               {
-                name: '1 BHK - 435',
                 carpetArea: 435,
-                builtUpArea: 495,
-                superBuiltUpArea: 520,
-                ReraCarpet: 377,
-                BalconyArea: 58,
-                price: 5500000,
+                price: 3200512,
                 floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-1bhk-435-2d.png',
                 bedrooms: 1,
                 bathrooms: 2,
@@ -496,13 +339,8 @@ const ongoingProperties = [
                 additionalRooms: []
               },
               {
-                name: '1 BHK - 458',
                 carpetArea: 458,
-                builtUpArea: 518,
-                superBuiltUpArea: 548,
-                ReraCarpet: 390,
-                BalconyArea: 69,
-                price: 5500000,
+                price: 3376110,
                 floorPlan: '/images/property/shankeshwar-sparsh/floorplans/sparsh-1bhk-458-2d.png',
                 bedrooms: 1,
                 bathrooms: 2,
@@ -512,55 +350,51 @@ const ongoingProperties = [
               }
             ]
           }
-    ],    amenities: [
+    ],  
+
+    amenities: [
         // Lifestyle Amenities (Recreational)
         { name: 'Multipurpose Sports Court', category: 'recreational' },
         { name: 'Calisthenics Area', category: 'recreational' },
         { name: 'Walking Track', category: 'recreational' },
-        { name: 'Temple', category: 'recreational' },
-        { name: 'Temple Courtyard', category: 'recreational' },
-        { name: 'Kids Play Area', category: 'recreational' },
-        { name: 'Parents Seating', category: 'recreational' },
-        { name: 'Open Amphitheater', category: 'recreational' },
-        { name: 'Stage Seating', category: 'recreational' },
-        { name: 'Multipurpose Party Lawn', category: 'recreational' },
-        { name: 'Table Tennis', category: 'recreational' },
-        { name: 'Foosball', category: 'recreational' },
-        { name: 'Board Games', category: 'recreational' },
-        { name: 'Fitness Arena', category: 'recreational' },
-        { name: 'Gazebos', category: 'recreational' },
-        { name: 'Yoga Room', category: 'recreational' },
-        { name: 'Co-working Space', category: 'recreational' },
-        { name: 'Library', category: 'recreational' },
-        { name: 'Lounge Seatings', category: 'recreational' },
-        { name: 'Fragrance Garden', category: 'recreational' },
-        { name: 'Sculpture Zone', category: 'recreational' },
-      
-        // Other Amenities
-        { name: 'Modern Elevation', category: 'design' },
-        { name: 'Designer Entrance', category: 'design' },
-        { name: 'Designer Lobbies', category: 'design' },
-        { name: 'Designer Driveways', category: 'design' },
-        { name: 'Society Office', category: 'convenience' },
-        { name: 'Limited Solar Water Heating System', category: 'sustainability' },
+        { name: 'Children Play Area with Equipment', category: 'recreational' },
+        { name: 'Senior Citizen Sit Out Area', category: 'recreational' },
+        { name: 'Gazebo', category: 'recreational' },
+        { name: 'Amphitheatre', category: 'recreational' },
+        { name: 'Party Lawn', category: 'recreational' },
+        { name: 'Clubhouse with Indoor Games', category: 'recreational' },
+        { name: 'Well Equipped Gymnasium', category: 'recreational' },
+
+        // Wellness Amenities
+        { name: 'Yoga & Meditation Area', category: 'wellness' },
+
+        // Spiritual Amenities
+        { name: 'Temple', category: 'spiritual' },
+
+        // Security Amenities
+        { name: 'Grand Entrance Gate with Security Cabin', category: 'security' },
+        { name: 'CCTV Surveillance for Common Areas', category: 'security' },
+        { name: 'Fire Fighting System', category: 'security' },
+
+        // Utilities Amenities
+        { name: 'Power Backup for Lifts & Common Areas', category: 'utilities' },
+
+        // Sustainability Amenities
         { name: 'Rainwater Harvesting', category: 'sustainability' },
-        { name: 'Sewage Treatment Plant', category: 'sustainability' },
-        { name: 'Garbage Chute', category: 'convenience' },
-        { name: 'Letter Box with Name Plate', category: 'convenience' },
-      
-        // Safety Features (Security)
-        { name: 'Security Cabin', category: 'security' },
-        { name: 'CCTV Camera for Common Areas', category: 'security' },
-        { name: 'Video Door Phone with Intercom Facility', category: 'security' },
-        { name: 'Fire Extinguisher in Each Flat', category: 'security' },
-        { name: 'Emergency Alarm on Each Floor', category: 'security' }
+        { name: 'Solar Water Heating System (Limited)', category: 'sustainability' },
+
+        // Infrastructure Amenities
+        { name: 'Internal Concrete/Paved Roads', category: 'infrastructure' },
+        { name: 'Street Lighting', category: 'infrastructure' }
+
       ],
       
     amenityImages: [
       '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-1.jpeg',
       '/images/property/shankeshwar-sparsh/amenities/sparsh-amenitie-2.jpeg'
     ],
-    totalUnits: 120,
+
+    totalUnits: 436,
     completionDate: 'June 2025',
     possessionDate: 'September 2025',
     reraNumber: 'P52100055256',
@@ -568,7 +402,7 @@ const ongoingProperties = [
     reraRegistrationUrl: 'https://maharerait.mahaonline.gov.in/ProjectSummaryView/ProjectSummaryQRCodeView?id=Q2VydGlmaWNhdGVObz1QNTIxMDAwNTUyNTYmU2NhbnR5cGU9UHJvbW90ZXJMb2dpblFSQ29kZQ==',
     priceRange: { min: 3200000, max: 4700000 },
     startingPrice: 3200000,
-    completionPercentage: 60,
+    completionPercentage: 45,
     brochureUrl: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-brochure.pdf',
     floorPlanPdf: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-floorplans.pdf',
     videoUrl: 'https://www.youtube.com/embed/KoTJEPP-5Z8',
@@ -596,21 +430,22 @@ const ongoingProperties = [
       },
       
     constructionProgress: {
-      overall: 60,
+      overall: 45,
       stages: [
         { name: 'Foundation', percentage: 100 },
-        { name: 'Structure', percentage: 85 },
-        { name: 'Brickwork', percentage: 75 },
-        { name: 'Plumbing', percentage: 50 },
-        { name: 'Electrical', percentage: 45 },
-        { name: 'Flooring', percentage: 30 },
-        { name: 'Finishing', percentage: 15 }
+        { name: 'Structure', percentage: 55 },
+        // { name: 'Brickwork', percentage: 75 },
+        // { name: 'Plumbing', percentage: 50 },
+        // { name: 'Electrical', percentage: 45 },
+        // { name: 'Flooring', percentage: 30 },
+        // { name: 'Finishing', percentage: 15 }
       ]
     },
+
     projectOverview: {
-      total_area: '3.6 Acres',
-      total_buildings: '2 Towers',
-      total_units: '120 Apartments',
+      total_area: '2 Acres',
+      total_buildings: '3 Towers',
+      total_units: '436 Apartments',
       unit_variants: '1 & 2 BHK',
       open_space: '60% of Total Area',
       car_parking: '1 per Apartment',

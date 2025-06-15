@@ -29,7 +29,9 @@ const containerVariants = {
 
 export default function OngoingProjectsPage() {
   // Fetch ongoing projects (under-construction or nearing possession)
-  const ongoingProperties = getPropertiesByStatus(['under-construction', 'nearing-possession']);
+  const underConstructionProjects = getPropertiesByStatus('under-construction');
+  const nearingPossessionProjects = getPropertiesByStatus('Nearing Possession');
+  const ongoingProperties = [...nearingPossessionProjects, ...underConstructionProjects];
 
   return (
     <motion.div
@@ -39,6 +41,7 @@ export default function OngoingProjectsPage() {
       variants={pageVariants}
       className="min-h-screen bg-cream"
     >
+      <title>Ongoing & Nearing Possession Projects - Shankeshwar Buildprop</title>
       {/* Hero Banner for Ongoing Projects */}
       <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
         <div 
@@ -65,7 +68,7 @@ export default function OngoingProjectsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                Ongoing Projects
+                Ongoing & Nearing Possession Projects
               </motion.h1>
               
               <motion.p 
@@ -161,14 +164,14 @@ export default function OngoingProjectsPage() {
                 <div className="md:flex md:items-center">
                   <div className="hidden md:block md:w-1/2 md:pr-8 text-right">
                     <h4 className="text-deep-teal font-bold">Finishes</h4>
-                    <p className="text-sm text-gray-600">Attention to every detail</p>
+                    <p className="text-lg text-gray-600">Quality homes in the making, soon to be yours.</p>
                   </div>
                   
                   <div className="absolute left-0 md:left-1/2 top-0 h-6 w-6 rounded-full bg-deep-teal border-4 border-white shadow transform md:-translate-x-1/2"></div>
                   
                   <div className="md:w-1/2 md:pl-8">
                     <h4 className="text-deep-teal font-bold md:hidden">Finishes</h4>
-                    <p className="text-sm text-gray-600 md:hidden">Attention to every detail</p>
+                    <p className="text-lg text-gray-600 md:hidden">Quality homes in the making, soon to be yours.</p>
                     <div className="mt-2 p-4 bg-sage-teal/5 rounded-lg">
                       <p className="text-sm text-gray-700">Premium finishes and thoughtful details transform the structure into a beautiful, functional home.</p>
                     </div>
@@ -203,7 +206,7 @@ export default function OngoingProjectsPage() {
           ) : (
             <div className="col-span-full text-center py-16 bg-white rounded-lg shadow-md">
               <i className="fas fa-hard-hat text-5xl text-amber-gold mb-4"></i>
-              <h3 className="text-2xl font-display text-deep-teal mb-2">New projects coming soon</h3>
+              <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-2">Ongoing & Nearing Possession Projects</h1>
               <p className="text-gray-600 mb-6">
                 We're planning exciting new developments. Stay tuned for announcements.
               </p>

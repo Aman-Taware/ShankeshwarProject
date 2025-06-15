@@ -46,8 +46,12 @@ const investmentProperties = [
     ],
     documents: [
       {
-        name: 'Project Brochure',
+        name: 'Project Plan',
         pdfPath: '/documents/investment/capri/plan.pdf' 
+      },
+      {
+        name: 'Brochure',
+        pdfPath: '/documents/investment/capri/brochure.pdf' 
       }
     ],
     contactPhone: '+919604304919',
@@ -81,12 +85,8 @@ const investmentProperties = [
         pdfPath: '/documents/investment/khushi/commercial.pdf' 
       },
       {
-        name: 'Floor Plan - First Floor',
-        pdfPath: '/documents/investment/khushi/first-floor.pdf' 
-      },
-      {
-        name: 'Floor Plan - ground Floor',
-        pdfPath: '/documents/investment/khushi/ground-floor.pdf' 
+        name: 'Floor Plan',
+        pdfPath: '/documents/investment/khushi/floor_plan.pdf' 
       }
     ],
     contactPhone: '+919604304919',

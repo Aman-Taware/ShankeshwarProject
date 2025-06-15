@@ -284,23 +284,6 @@ const ContactPage = () => {
             >
               <h2 className="text-xl font-bold mb-6 text-deep-teal font-display">Sales Team</h2>
               
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-3">
-                  <img 
-                    src={siteConfig.contact.sales.image || '/images/placeholders/profile.svg'}
-                    alt={siteConfig.contact.sales.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.src = '/images/placeholders/profile.svg';
-                    }}
-                  />
-                </div>
-                <div>
-                  <h3 className="font-medium text-deep-teal">{siteConfig.contact.sales.name}</h3>
-                  <p className="text-sm text-gray-500">{siteConfig.contact.sales.position}</p>
-                </div>
-              </div>
-              
               <div className="flex items-center mb-2">
                 <FiPhone className="text-amber-gold mr-2" />
                 <a href={`tel:+91${siteConfig.contact.sales.phone}`} className="text-gray-600 hover:text-amber-gold text-sm transition-colors">

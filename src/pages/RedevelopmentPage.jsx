@@ -201,11 +201,11 @@ const RedevelopmentPage = () => {
                 whileHover={{ y: -5 }}
               >
                 {benefit.gifUrl && (
-                  <div className="mb-5 w-full h-48 rounded-md overflow-hidden bg-gray-200">
+                  <div className="mb-5 w-full h-56 rounded-md overflow-hidden bg-gray-200">
                     <img 
                       src={benefit.gifUrl} 
                       alt={`${benefit.title} GIF`} 
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                       onError={(e) => { e.target.style.display = 'none'; /* Hide if GIF fails to load */ }}
                     />
                   </div>

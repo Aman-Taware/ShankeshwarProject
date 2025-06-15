@@ -29,7 +29,11 @@ export const companyInfo = {
     city: "Pune",
     state: "Maharashtra",
     pinCode: "411044",
-    landmark: "Pradhikaran, Nigdi" // Optional
+    landmark: "Pradhikaran, Nigdi", // Optional
+    coordinates: {
+      lat: 18.644265, // Replace with correct latitude
+      lng: 73.760234  // Replace with correct longitude
+    }
   },
   
   // Multiple office locations if applicable

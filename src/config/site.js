@@ -68,8 +68,8 @@ export const siteConfig = {
     pincode: '411044',
     country: 'India',
     location: {
-      latitude: 18.6501,
-      longitude: 73.7568,
+      latitude: 18.660102846189176,
+      longitude: 73.77324781758772,
     },
   },
   branches: [
