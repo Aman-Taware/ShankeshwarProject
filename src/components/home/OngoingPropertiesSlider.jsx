@@ -304,7 +304,7 @@ const OngoingPropertiesSlider = () => {
                         
                         <div className={`mt-auto pt-2 transition-opacity duration-300 ${positions[1] === index ? 'opacity-100' : 'opacity-90 hover:opacity-100'}`}>
                           <Button 
-                            href={`/properties/${property.slug}`} 
+                            href={`/property/${property.slug}`} 
                             variant={positions[1] === index ? "primary" : "outline"} 
                             size="sm" 
                             className={`w-full py-2 text-sm ${positions[1] === index 

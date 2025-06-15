@@ -193,7 +193,10 @@ const PropertyDetailPage = () => {
 
   const statusConfig = getPropertyStatusConfig(displayProperty.status);
   const isUpcoming = displayProperty.status === PROPERTY_STATUS.UPCOMING.value;
-  const isUnderConstruction = displayProperty.status === PROPERTY_STATUS.UNDER_CONSTRUCTION.value;
+  const isUnderConstruction = [
+    PROPERTY_STATUS.UNDER_CONSTRUCTION.value,
+    PROPERTY_STATUS.NEARING_POSSESSION.value
+  ].includes(displayProperty.status);
 
   // Display price range properly
   const formatPriceRange = () => {

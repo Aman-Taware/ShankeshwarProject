@@ -127,7 +127,7 @@ export default function Footer() {
               </motion.div>
             </Link>
             <p className="text-sm text-sage-teal/90 mb-5 leading-relaxed">
-              {companyInfo.fullDescription.substring(0, 150)}...
+              {companyInfo.fullDescription.substring(0, 116)}
             </p>
             <div className="flex space-x-4">
               {navigation.social.map((item) => (

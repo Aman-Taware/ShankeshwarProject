@@ -98,9 +98,9 @@ const AboutUsSummary = () => {
               
               <Button 
                 variant="outline" 
-                href="/projects/completed"
+                href="/projects/ongoing"
               >
-                View Completed Projects
+                View Ongoing Projects
               </Button>
             </motion.div>
           </div>

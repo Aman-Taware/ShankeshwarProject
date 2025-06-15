@@ -32,10 +32,10 @@ const investmentProperties = [
       'Proximity to residential catchments'
     ],
     images: {
-      thumbnail: '/images/properties/investment/capri-1.jpeg',
-      featured: '/images/properties/investment/capri-1.jpeg',
+      thumbnail: '/images/properties/investment/capri/capri-1.png',
+      featured: '/images/properties/investment/capri/capri-1.png',
       gallery: [
-        '/images/properties/investment/capri-1.jpeg',
+        '/images/properties/investment/capri/capri-1.png',
       ]
     },
     amenities: [

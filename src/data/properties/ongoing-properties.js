@@ -84,6 +84,7 @@ const ongoingProperties = [
             bedrooms: 3,
             bathrooms: 2,
             balconies: 2,
+            floorPlan: '/images/property/shankeshwar-pearl/floorplans/pearl-floorplan.png',
             facing: 'East',
           },
           {
@@ -92,6 +93,7 @@ const ongoingProperties = [
             bedrooms: 3,
             bathrooms: 2,
             balconies: 2,
+            floorPlan: '/images/property/shankeshwar-pearl/floorplans/pearl-floorplan.png',
             facing: 'North-East'
           }
         ]
@@ -105,6 +107,7 @@ const ongoingProperties = [
             bedrooms: 2,
             bathrooms: 2,
             balconies: 1,
+            floorPlan: '/images/property/shankeshwar-pearl/floorplans/pearl-floorplan.png',
             facing: 'North-East'
           }
         ]
