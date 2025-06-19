@@ -238,24 +238,21 @@ A transparent and structured approach, step by step, towards your new beginning.
               centeredSlides={true}
               slidesPerView={'auto'}
               loop={false}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: true,
-              }}
+              initialSlide={0}
               coverflowEffect={{
-                rotate: 30,
+                rotate: 50,
                 stretch: 0,
                 depth: 100,
                 modifier: 1,
                 slideShadows: true,
               }}
-              pagination={{ clickable: true, el: '.swiper-pagination-custom' }}
+              pagination={{ clickable: true, el: '.swiper-pagination-journey' }}
               navigation={{
-                nextEl: '.swiper-button-next-custom',
-                prevEl: '.swiper-button-prev-custom',
+                nextEl: '.swiper-button-next-journey',
+                prevEl: '.swiper-button-prev-journey',
               }}
-              modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-              className="redevelopment-process-slider pb-16"
+              modules={[EffectCoverflow, Pagination, Navigation]}
+              className="w-full h-full redevelopment-process-slider pb-16"
               onSlideChange={(swiper) => setActiveProcessIndex(swiper.realIndex)}
             >
               {processSteps.map((step) => (
@@ -276,15 +273,15 @@ A transparent and structured approach, step by step, towards your new beginning.
             </Swiper>
             
             {/* Custom Navigation Buttons */}
-            <div className="swiper-button-prev-custom absolute top-1/2 left-0 md:-left-8 transform -translate-y-1/2 z-10 p-3 bg-amber-gold/80 hover:bg-amber-gold text-deep-teal rounded-full cursor-pointer transition-all">
+            <div className="swiper-button-prev-journey absolute top-1/2 left-0 md:-left-8 transform -translate-y-1/2 z-10 p-3 bg-amber-gold/80 hover:bg-amber-gold text-deep-teal rounded-full cursor-pointer transition-all">
               <FiChevronLeft size={24} />
             </div>
-            <div className="swiper-button-next-custom absolute top-1/2 right-0 md:-right-8 transform -translate-y-1/2 z-10 p-3 bg-amber-gold/80 hover:bg-amber-gold text-deep-teal rounded-full cursor-pointer transition-all">
+            <div className="swiper-button-next-journey absolute top-1/2 right-0 md:-right-8 transform -translate-y-1/2 z-10 p-3 bg-amber-gold/80 hover:bg-amber-gold text-deep-teal rounded-full cursor-pointer transition-all">
               <FiChevronRight size={24} />
             </div>
 
             {/* Custom Pagination / Progress Bar */}
-            <div className="swiper-pagination-custom text-center mt-8 flex justify-center items-center space-x-2">
+            <div className="swiper-pagination-journey text-center mt-8 flex justify-center items-center space-x-2">
               {processSteps.map((_, index) => (
                 <button 
                   key={index} 

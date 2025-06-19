@@ -84,8 +84,8 @@ const PropertyAmenities = ({ amenities = [], propertyId = '', amenityImages = []
   // Get key amenities for featured display
   const getKeyAmenities = () => {
     const priorities = [
-      'Swimming Pool', 'Gym', 'Clubhouse', 'Children\'s Play Area',
-      'Landscaped Gardens', 'Jogging Track', 'Indoor Games'
+      'Co-Working Space & Library', 'Swimming Pool', 'Gym', 'Clubhouse', 
+      'Children\'s Play Area', 'Landscaped Gardens', 'Jogging Track', 'Indoor Games'
     ];
     
     // Try to find amenities that match our priorities
@@ -118,6 +118,8 @@ const PropertyAmenities = ({ amenities = [], propertyId = '', amenityImages = []
         description = 'Enjoy a refreshing swim in our beautifully designed pool perfect for recreation and relaxation.';
       } else if (amenity.name.toLowerCase().includes('gym')) {
         description = 'Stay fit with our state-of-the-art gymnasium equipped with cardio and strength training equipment.';
+            } else if (amenity.name.toLowerCase().includes('library') || amenity.name.toLowerCase().includes('co-working')) {
+        description = 'A quiet and well-equipped space for working, studying, or reading.';
       } else if (amenity.name.toLowerCase().includes('garden') || amenity.name.toLowerCase().includes('landscape')) {
         description = 'Relax amidst lush green spaces perfect for morning walks and evening relaxation.';
       } else if (amenity.name.toLowerCase().includes('play') || amenity.name.toLowerCase().includes('children')) {

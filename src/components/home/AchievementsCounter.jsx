@@ -125,7 +125,7 @@ const AchievementsCounter = () => {
 
   // Render a single counter
   const renderCounter = (value, suffix, ref, count, className = "") => (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div className={`flex items-baseline justify-center ${className}`}>
       <span 
         ref={ref}
         className="text-5xl md:text-6xl font-bold text-deep-teal transition-colors duration-300 group-hover:text-amber-gold"
@@ -137,35 +137,6 @@ const AchievementsCounter = () => {
       </span>
     </div>
   );
-
-  // Render subcounters in horizontal layout (for Projects and Development)
-  const renderHorizontalSubcounters = (subcounters) => {
-    return (
-      <div className="w-full mt-2 space-y-2">
-        {subcounters.map((subcounter, index) => {
-          const { count, ref } = useCounter(subcounter.value, 2.5);
-          return (
-            <div key={index} className="flex justify-between items-center">
-              <h4 className="text-base font-medium text-deep-teal text-left">
-                {subcounter.name}
-              </h4>
-              <div className="flex items-center">
-                <span 
-                  ref={ref}
-                  className="text-xl md:text-2xl font-bold text-deep-teal transition-colors duration-300 group-hover:text-amber-gold"
-                >
-                  {count}
-                </span>
-                <span className="text-lg md:text-xl font-bold text-amber-gold ml-1">
-                  {subcounter.suffix}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-sage-teal/10 to-transparent">
@@ -195,13 +166,21 @@ const AchievementsCounter = () => {
           animate={controls}
         >
           {achievements.map((achievement) => {
-            // Use the counter hook for each achievement if it doesn't have subcounters
-            const { count, ref } = !achievement.hasSubcounters ? useCounter(achievement.value, 2.5) : { count: 0, ref: null };
+            // Calculate total value for the main counter
+            const totalValue = achievement.hasSubcounters
+              ? achievement.subcounters.reduce((sum, sc) => sum + sc.value, 0)
+              : achievement.value;
+            
+            // Suffix for the main counter
+            const suffix = achievement.hasSubcounters ? '+' : achievement.suffix;
+
+            // Use the counter hook for the total value
+            const { count, ref } = useCounter(totalValue, 2.5);
             
             return (
               <motion.div 
                 key={achievement.id}
-                className={`relative p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group flex flex-col h-64`}
+                className="relative p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group flex flex-col h-72" // Increased height
                 variants={itemVariants}
                 whileHover={{ 
                   y: -5, 
@@ -212,24 +191,34 @@ const AchievementsCounter = () => {
                   <i className={`${achievement.icon} text-deep-teal text-2xl`}></i>
                 </div>
                 
-                <div className="mt-8 text-center flex-grow flex flex-col">
-                  <h3 className="text-xl font-semibold text-deep-teal mb-2">
-                    {achievement.name}
-                  </h3>
-                  
-                  {!achievement.hasSubcounters && (
-                    <>
-                      {renderCounter(achievement.value, achievement.suffix, ref, count)}
-                      
-                      {achievement.description && (
-                        <p className="text-sm text-deep-teal/70 mt-4">
+                <div className="mt-8 text-center flex-grow flex flex-col justify-between">
+                  {/* Top part: Title and Main Counter */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-deep-teal mb-2">
+                      {achievement.name}
+                    </h3>
+                    {renderCounter(totalValue, suffix, ref, count)}
+                  </div>
+
+                  {/* Bottom part: Description or Sub-counter list */}
+                  <div className="h-20">
+                    {achievement.hasSubcounters ? (
+                      <ul className="text-sm text-deep-teal/80 mt-4 space-y-1 text-left px-2">
+                        {achievement.subcounters.map(sc => (
+                          <li key={sc.name} className="flex justify-between items-center">
+                            <span>{sc.name}</span>
+                            <span className="font-semibold text-deep-teal">{sc.value}{sc.suffix}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      achievement.description && (
+                        <p className="text-sm text-deep-teal/70 mt-4 px-2">
                           {achievement.description}
                         </p>
-                      )}
-                    </>
-                  )}
-                  
-                  {achievement.hasSubcounters && renderHorizontalSubcounters(achievement.subcounters)}
+                      )
+                    )}
+                  </div>
                 </div>
                 
                 {/* Decorative elements */}

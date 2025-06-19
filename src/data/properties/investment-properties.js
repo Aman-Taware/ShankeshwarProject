@@ -18,8 +18,9 @@ const investmentProperties = [
     expectedYield: '6-8% Annually', 
     location: {
       city: 'Ravet',
+      zipCode: '412101',
       address: 'Prime Location, Ravet, Pune',
-      mapLink: 'https://maps.app.goo.gl/XWMUsbPCjqZVBLrDA'
+      mapLink: 'https://maps.app.goo.gl/ciEWavsV29c6tSPK6'
     },
     shortDescription: 'Premium first floor commercial shops with excellent visibility and foot traffic in the growing neighborhood of Ravet.',
     longDescription: 'Invest in high-potential commercial shops on the first floor of Ashirwad Capri, strategically located in Ravet, Pune. These units offer excellent visibility, high footfall potential, and are ideal for various retail or office setups. With a ceiling height of 14ft, these shops provide ample space and a modern ambiance. Ravet is a rapidly developing area with strong infrastructure growth, making this a lucrative investment opportunity.', 
@@ -67,7 +68,8 @@ const investmentProperties = [
     location: {
       city: 'Moshi',
       address: 'Dudalgaon, Moshi',
-      mapLink: 'https://maps.app.goo.gl/iP5zJHbBttmoBkeM9?g_st=com.google.maps.preview.copy'
+      zipCode: '412105',
+      mapLink: 'https://maps.app.goo.gl/ZAJYpknfyFAbVrDC8'
     },
     shortDescription: 'Prime ground floor commercial shops with excellent visibility and 20ft height in the growing area of Dudalgaon, Moshi.',
     images: {

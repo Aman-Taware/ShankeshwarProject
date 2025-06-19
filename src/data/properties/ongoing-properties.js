@@ -149,7 +149,7 @@ const ongoingProperties = [
     ],
     totalUnits: 240,
     completionDate: 'December 2025',
-    possessionDate: 'March 2026',
+    possessionDate: 'December 2025',
     reraNumber: 'P52100035074',
     reraCertificatePath: '/documents/properties/shankeshwar-pearl/rera-certificate.pdf',
     reraRegistrationUrl: 'https://maharera.mahaonline.gov.in',
@@ -208,15 +208,15 @@ const ongoingProperties = [
       unit_variants: '2 BHK, 3 BHK, Duplex',
       open_space: '65% of Total Area',
       car_parking: '1 per Apartment',
-      completion_date: 'Mid 2025',
+      completion_date: 'Dec 2025',
       possession_date: 'Dec 2025',
       rera_registration: 'P52100035074',
       project_architect: 'Usha Rangrajan',
-      landscape_architect: 'Vikas Labba-Design Terra',
+      landscape_architect: 'Mohar Landscape Architect',
       legal_advisor: 'Adv. Shrikant Kadam'
     },
     contactPhone: '+919604304919',
-    contactEmail: 'sales@shankeshwarbuildcorp.com'
+    contactEmail: 'shankeshwarbuildcorp@gmail.com'
   },
   {
     id: 'shankeshwar-sparsh',
@@ -247,8 +247,17 @@ const ongoingProperties = [
         { name: 'Aditya International School', distance: '1.2 km',type: 'education', details: 'English medium school focused on academic excellence' },
         { name: 'MIT College', distance: '2.5 km',type: 'education', details: 'Private college offering engineering and management courses' },
         { name: 'Sharadchandra College', distance: '2.5 km',type: 'education', details: 'Private college offering engineering and management courses' },
-        { name: 'Bharat Petroleum Medical Center (Nearby)', distance: '1.5 km',type: 'health', details: 'Local healthcare and emergency support nearby' },
-        { name: 'Noble Hospital (Yerwada)', distance: '6.5 km',type: 'health', details: 'Full-service multi-specialty hospital' },
+        { name: 'Shree Multispeciality Hospital Moshi', distance: '0.99 km', type: 'healthcare', details: 'Comprehensive medical services and emergency care' },
+        { name: 'Varad Multispeciality Hospital', distance: '1.09 km', type: 'healthcare', details: 'Multi-specialty healthcare facility' },
+        { name: 'Dr Lata\'S Nirmiti Hospital', distance: '1.14 km', type: 'healthcare', details: 'Specializing in Gynaecology, Obstetrics, and Infertility' },
+        { name: 'Pcmc Hospital Moshi', distance: '1.21 km', type: 'healthcare', details: 'Public hospital serving the Moshi area' },
+        { name: 'Sunrise Hospital', distance: '1.33 km', type: 'healthcare', details: 'General hospital with various medical departments' },
+        { name: 'Jijau Mother & Child Care Hospital', distance: '1.50 km', type: 'healthcare', details: 'Specialized care for mothers and children' },
+        { name: 'Sarvadnya Hospital Medical', distance: '1.56 km', type: 'healthcare', details: 'General medical and hospital services' },
+        { name: 'Spandan Hospital Moshi', distance: '1.60 km', type: 'healthcare', details: 'Gynaecology, General Medicine, and Sonography services' },
+        { name: 'Tulip Hospital', distance: '1.62 km', type: 'healthcare', details: 'Multi-specialty hospital with modern facilities' },
+        { name: 'Sable Hospital', distance: '1.63 km', type: 'healthcare', details: 'General hospital and medical care' },
+        { name: 'Noble Hospital (Yerwada)', distance: '6.5 km',type: 'healthcare', details: 'Full-service multi-specialty hospital' },
         { name: 'D Mart', distance: '2.0 km',type: 'shopping', details: 'Supermarket for daily needs and household items' },
         { name: 'Reliance Trends', distance: '2.1 km',type: 'shopping', details: 'Fashion and clothing store' },
         { name: 'Spine City Mall', distance: '5.0 km',type: 'shopping', details: 'Mall with multiple stores and entertainment zones' },
@@ -355,9 +364,10 @@ const ongoingProperties = [
           }
     ],  
 
-    amenities: [
+    amenities: [ 
         // Lifestyle Amenities (Recreational)
         { name: 'Multipurpose Sports Court', category: 'recreational' },
+        { name: 'Co-Working Space & Library', category: 'recreational' },
         { name: 'Calisthenics Area', category: 'recreational' },
         { name: 'Walking Track', category: 'recreational' },
         { name: 'Children Play Area with Equipment', category: 'recreational' },
@@ -408,7 +418,7 @@ const ongoingProperties = [
     completionPercentage: 45,
     brochureUrl: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-brochure.pdf',
     floorPlanPdf: '/documents/properties/shankeshwar-sparsh/shankeshwar-sparsh-floorplans.pdf',
-    videoUrl: 'https://www.youtube.com/embed/KoTJEPP-5Z8',
+    videoUrl: 'https://youtu.be/KoTJEPP-5Z8?si=vZOfW87o0fT6yV9x',
     showSections: {
       specifications: true,
       floorplans: true,
@@ -450,10 +460,10 @@ const ongoingProperties = [
       total_buildings: '3 Towers',
       total_units: '436 Apartments',
       unit_variants: '1 & 2 BHK',
-      open_space: '60% of Total Area',
+      open_space: '10% of Total Area',
       car_parking: '1 per Apartment',
-      completion_date: 'June 2025',
-      possession_date: 'September 2025'
+      completion_date: 'Dec 2028',
+      possession_date: 'Dec 2027 Onwards'
     },
     contactPhone: '+919604304919',
     contactEmail: 'shankeshwarbuildcorp@gmail.com'

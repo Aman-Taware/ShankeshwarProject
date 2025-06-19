@@ -231,7 +231,7 @@ const HeroSection = () => {
                   transition: 'transform 0.2s ease-out'
                 }}
               >
-                <div className="text-deep-teal font-bold">Luxury Residences</div>
+                <div className="text-deep-teal font-bold">Authentic</div>
               </div>
               
               {/* Top Right - Premium Quality (Half Out) */}
@@ -242,7 +242,7 @@ const HeroSection = () => {
                   transition: 'transform 0.2s ease-out'
                 }}
               >
-                <div className="font-semibold">Premium Quality</div>
+                <div className="font-semibold">Committed</div>
               </div>
               
               {/* Middle Left - Modern Design (Half Out) */}
@@ -253,7 +253,7 @@ const HeroSection = () => {
                   transition: 'transform 0.2s ease-out'
                 }}
               >
-                <div className="text-white font-semibold">Modern Design</div>
+                <div className="text-white font-semibold">Uncompromised</div>
               </div>
               
               {/* Middle Right - Smart Home (Half Out, Zig-Zag) */}
@@ -264,7 +264,7 @@ const HeroSection = () => {
                   transition: 'transform 0.2s ease-out'
                 }}
               >
-                <div className="font-semibold">Smart Home</div>
+                <div className="font-semibold">Enduring</div>
               </div>
               
               {/* Bottom Left - Prime Location (Half Out) */}
@@ -275,7 +275,7 @@ const HeroSection = () => {
                   transition: 'transform 0.2s ease-out'
                 }}
               >
-                <div className="font-semibold">Prime Location</div>
+                <div className="font-semibold">Trailblazing</div>
               </div>
             </div>
           </motion.div>

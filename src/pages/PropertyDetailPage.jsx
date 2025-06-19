@@ -467,8 +467,11 @@ const PropertyDetailPage = () => {
           animate="visible"
             variants={fadeInUp}
           >
-            {displayProperty.images && displayProperty.images.length > 0 ? (
-            <PropertyGallery images={displayProperty.images} />
+            {(displayProperty.images && displayProperty.images.length > 0) || (displayProperty.gallery && displayProperty.gallery.length > 0) || displayProperty.videoUrl ? (
+              <PropertyGallery 
+                images={displayProperty.images || displayProperty.gallery || []} 
+                videoTour={displayProperty.videoUrl} 
+              />
             ) : (
               <div className="aspect-w-16 aspect-h-9 bg-gray-100 flex items-center justify-center">
                 <div className="text-center p-8">
@@ -768,18 +771,19 @@ const PropertyDetailPage = () => {
               {/* Gallery Tab Content */}
               {activeTab === 'gallery' && (
                 <>
-                  {!(displayProperty.images && 
-                     displayProperty.images.length > 0 &&
-                     shouldShowSection('gallery')) ? (
+                  {(!shouldShowSection('gallery') || (!displayProperty.images?.length && !displayProperty.gallery?.length && !displayProperty.videoUrl)) ? (
                     <div className="flex flex-col items-center justify-center h-64">
                       <FaExclamationTriangle className="text-amber-gold text-4xl mb-4" />
-                      <h3 className="text-xl font-medium text-deep-teal mb-2">Gallery Images Will Be Updated Soon</h3>
-                      <p className="text-gray-600 text-center">We're working on finalizing the gallery images for this property. Please check back later.</p>
+                      <h3 className="text-xl font-medium text-deep-teal mb-2">Gallery Will Be Updated Soon</h3>
+                      <p className="text-gray-600 text-center">We're working on finalizing the gallery for this property. Please check back later.</p>
                     </div>
                   ) : (
                     <div className="gallery-tab">
                       <h2 className="text-2xl font-bold mb-6">Property Gallery</h2>
-                      <PropertyGallery images={displayProperty.images} />
+                      <PropertyGallery 
+                        images={displayProperty.images || displayProperty.gallery || []} 
+                        videoTour={displayProperty.videoUrl} 
+                      />
                     </div>
                   )}
                 </>

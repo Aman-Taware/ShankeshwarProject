@@ -571,7 +571,7 @@ const ContactPage = () => {
                   <p className="text-gray-600">{branch.city}, {branch.state} {branch.pincode}</p>
                   
                   <a 
-                    href={`https://maps.google.com/?q=${encodeURIComponent(branch.address)}`}
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${branch.location.latitude},${branch.location.longitude}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center text-amber-gold mt-4 hover:text-deep-teal transition-colors"

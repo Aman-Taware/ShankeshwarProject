@@ -312,6 +312,46 @@ export const getAmenityIcon = (amenityName) => {
     return <TbYoga size={iconSize} color={iconColor} />;
   }
   
+  // Co-working & Library
+  if (lowercaseName.includes('co-working') || lowercaseName.includes('library') || lowercaseName.includes('book')) {
+    return <BiBook size={iconSize} color={iconColor} />;
+  }
+
+  // Calisthenics & Exercise
+  if (lowercaseName.includes('calisthenics')) {
+    return <BiDumbbell size={iconSize} color={iconColor} />;
+  }
+
+  // Senior Citizen Area
+  if (lowercaseName.includes('senior citizen')) {
+    return <FaChair size={iconSize} color={iconColor} />;
+  }
+
+  // Gazebo
+  if (lowercaseName.includes('gazebo')) {
+    return <FaArchway size={iconSize} color={iconColor} />;
+  }
+
+  // Temple
+  if (lowercaseName.includes('temple')) {
+    return <GiTempleDoor size={iconSize} color={iconColor} />;
+  }
+
+  // Fire Safety
+  if (lowercaseName.includes('fire')) {
+    return <FaFire size={iconSize} color={iconColor} />;
+  }
+  
+  // Roads
+  if (lowercaseName.includes('road')) {
+    return <FaRoad size={iconSize} color={iconColor} />;
+  }
+
+  // Lighting
+  if (lowercaseName.includes('light')) {
+    return <FaLightbulb size={iconSize} color={iconColor} />;
+  }
+
   // Default icon for unmatched amenities
   return <FaStar size={iconSize} color={iconColor} />;
 };

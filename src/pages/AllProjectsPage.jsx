@@ -38,7 +38,7 @@ const AllProjectsPage = () => {
   const getInitialFilter = () => {
     const params = new URLSearchParams(location.search);
     const statusParam = params.get('filter');
-    if (statusParam && ['all', 'upcoming', 'ongoing', 'completed'].includes(statusParam)) {
+    if (statusParam && ['all', 'ongoing', 'upcoming', 'completed'].includes(statusParam)) {
       return statusParam;
     }
     return 'all'; // Default if no valid filter in URL
@@ -218,6 +218,19 @@ const AllProjectsPage = () => {
             >
               All Projects
             </button>
+            {ongoingProperties.length > 0 && (
+              <button
+                onClick={() => handleFilterChange('ongoing')}
+                className={`px-3 py-1.5 text-sm rounded-full font-medium transition-all ${
+                  activeFilter === 'ongoing' 
+                    ? 'bg-sage-teal text-white shadow-md' 
+                    : 'bg-white text-deep-teal hover:bg-gray-100'
+                }`}
+              >
+                <i className="fas fa-hard-hat mr-2"></i>
+                Ongoing
+              </button>
+            )}
             {upcomingProperties.length > 0 && (
               <button
                 onClick={() => handleFilterChange('upcoming')}
@@ -229,19 +242,6 @@ const AllProjectsPage = () => {
               >
                 <i className="fas fa-calendar-alt mr-2"></i>
                 Upcoming
-              </button>
-            )}
-            {ongoingProperties.length > 0 && (
-              <button
-                onClick={() => handleFilterChange('ongoing')}
-                className={`px-3 py-1.5 text-sm rounded-full font-medium transition-all ${
-                  activeFilter === 'ongoing' 
-                    ? 'bg-sage-teal text-deep-teal shadow-md' 
-                    : 'bg-white text-deep-teal hover:bg-gray-100'
-                }`}
-              >
-                <i className="fas fa-hard-hat mr-2"></i>
-                Ongoing
               </button>
             )}
             {completedProperties.length > 0 && (

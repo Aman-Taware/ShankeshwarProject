@@ -75,10 +75,14 @@ export const siteConfig = {
   branches: [
     {
       name: 'Site Office',
-      address: 'Shankeshwar Pearl, Ravet, Pune, Maharashtra',
+      address: 'Shankeshwar Sparsh Office, Gat No. 334, Kudale Wasti, near Shankeshwar Gravity, near Swami Samarth Math, Bhim Nagar, Moshi',
       city: 'Pune',
       state: 'Maharashtra',
-      pincode: '411033',
+      pincode: '412105',
+      location: {
+        latitude: 18.671311021962357,
+        longitude: 73.86038236855323,
+      },
     },
   ],
 }; 
