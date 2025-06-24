@@ -117,6 +117,14 @@ const ContactPage = () => {
     }
   };
 
+  const socialIcons = {
+    facebook: <FaFacebookF />,
+    twitter: <FaTwitter />,
+    instagram: <FaInstagram />,
+    linkedin: <FaLinkedinIn />,
+    youtube: <FaYoutube />,
+  };
+
   // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -234,46 +242,23 @@ const ContactPage = () => {
             >
               <h2 className="text-xl font-bold mb-6 text-deep-teal font-display">Connect With Us</h2>
               <div className="flex space-x-4">
-                <a 
-                  href={siteConfig.contact.socialLinks.facebook} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-deep-teal hover:bg-amber-gold text-white p-3 rounded-full transition-colors"
-                >
-                  <FaFacebookF />
-                </a>
-                <a 
-                  href={siteConfig.contact.socialLinks.twitter} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-deep-teal hover:bg-amber-gold text-white p-3 rounded-full transition-colors"
-                >
-                  <FaTwitter />
-                </a>
-                <a 
-                  href={siteConfig.contact.socialLinks.instagram} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-deep-teal hover:bg-amber-gold text-white p-3 rounded-full transition-colors"
-                >
-                  <FaInstagram />
-                </a>
-                <a 
-                  href={siteConfig.contact.socialLinks.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-deep-teal hover:bg-amber-gold text-white p-3 rounded-full transition-colors"
-                >
-                  <FaLinkedinIn />
-                </a>
-                <a 
-                  href={siteConfig.contact.socialLinks.youtube} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-deep-teal hover:bg-amber-gold text-white p-3 rounded-full transition-colors"
-                >
-                  <FaYoutube />
-                </a>
+                {Object.entries(socialIcons).map(([name, icon]) => {
+                  const url = siteConfig.contact.socialLinks[name];
+                  if (!url) return null;
+                  
+                  return (
+                    <a 
+                      key={name}
+                      href={url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      aria-label={`Follow us on ${name}`}
+                      className="bg-deep-teal hover:bg-amber-gold text-white p-3 rounded-full transition-colors"
+                    >
+                      {icon}
+                    </a>
+                  );
+                })}
               </div>
             </motion.div>
             
@@ -343,19 +328,17 @@ const ContactPage = () => {
                         Your Name*
                       </label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FiUser className="text-gray-400" />
-                        </div>
+                        <FiUser className="absolute top-1/2 -translate-y-1/2 left-3 text-amber-gold" />
                         <input
                           type="text"
                           id="name"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className={`block w-full pl-10 pr-3 py-2 border ${
-                            errors.name ? 'border-red-500' : 'border-gray-300'
-                          } rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal`}
-                          placeholder="John Doe"
+                          className={`w-full pl-10 pr-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 bg-cream text-deep-teal ${
+                            errors.name ? 'border-red-500 ring-red-500' : 'border-gray-300 focus:ring-amber-gold focus:border-amber-gold'
+                          }`}
+                          placeholder="e.g. John Doe"
                         />
                       </div>
                       {errors.name && (
@@ -369,19 +352,17 @@ const ContactPage = () => {
                         Email Address*
                       </label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FiMail className="text-gray-400" />
-                        </div>
+                        <FiMail className="absolute top-1/2 -translate-y-1/2 left-3 text-amber-gold" />
                         <input
                           type="email"
                           id="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className={`block w-full pl-10 pr-3 py-2 border ${
-                            errors.email ? 'border-red-500' : 'border-gray-300'
-                          } rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal`}
-                          placeholder="johndoe@example.com"
+                          className={`w-full pl-10 pr-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 bg-cream text-deep-teal ${
+                            errors.email ? 'border-red-500 ring-red-500' : 'border-gray-300 focus:ring-amber-gold focus:border-amber-gold'
+                          }`}
+                          placeholder="e.g. you@example.com"
                         />
                       </div>
                       {errors.email && (
@@ -395,19 +376,17 @@ const ContactPage = () => {
                         Phone Number*
                       </label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FiPhone className="text-gray-400" />
-                        </div>
+                        <FiPhone className="absolute top-1/2 -translate-y-1/2 left-3 text-amber-gold" />
                         <input
                           type="tel"
                           id="phone"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`block w-full pl-10 pr-3 py-2 border ${
-                            errors.phone ? 'border-red-500' : 'border-gray-300'
-                          } rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal`}
-                          placeholder="9876543210"
+                          className={`w-full pl-10 pr-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 bg-cream text-deep-teal ${
+                            errors.phone ? 'border-red-500 ring-red-500' : 'border-gray-300 focus:ring-amber-gold focus:border-amber-gold'
+                          }`}
+                          placeholder="e.g. 9876543210"
                         />
                       </div>
                       {errors.phone && (
@@ -426,7 +405,7 @@ const ContactPage = () => {
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal"
+                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal bg-cream text-deep-teal"
                         placeholder="How can we help you?"
                       />
                     </div>
@@ -441,7 +420,7 @@ const ContactPage = () => {
                         name="inquiryType"
                         value={formData.inquiryType}
                         onChange={handleChange}
-                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal"
+                        className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal bg-cream text-deep-teal"
                       >
                         <option value="General Inquiry">General Inquiry</option>
                         <option value="Property Interest">Property Interest</option>
@@ -460,7 +439,7 @@ const ContactPage = () => {
                     </label>
                     <div className="relative">
                       <div className="absolute top-3 left-3 pointer-events-none">
-                        <FiMessageSquare className="text-gray-400" />
+                        <FiMessageSquare className="text-amber-gold" />
                       </div>
                       <textarea
                         id="message"
@@ -470,7 +449,7 @@ const ContactPage = () => {
                         onChange={handleChange}
                         className={`block w-full pl-10 pr-3 py-2 border ${
                           errors.message ? 'border-red-500' : 'border-gray-300'
-                        } rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal`}
+                        } rounded-md shadow-sm focus:outline-none focus:ring-deep-teal focus:border-deep-teal bg-cream text-deep-teal`}
                         placeholder="Write your message here..."
                       ></textarea>
                     </div>

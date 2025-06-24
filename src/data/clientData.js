@@ -59,7 +59,7 @@ export const companyInfo = {
     instagram: "https://www.instagram.com/shankeshwargroup/?igsh=a3lyMnMyaG1tanc1",
     linkedin: "https://www.linkedin.com/company/shankeshwar-group/",
     twitter: "", // Not provided in client data
-    youtube: "" // Not provided in client data
+    youtube: "https://www.youtube.com/@ShankeshwarGroupOfficial"
   },
   
   // Company Description (used in About Us and other sections)

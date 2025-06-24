@@ -54,11 +54,11 @@ export const siteConfig = {
     officeEmail: "shankeshwarbuildcorp@gmail.com",
     whatsapp: "9604304919",
     socialLinks: {
-      facebook: "https://facebook.com/shankeshwarbuildcorp",
-      twitter: "https://twitter.com/shankeshwarbuild",
-      instagram: "https://www.instagram.com/suresteprealty?igsh=MTBkMmppYXpuYmg3YQ",
+      facebook: "", // Not provided in client data
+      instagram: "https://www.instagram.com/shankeshwargroup/?igsh=a3lyMnMyaG1tanc1",
       linkedin: "https://www.linkedin.com/company/shankeshwar-group/",
-      youtube: "https://youtube.com/@shankeshwarbuildcorp"
+      twitter: "", // Not provided in client data
+      youtube: "https://www.youtube.com/@ShankeshwarGroupOfficial" 
     },
   },
   mainOffice: {
